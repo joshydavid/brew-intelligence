@@ -1,0 +1,64 @@
+# ☕ Brew Intelligence
+
+![Issue](https://img.shields.io/github/issues/joshydavid/joshua-david)
+![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
+![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
+
+- [View Project](https://joshuadavid.dev)
+- [Report Bug](https://github.com/joshydavid/joshua-david/issues/new/choose)
+
+## Tech Stack
+
+- Java, Spring Boot
+- PostgreSQL
+- Redis
+- Swagger
+- React
+- Tailwind CSS
+- Amazon Web Services
+
+## Getting Started
+
+1. Clone the project
+
+   ```
+   git clone https://github.com/joshydavid/brew-intelligence.git
+   ```
+
+2. Install dependencies
+
+   ```
+   mvn clean install -U
+   ```
+
+3. Set up environment variables
+
+   create file `.env`
+
+   ```
+   DB_URL=jdbc:postgresql://localhost:5432/timperiodb
+   DB_USERNAME=postgres
+   DB_PASSWORD=root
+   JWT_SECRET_KEY={JWT_SECRET_KEY}
+   SERVER=//localhost:5173
+   ```
+
+4. Run the project in development environment
+
+   ```
+   mvn spring-boot:run
+   ```
+
+## API Documentation
+
+```
+https://dummylink.com
+```
+
+## Acknowledgement
+
+Developed by [Joshua](https://linkedin.com/in/joshydavid)
+
+<a href="https://linkedin.com/in/joshydavid/">
+  <img src="https://github.com/user-attachments/assets/4dfe0c89-8ced-4e08-bcf3-6261bdbb956d" width="80">
+</a>
