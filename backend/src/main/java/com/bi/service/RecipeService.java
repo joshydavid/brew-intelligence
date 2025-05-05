@@ -20,10 +20,10 @@ public class RecipeService {
         this.recipeRepo = recipeRepo;
     }
 
-    @Cacheable(value = RedisCacheKey.GET_RECIPE_KEY)
+    @Cacheable(value = RedisCacheKey.GET_RECIPES_KEY)
     public List<RecipeDTO> getRecipes() {
-        List<Recipe> recipe = recipeRepo.findAll();
-        return recipe.stream()
+        List<Recipe> recipes = recipeRepo.findAll();
+        return recipes.stream()
                 .map(RecipeMapper::toDTO)
                 .toList();
     }
