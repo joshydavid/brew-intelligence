@@ -2,5 +2,7 @@ package com.bi.model.enums;
 
 public enum BrewMethod {
     ESPRESSO,
-    FILTER,
+    V60,
+    CHEMEX,
+    MOKA_POT
 }
