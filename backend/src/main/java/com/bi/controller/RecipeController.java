@@ -18,6 +18,8 @@ import com.bi.dto.AddRecipeDTO;
 import com.bi.dto.RecipeDTO;
 import com.bi.service.RecipeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping(ApiPaths.GET_RECIPES)
 public class RecipeController {
@@ -34,7 +36,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<RecipeDTO> addRecipe(@RequestBody AddRecipeDTO dto) {
+    public ResponseEntity<RecipeDTO> addRecipe(@Valid @RequestBody AddRecipeDTO dto) {
         RecipeDTO createdRecipe = this.recipeService.addRecipe(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRecipe);
     }
