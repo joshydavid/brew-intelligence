@@ -30,7 +30,6 @@ public class Recipe extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     private MethodType methodType;
-
     private double coffeeDose;
     private double waterAmount;
     private int brewTemp;
