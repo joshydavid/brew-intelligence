@@ -15,13 +15,13 @@ public class AddRecipeDTO {
     private MethodType methodType;
 
     @NotNull(message = ErrorMessage.COFFEE_DOSE_REQUIRED)
-    private double coffeeDose;
+    private Double coffeeDose;
 
     @NotNull(message = ErrorMessage.WATER_AMOUNT_REQUIRED)
-    private double waterAmount;
+    private Double waterAmount;
 
     @NotNull(message = ErrorMessage.BREW_TEMP_REQUIRED)
-    private int brewTemp;
+    private Integer brewTemp;
 
     @NotBlank(message = ErrorMessage.BREW_TIME_REQUIRED)
     private String brewTime;
