@@ -1,7 +1,7 @@
 package com.bi.constant;
 
 public class ErrorMessage {
-    // AddCoffeeListingDTO
+    // AddOrUpdateCoffeeListingDTO
     public static final String COFFEE_NAME_REQUIRED = "Coffee name is required";
     public static final String ROAST_DATE_REQUIRED = "Roast date is required";
     public static final String NO_FUTURE_DATE = "Date cannot be in the future";
