@@ -27,7 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Cacheable(value = RedisCacheKey.GET_RECIPES_KEY)
     public List<RecipeDTO> getRecipes() {
-        List<Recipe> recipes = recipeRepo.findAll();
+        List<Recipe> recipes = this.recipeRepo.findAll();
         return recipes.stream()
                 .map(RecipeMapper::toDTO)
                 .toList();
@@ -46,14 +46,14 @@ public class RecipeServiceImpl implements RecipeService {
                 .createdBy(dto.getCreatedBy())
                 .build();
 
-        Recipe newRecipeDTO = recipeRepo.save(newRecipe);
+        Recipe newRecipeDTO = this.recipeRepo.save(newRecipe);
         return RecipeMapper.toDTO(newRecipeDTO);
     }
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
-    public RecipeDTO updateRecipe(UUID id, RecipeDTO updatedRecipe) {
-        Recipe existingRecipe = recipeRepo.findById(id)
+    public RecipeDTO updateRecipe(UUID id, AddRecipeDTO updatedRecipe) {
+        Recipe existingRecipe = this.recipeRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe", id));
 
         existingRecipe.setMethodType(updatedRecipe.getMethodType());
