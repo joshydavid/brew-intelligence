@@ -4,12 +4,13 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
-- [View Project](https://joshuadavid.dev)
-- [Report Bug](https://github.com/joshydavid/joshua-david/issues/new/choose)
+- [View Project](https://brew.joshydavid.com)
+- [View API Documentation](https://brew-api.joshydavid.com)
+- [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
 
 ## Tech Stack
 
-- Java, Spring Boot
+- Java Spring Boot
 - PostgreSQL
 - Redis
 - Swagger
@@ -48,12 +49,6 @@
    ```
    mvn spring-boot:run
    ```
-
-## API Documentation
-
-```
-https://dummylink.com
-```
 
 ## Acknowledgement
 
