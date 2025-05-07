@@ -5,7 +5,7 @@
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
 - [View Project](https://brew.joshydavid.com)
-- [View API Documentation](https://brew.joshydavid.com/swagger-ui/index.html)
+- [View API Documentation](https://brew.joshydavid.com/docs.html)
 - [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
 
 ## Tech Stack

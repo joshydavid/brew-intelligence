@@ -11,15 +11,14 @@ import io.swagger.v3.oas.models.servers.Server;
 
 @Configuration
 public class SwaggerConfig {
-
-    @Value("${springdoc.swagger-ui.url}")
-    private String swaggerApiUrl;
+    @Value("${swagger.documentation.url}")
+    private String swaggerDocUrl;
 
     @Bean
     public OpenAPI customOpenAPI() {
         Server server = new Server();
-        server.setUrl(swaggerApiUrl);
-        server.setDescription("Production Server");
+        server.setUrl(swaggerDocUrl);
+        server.setDescription(" Server");
         return new OpenAPI().servers(List.of(server));
     }
 }
