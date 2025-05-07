@@ -20,10 +20,12 @@ import com.bi.dto.CoffeeListingDTO;
 import com.bi.model.enums.RoastType;
 import com.bi.service.CoffeeListingService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(ApiPaths.GET_COFFEE_LISTINGS)
+@Tag(name = "Coffee Listings", description = "APIs for listing coffee")
 public class CoffeeListingController {
 
     private final CoffeeListingService coffeeListingService;
