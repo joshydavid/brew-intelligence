@@ -12,5 +12,5 @@ public interface RecipeService {
 
     RecipeDTO addRecipe(AddRecipeDTO dto);
 
-    RecipeDTO updateRecipe(UUID id, RecipeDTO updatedRecipe);
+    RecipeDTO updateRecipe(UUID id, AddRecipeDTO updatedRecipe);
 }
