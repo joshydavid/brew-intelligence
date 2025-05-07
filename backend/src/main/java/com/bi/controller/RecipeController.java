@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bi.constant.ApiPaths;
-import com.bi.dto.AddRecipeDTO;
+import com.bi.dto.AddOrUpdateRecipeDTO;
 import com.bi.dto.RecipeDTO;
 import com.bi.service.RecipeService;
 
@@ -36,14 +36,14 @@ public class RecipeController {
     }
 
     @PostMapping
-    public ResponseEntity<RecipeDTO> addRecipe(@Valid @RequestBody AddRecipeDTO dto) {
+    public ResponseEntity<RecipeDTO> addRecipe(@Valid @RequestBody AddOrUpdateRecipeDTO dto) {
         RecipeDTO createdRecipe = this.recipeService.addRecipe(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRecipe);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<RecipeDTO> updateRecipe(@PathVariable UUID id,
-            @Valid @RequestBody AddRecipeDTO recipeDTO) {
+            @Valid @RequestBody AddOrUpdateRecipeDTO recipeDTO) {
         RecipeDTO updatedRecipe = this.recipeService.updateRecipe(id, recipeDTO);
         return ResponseEntity.ok(updatedRecipe);
     }

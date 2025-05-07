@@ -10,7 +10,7 @@ public class ErrorMessage {
     public static final String ROAST_TYPE_REQUIRED = "Roast type is required";
     public static final String BREW_METHOD_REQUIRED = "Brew method is required";
 
-    // AddRecipeDTO
+    // AddOrUpdateRecipeDTO
     public static final String METHOD_TYPE_REQUIRED = "Method type is required";
     public static final String COFFEE_DOSE_REQUIRED = "Coffee dose is required";
     public static final String WATER_AMOUNT_REQUIRED = "Water amount is required";

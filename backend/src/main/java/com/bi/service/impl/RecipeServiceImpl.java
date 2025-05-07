@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.RedisCacheKey;
-import com.bi.dto.AddRecipeDTO;
+import com.bi.dto.AddOrUpdateRecipeDTO;
 import com.bi.dto.RecipeDTO;
 import com.bi.exception.EntityNotFoundException;
 import com.bi.mapper.RecipeMapper;
@@ -35,7 +35,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
-    public RecipeDTO addRecipe(AddRecipeDTO dto) {
+    public RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto) {
         Recipe newRecipe = Recipe.builder()
                 .methodType(dto.getMethodType())
                 .coffeeDose(dto.getCoffeeDose())
@@ -52,7 +52,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
-    public RecipeDTO updateRecipe(UUID id, AddRecipeDTO updatedRecipe) {
+    public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
         Recipe existingRecipe = this.recipeRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe", id));
 
