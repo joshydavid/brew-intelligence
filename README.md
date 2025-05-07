@@ -4,12 +4,13 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
-- [View Project](https://joshuadavid.dev)
-- [Report Bug](https://github.com/joshydavid/joshua-david/issues/new/choose)
+- [View Project](https://brew.joshydavid.com)
+- [View API Documentation](https://brew-api.joshydavid.com)
+- [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
 
 ## Tech Stack
 
-- Java, Spring Boot
+- Java Spring Boot
 - PostgreSQL
 - Redis
 - Swagger
@@ -33,27 +34,14 @@
 
 3. Set up environment variables
 
-   create file `.env`
-
-   ```
-   DB_URL=jdbc:postgresql://localhost:5432/timperiodb
-   DB_USERNAME=postgres
-   DB_PASSWORD=root
-   JWT_SECRET_KEY={JWT_SECRET_KEY}
-   SERVER=//localhost:5173
-   ```
+   `cp .env.sample .env`
 
 4. Run the project in development environment
 
    ```
+   source .env
    mvn spring-boot:run
    ```
-
-## API Documentation
-
-```
-https://dummylink.com
-```
 
 ## Acknowledgement
 

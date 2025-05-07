@@ -16,6 +16,8 @@ import com.bi.model.Recipe;
 import com.bi.repository.RecipeRepository;
 import com.bi.service.RecipeService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepo;
@@ -52,6 +54,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
+    @Transactional
     public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
         Recipe existingRecipe = this.recipeRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe", id));
