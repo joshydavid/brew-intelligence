@@ -18,10 +18,12 @@ import com.bi.dto.AddOrUpdateRecipeDTO;
 import com.bi.dto.RecipeDTO;
 import com.bi.service.RecipeService;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(ApiPaths.GET_RECIPES)
+@Tag(name = "Recipes Listings", description = "APIs for listing recipes")
 public class RecipeController {
 
     private final RecipeService recipeService;
