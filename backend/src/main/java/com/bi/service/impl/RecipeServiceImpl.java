@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.RedisCacheKey;
-import com.bi.dto.AddRecipeDTO;
+import com.bi.dto.AddOrUpdateRecipeDTO;
 import com.bi.dto.RecipeDTO;
 import com.bi.exception.EntityNotFoundException;
 import com.bi.mapper.RecipeMapper;
@@ -27,7 +27,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @Cacheable(value = RedisCacheKey.GET_RECIPES_KEY)
     public List<RecipeDTO> getRecipes() {
-        List<Recipe> recipes = recipeRepo.findAll();
+        List<Recipe> recipes = this.recipeRepo.findAll();
         return recipes.stream()
                 .map(RecipeMapper::toDTO)
                 .toList();
@@ -35,7 +35,7 @@ public class RecipeServiceImpl implements RecipeService {
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
-    public RecipeDTO addRecipe(AddRecipeDTO dto) {
+    public RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto) {
         Recipe newRecipe = Recipe.builder()
                 .methodType(dto.getMethodType())
                 .coffeeDose(dto.getCoffeeDose())
@@ -46,14 +46,14 @@ public class RecipeServiceImpl implements RecipeService {
                 .createdBy(dto.getCreatedBy())
                 .build();
 
-        Recipe newRecipeDTO = recipeRepo.save(newRecipe);
+        Recipe newRecipeDTO = this.recipeRepo.save(newRecipe);
         return RecipeMapper.toDTO(newRecipeDTO);
     }
 
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
-    public RecipeDTO updateRecipe(UUID id, RecipeDTO updatedRecipe) {
-        Recipe existingRecipe = recipeRepo.findById(id)
+    public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
+        Recipe existingRecipe = this.recipeRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe", id));
 
         existingRecipe.setMethodType(updatedRecipe.getMethodType());

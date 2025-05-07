@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-public class AddRecipeDTO {
+public class AddOrUpdateRecipeDTO {
     @NotNull(message = ErrorMessage.METHOD_TYPE_REQUIRED)
     private MethodType methodType;
 
