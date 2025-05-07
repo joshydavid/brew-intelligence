@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         Server server = new Server();
         server.setUrl(swaggerDocUrl);
-        server.setDescription(" Server");
+        server.setDescription("Production Server");
         return new OpenAPI().servers(List.of(server));
     }
 }
