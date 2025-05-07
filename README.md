@@ -34,19 +34,12 @@
 
 3. Set up environment variables
 
-   create file `.env`
-
-   ```
-   DB_URL=jdbc:postgresql://localhost:5432/timperiodb
-   DB_USERNAME=postgres
-   DB_PASSWORD=root
-   JWT_SECRET_KEY={JWT_SECRET_KEY}
-   SERVER=//localhost:5173
-   ```
+   `cp .env.sample .env`
 
 4. Run the project in development environment
 
    ```
+   source .env
    mvn spring-boot:run
    ```
 
