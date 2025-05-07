@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
-public class AddCoffeeListingDTO {
+public class AddOrUpdateCoffeeListingDTO {
     @NotBlank(message = ErrorMessage.COFFEE_NAME_REQUIRED)
     private String coffeeName;
 

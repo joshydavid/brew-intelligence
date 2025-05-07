@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bi.constant.ApiPaths;
-import com.bi.dto.AddCoffeeListingDTO;
+import com.bi.dto.AddOrUpdateCoffeeListingDTO;
 import com.bi.dto.CoffeeListingDTO;
 import com.bi.model.enums.RoastType;
 import com.bi.service.CoffeeListingService;
@@ -50,14 +50,14 @@ public class CoffeeListingController {
     }
 
     @PostMapping
-    public ResponseEntity<CoffeeListingDTO> addCoffeeListing(@Valid @RequestBody AddCoffeeListingDTO dto) {
+    public ResponseEntity<CoffeeListingDTO> addCoffeeListing(@Valid @RequestBody AddOrUpdateCoffeeListingDTO dto) {
         CoffeeListingDTO createdListing = this.coffeeListingService.addCoffeeListing(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdListing);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CoffeeListingDTO> updateCoffeeListing(@PathVariable UUID id,
-            @Valid @RequestBody AddCoffeeListingDTO coffeeListingDTO) {
+            @Valid @RequestBody AddOrUpdateCoffeeListingDTO coffeeListingDTO) {
         CoffeeListingDTO updatedCoffeeListing = this.coffeeListingService.updateCoffeeListing(id, coffeeListingDTO);
         return ResponseEntity.ok(updatedCoffeeListing);
     }

@@ -8,7 +8,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.RedisCacheKey;
-import com.bi.dto.AddCoffeeListingDTO;
+import com.bi.dto.AddOrUpdateCoffeeListingDTO;
 import com.bi.dto.CoffeeListingDTO;
 import com.bi.exception.EntityNotFoundException;
 import com.bi.mapper.CoffeeListingMapper;
@@ -49,7 +49,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
-    public CoffeeListingDTO addCoffeeListing(AddCoffeeListingDTO dto) {
+    public CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto) {
         CoffeeListing coffeeListing = CoffeeListing.builder()
                 .coffeeName(dto.getCoffeeName())
                 .roastDate(dto.getRoastDate())
@@ -66,7 +66,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
-    public CoffeeListingDTO updateCoffeeListing(UUID id, AddCoffeeListingDTO updatedCoffeeListing) {
+    public CoffeeListingDTO updateCoffeeListing(UUID id, AddOrUpdateCoffeeListingDTO updatedCoffeeListing) {
         CoffeeListing existingListing = this.coffeeListingRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
 
