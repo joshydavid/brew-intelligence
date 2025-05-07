@@ -17,6 +17,8 @@ import com.bi.model.enums.RoastType;
 import com.bi.repository.CoffeeListingRepository;
 import com.bi.service.CoffeeListingService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class CoffeeListingServiceImpl implements CoffeeListingService {
     private final CoffeeListingRepository coffeeListingRepo;
@@ -46,6 +48,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     @Override
     @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
+    @Transactional
     public CoffeeListingDTO addCoffeeListing(AddCoffeeListingDTO dto) {
         CoffeeListing coffeeListing = CoffeeListing.builder()
                 .coffeeName(dto.getCoffeeName())
@@ -62,6 +65,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     @Override
     @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
+    @Transactional
     public CoffeeListingDTO updateCoffeeListing(UUID id, AddCoffeeListingDTO updatedCoffeeListing) {
         CoffeeListing existingListing = this.coffeeListingRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
