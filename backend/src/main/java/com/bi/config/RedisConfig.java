@@ -13,16 +13,15 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 
 @Configuration
 @EnableCaching
-public class RedisConfig {
+class RedisConfig {
     @Value("${spring.cache.redis.time-to-live}")
     private long cacheTtlMinutes;
 
     @Bean
-    public RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
+    RedisCacheManager cacheManager(RedisConnectionFactory connectionFactory) {
         RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig()
                 .entryTtl(Duration.ofMinutes(cacheTtlMinutes));
 
         return RedisCacheManager.builder(connectionFactory).cacheDefaults(config).build();
     }
-
 }
