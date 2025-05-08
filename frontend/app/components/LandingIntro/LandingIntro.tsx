@@ -1,0 +1,25 @@
+import BrewIntelligenceIntro from "@/components/BrewIntelligence/BrewIntelligenceIntro";
+import { CoffeeListingEntry } from "@/components/CoffeeListing/CoffeeListingEntry";
+import { CoffeeRecipesEntry } from "@/components/CoffeeRecipes/CoffeeRecipesEntry";
+
+export default function LandingIntro() {
+  return (
+    <div className="mx-auto max-w-2xl px-4 py-12 text-center">
+      <h1 className="text-4xl font-bold text-gray-900 dark:text-white">
+        Welcome to{" "}
+        <span className="text-blue-600 dark:text-blue-500">
+          Brew Intelligence.
+        </span>
+      </h1>
+      <p className="my-6 text-lg text-gray-600 dark:text-gray-300">
+        Discover the art and science of great coffee — and log your beans by
+        origin, roast date, weight, and more.
+      </p>
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-1 lg:grid-cols-3">
+        <CoffeeListingEntry />
+        <CoffeeRecipesEntry />
+        <BrewIntelligenceIntro />
+      </div>
+    </div>
+  );
+}

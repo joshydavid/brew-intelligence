@@ -1,5 +1,6 @@
 "use client";
 
+import SignIn from "@/components/SignIn/SignIn";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -21,7 +22,6 @@ import {
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import * as React from "react";
-import SignIn from "../SignIn/SignIn";
 
 interface ResponseDialogProps {
   dialogButton: string;
