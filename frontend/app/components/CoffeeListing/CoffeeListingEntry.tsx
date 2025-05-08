@@ -1,0 +1,173 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
+import { format } from "date-fns";
+import { Coffee } from "lucide-react";
+import { useState } from "react";
+
+export function CoffeeListingEntry() {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button size="lg">
+          <Coffee className="h-4 w-4" />
+          Log Beans
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-[500px]">
+        <DialogHeader>
+          <DialogTitle>New Coffee Bean Log</DialogTitle>
+          <DialogDescription className="text-xs">
+            Log details like roast date, weight, and brew method.
+          </DialogDescription>
+        </DialogHeader>
+        <CoffeeListingEntryForm />
+        <DialogFooter>
+          <Button type="submit">
+            <Coffee className="mr-1 h-4 w-4" />
+            Log Beans
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+const CoffeeListingEntryForm = () => {
+  const [formData, setFormData] = useState({
+    coffeeName: "",
+    roastDate: new Date(),
+    weightInKg: "",
+    roastType: "",
+    brewMethod: "",
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  return (
+    <div className="grid gap-5 py-4">
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label htmlFor="coffeeName" className="sm:text-right">
+          Name
+        </Label>
+        <Input
+          id="coffeeName"
+          value={formData.coffeeName}
+          onChange={handleChange}
+          className="w-full sm:col-span-3"
+          placeholder="Ethiopia Yirgacheffe"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label className="sm:text-right">Roast Date</Label>
+        <Popover>
+          <PopoverTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-full justify-start text-left font-normal sm:col-span-3"
+            >
+              {formData.roastDate
+                ? format(formData.roastDate, "PPP")
+                : "Pick a date"}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0">
+            <Calendar
+              mode="single"
+              selected={formData.roastDate}
+              onSelect={(date) =>
+                date && setFormData({ ...formData, roastDate: date })
+              }
+              disabled={(date) => date > new Date()}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
+
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label htmlFor="weightInKg" className="sm:text-right">
+          Weight (KG)
+        </Label>
+        <Input
+          id="weightInKg"
+          type="number"
+          value={formData.weightInKg}
+          onChange={handleChange}
+          className="sm:col-span-3"
+          placeholder="0"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label className="sm:text-right">Roast Type</Label>
+        <Select
+          value={formData.roastType}
+          onValueChange={(value) =>
+            setFormData({ ...formData, roastType: value })
+          }
+        >
+          <SelectTrigger className="w-full sm:col-span-3">
+            <SelectValue placeholder="Select roast type" />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.values(RoastType).map((type) => (
+              <SelectItem key={type} value={type}>
+                {type}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label className="sm:text-right">Brew Method</Label>
+        <Select
+          value={formData.brewMethod}
+          onValueChange={(value) =>
+            setFormData({ ...formData, brewMethod: value })
+          }
+        >
+          <SelectTrigger className="w-full sm:col-span-3">
+            <SelectValue placeholder="Select brew method" />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.values(BrewMethod).map((method) => (
+              <SelectItem key={method} value={method}>
+                {method.replace("_", " ")}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  );
+};
