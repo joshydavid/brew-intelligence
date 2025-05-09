@@ -92,6 +92,19 @@ const CoffeeRecipeForm = () => {
   return (
     <div className="grid gap-8 py-4">
       <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
+        <Label htmlFor="createdBy" className="sm:text-right">
+          Creator
+        </Label>
+        <Input
+          id="createdBy"
+          value={formData.createdBy}
+          onChange={handleInputChange}
+          placeholder="Who crafted this recipe?"
+          className="sm:col-span-3"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
         <Label className="sm:text-right">Brew Method</Label>
         <Select
           value={formData.methodType}
@@ -123,6 +136,7 @@ const CoffeeRecipeForm = () => {
           onChange={handleInputChange}
           placeholder="How much ground coffee?"
           className="sm:col-span-3"
+          min="1"
         />
       </div>
 
@@ -137,6 +151,7 @@ const CoffeeRecipeForm = () => {
           onChange={handleInputChange}
           placeholder="How much water?"
           className="sm:col-span-3"
+          min="10"
         />
       </div>
 
@@ -149,8 +164,9 @@ const CoffeeRecipeForm = () => {
           type="number"
           value={formData.brewTemp}
           onChange={handleInputChange}
-          placeholder="Water temp in Celsius"
+          placeholder="Water temperature in celsius"
           className="sm:col-span-3"
+          min="0"
         />
       </div>
 
@@ -193,19 +209,6 @@ const CoffeeRecipeForm = () => {
             + Add Step
           </Button>
         </div>
-      </div>
-
-      <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
-        <Label htmlFor="createdBy" className="sm:text-right">
-          Creator
-        </Label>
-        <Input
-          id="createdBy"
-          value={formData.createdBy}
-          onChange={handleInputChange}
-          placeholder="Who crafted this recipe?"
-          className="sm:col-span-3"
-        />
       </div>
     </div>
   );
