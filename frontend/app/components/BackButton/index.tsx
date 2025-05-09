@@ -6,7 +6,7 @@ export default function BackButton() {
   const router = useRouter();
   return (
     <Button variant="ghost" onClick={() => router.back()}>
-      <ArrowLeft /> Back
+      <ArrowLeft />
     </Button>
   );
 }
