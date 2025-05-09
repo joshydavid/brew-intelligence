@@ -8,7 +8,9 @@ import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { formatDate, sortByLatestDate } from "@/lib/constants/utils";
+import Coffee from "@/public/coffee.jpg";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 export default function DisplayCoffeeListings() {
   const {
@@ -43,13 +45,21 @@ export default function DisplayCoffeeListings() {
           }: any) => (
             <Card key={listingId}>
               <CardHeader>
+                <Image
+                  src={Coffee}
+                  alt="coffee"
+                  height="1000"
+                  width="1000"
+                  className="h-auto w-full rounded-t-lg object-cover"
+                />
+              </CardHeader>
+              <CardContent className="flex flex-col gap-2">
                 <CardTitle className="text-xl">{coffeeName}</CardTitle>
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="my-2 flex flex-wrap gap-2">
                   <Badge variant="secondary">{roastType}</Badge>
                   <Badge variant="secondary">{brewMethod}</Badge>
                 </div>
-              </CardHeader>
-              <CardContent className="flex flex-col gap-2">
+
                 <p className="text-xs font-medium text-muted-foreground">
                   Roast Date
                 </p>

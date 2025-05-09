@@ -7,7 +7,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import Brew from "@/public/brew.jpg";
 import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 
 export default function DisplayCoffeeRecipes() {
   const {
@@ -43,6 +45,15 @@ export default function DisplayCoffeeRecipes() {
           }: any) => (
             <Card key={recipeId}>
               <CardHeader>
+                <Image
+                  src={Brew}
+                  alt="coffee"
+                  height="1000"
+                  width="1000"
+                  className="h-auto w-full rounded-t-lg object-cover"
+                />
+              </CardHeader>
+              <CardContent className="space-y-6">
                 <CardTitle className="text-xl">{createdBy}'s Recipe</CardTitle>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Badge variant="secondary">{methodType}</Badge>
@@ -51,8 +62,6 @@ export default function DisplayCoffeeRecipes() {
                   <Badge variant="secondary">{brewTemp}°C</Badge>
                   <Badge variant="secondary">{brewTime}</Badge>
                 </div>
-              </CardHeader>
-              <CardContent className="space-y-2">
                 <p className="text-sm font-medium text-muted-foreground">
                   Instructions
                 </p>
