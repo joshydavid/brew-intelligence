@@ -5,6 +5,11 @@ export enum BrewMethod {
   MOKA_POT = "Moka Pot",
 }
 
+export enum MethodType {
+  ICED = "Iced",
+  HOT = "Hot",
+}
+
 export enum RoastType {
   LIGHT = "Light",
   MEDIUM = "Medium",

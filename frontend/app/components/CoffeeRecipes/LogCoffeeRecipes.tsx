@@ -5,7 +5,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -19,13 +18,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { BrewMethod } from "@/lib/constants/coffee-listing";
+import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
+import { MethodType } from "@/lib/constants/coffee-listing";
 import { BookOpen } from "lucide-react";
 import { useState } from "react";
 
 export function LogCoffeeRecipes() {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="lg">
           <BookOpen className="h-4 w-4" />
@@ -39,19 +40,13 @@ export function LogCoffeeRecipes() {
             Craft and record your ideal brew: dose, temp, time, and steps.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeRecipeForm />
-        <DialogFooter>
-          <Button type="submit" size="lg">
-            <BookOpen className="mr-1 h-4 w-4" />
-            Save Recipe
-          </Button>
-        </DialogFooter>
+        <CoffeeRecipeForm onSuccess={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );
 }
 
-const CoffeeRecipeForm = () => {
+const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [formData, setFormData] = useState({
     methodType: "",
     coffeeDose: "",
@@ -61,11 +56,23 @@ const CoffeeRecipeForm = () => {
     brewInstructions: [""],
     createdBy: "",
   });
+  const { mutate } = useLogRecipeMutation();
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = () => {
+    mutate(formData, {
+      onSuccess: () => {
+        onSuccess();
+      },
+      onError: (error) => {
+        console.log("Mutation failed:", error);
+      },
+    });
   };
 
   const handleInstructionChange = (index: number, value: string) => {
@@ -116,8 +123,8 @@ const CoffeeRecipeForm = () => {
             <SelectValue placeholder="Select brewing method" />
           </SelectTrigger>
           <SelectContent>
-            {Object.values(BrewMethod).map((method) => (
-              <SelectItem key={method} value={method}>
+            {Object.values(MethodType).map((method) => (
+              <SelectItem key={method} value={method.toUpperCase()}>
                 {method.replace("_", " ")}
               </SelectItem>
             ))}
@@ -209,6 +216,13 @@ const CoffeeRecipeForm = () => {
             + Add Step
           </Button>
         </div>
+      </div>
+
+      <div className="flex justify-end">
+        <Button type="submit" size="lg" onClick={handleSubmit}>
+          <BookOpen className="mr-1 h-4 w-4" />
+          Save Recipe
+        </Button>
       </div>
     </div>
   );
