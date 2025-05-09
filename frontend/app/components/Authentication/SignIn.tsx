@@ -3,18 +3,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
 
-export default function SignIn() {
+export default function SignIn({ isMobile = true }) {
   return (
-    <form className={cn("grid items-start gap-4 px-4")}>
+    <form className={cn("grid items-start gap-4", isMobile && "px-4")}>
       <div className="grid gap-2">
         <Label htmlFor="email">Email</Label>
-        <Input type="email" id="email" defaultValue="shadcn@example.com" />
+        <Input type="email" id="email" />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="username">Username</Label>
-        <Input id="username" defaultValue="@shadcn" />
+        <Label htmlFor="username">Password</Label>
+        <Input id="password" type="password" />
       </div>
-      <Button type="submit">Save</Button>
+      <Button type="submit">Login</Button>
     </form>
   );
 }

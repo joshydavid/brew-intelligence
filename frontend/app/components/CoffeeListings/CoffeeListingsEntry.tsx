@@ -30,7 +30,7 @@ import { format } from "date-fns";
 import { Coffee } from "lucide-react";
 import { useState } from "react";
 
-export function CoffeeListingEntry() {
+export function CoffeeListingsEntry() {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -46,7 +46,7 @@ export function CoffeeListingEntry() {
             Log details like roast date, weight, and brew method.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeListingEntryForm />
+        <CoffeeListingsEntryForm />
         <DialogFooter>
           <Button type="submit">
             <Coffee className="mr-1 h-4 w-4" />
@@ -58,7 +58,7 @@ export function CoffeeListingEntry() {
   );
 }
 
-const CoffeeListingEntryForm = () => {
+const CoffeeListingsEntryForm = () => {
   const [formData, setFormData] = useState({
     coffeeName: "",
     roastDate: new Date(),
@@ -115,7 +115,7 @@ const CoffeeListingEntryForm = () => {
 
       <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
         <Label htmlFor="weightInKg" className="sm:text-right">
-          Weight (KG)
+          Weight (kg)
         </Label>
         <Input
           id="weightInKg"
@@ -124,6 +124,7 @@ const CoffeeListingEntryForm = () => {
           onChange={handleChange}
           className="sm:col-span-3"
           placeholder="0"
+          min="0"
         />
       </div>
 

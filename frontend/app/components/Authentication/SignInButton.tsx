@@ -1,11 +1,9 @@
 "use client";
 
-import SignIn from "@/components/SignIn/SignIn";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,23 +12,20 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import * as React from "react";
+import { useState } from "react";
+import SignIn from "./SignIn";
 
-interface ResponseDialogProps {
+interface SignInButtonProps {
   dialogButton: string;
 }
 
-export function ResponsiveDialog({
-  dialogButton,
-}: Readonly<ResponseDialogProps>) {
-  const [open, setOpen] = React.useState(false);
+export function SignInButton({ dialogButton }: Readonly<SignInButtonProps>) {
+  const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
@@ -41,12 +36,9 @@ export function ResponsiveDialog({
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Edit profile</DialogTitle>
-            <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription>
+            <DialogTitle>Log in to your account</DialogTitle>
           </DialogHeader>
-          <SignIn />
+          <SignIn isMobile={false} />
         </DialogContent>
       </Dialog>
     );
@@ -59,10 +51,7 @@ export function ResponsiveDialog({
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
-          <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DrawerDescription>
+          <DialogTitle>Log in to your account</DialogTitle>
         </DrawerHeader>
         <SignIn />
         <DrawerFooter className="pt-2 pb-36">
