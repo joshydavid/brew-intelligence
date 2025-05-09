@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
@@ -16,7 +17,7 @@ export default function DisplayCoffeeRecipes() {
     data: coffeeRecipes,
     error: coffeeRecipesErr,
     isLoading: coffeeRecipesLoading,
-  } = useQuery({
+  } = useQuery<CoffeeRecipeDTO[]>({
     queryKey: [QUERY_KEYS.COFFEE_RECIPES],
     queryFn: () => getRequest(API_ROUTES.RECIPES),
   });
@@ -32,7 +33,7 @@ export default function DisplayCoffeeRecipes() {
   return (
     <ParentWrapper>
       <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
-        {coffeeRecipes.map(
+        {coffeeRecipes?.map(
           ({
             recipeId,
             createdBy,
@@ -42,9 +43,9 @@ export default function DisplayCoffeeRecipes() {
             brewTemp,
             brewTime,
             brewInstructions,
-          }: any) => (
+          }: CoffeeRecipeDTO) => (
             <Card key={recipeId}>
-              <CardHeader>
+              <CardHeader className="relative h-50 overflow-hidden">
                 <Image
                   src={Brew}
                   alt="coffee"
@@ -53,7 +54,7 @@ export default function DisplayCoffeeRecipes() {
                   className="h-auto w-full rounded-t-lg object-cover"
                 />
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-3">
                 <CardTitle className="text-xl">{createdBy}'s Recipe</CardTitle>
                 <div className="mt-3 flex flex-wrap gap-2">
                   <Badge variant="secondary">{methodType}</Badge>
@@ -67,7 +68,7 @@ export default function DisplayCoffeeRecipes() {
                 </p>
                 <ol className="list-inside list-decimal space-y-1 text-sm text-foreground">
                   {brewInstructions.map((step: string, index: number) => (
-                    <li key={index}>{step}</li>
+                    <li key={`step-${index}`}>{step}</li>
                   ))}
                 </ol>
               </CardContent>
