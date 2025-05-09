@@ -1,9 +1,8 @@
-import { BookOpen } from "lucide-react";
-import BrewIntelligenceIntro from "../BrewIntelligence/BrewIntelligenceIntro";
-import CoffeeListings from "../CoffeeListings/CoffeeListings";
-import { CoffeeListingsEntry } from "../CoffeeListings/CoffeeListingsEntry";
-import { CoffeeRecipesEntry } from "../CoffeeRecipes/CoffeeRecipesEntry";
-import { Button } from "../ui/button";
+import BrewIntelligenceIntro from "@/components/BrewIntelligence/BrewIntelligenceIntro";
+import { LogCoffeeListing } from "@/components/CoffeeListings/LogCoffeeListing";
+import ViewBeansButton from "@/components/CoffeeListings/ViewBeansButton";
+import { LogCoffeeRecipes } from "@/components/CoffeeRecipes/LogCoffeeRecipes";
+import ViewRecipesButton from "@/components/CoffeeRecipes/ViewRecipesButton";
 
 export default function LandingIntro() {
   return (
@@ -19,15 +18,12 @@ export default function LandingIntro() {
         origin, roast date, weight, and more.
       </p>
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-1 lg:grid-cols-3">
-        <CoffeeListings />
+        <ViewBeansButton />
+        <ViewRecipesButton />
 
-        <Button size="lg">
-          <BookOpen className="h-4 w-4" />
-          View Recipes
-        </Button>
+        <LogCoffeeListing />
+        <LogCoffeeRecipes />
 
-        <CoffeeListingsEntry />
-        <CoffeeRecipesEntry />
         <BrewIntelligenceIntro />
       </div>
     </div>

@@ -10,7 +10,7 @@ import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { formatDate, sortByLatestDate } from "@/lib/constants/utils";
 import { useQuery } from "@tanstack/react-query";
 
-export default function DisplayListings() {
+export default function DisplayCoffeeListings() {
   const {
     data: coffeeListings,
     error: coffeeListingsErr,
@@ -45,12 +45,15 @@ export default function DisplayListings() {
               <CardHeader>
                 <CardTitle className="text-xl">{coffeeName}</CardTitle>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  <Badge variant="outline">{roastType}</Badge>
-                  <Badge variant="outline">{brewMethod}</Badge>
+                  <Badge variant="secondary">{roastType}</Badge>
+                  <Badge variant="secondary">{brewMethod}</Badge>
                 </div>
               </CardHeader>
-              <CardContent>
-                Roast Date {formatDate(new Date(roastDate))}
+              <CardContent className="flex flex-col gap-2">
+                <p className="text-xs font-medium text-muted-foreground">
+                  Roast Date
+                </p>
+                <p>{formatDate(new Date(roastDate))}</p>
               </CardContent>
             </Card>
           ),
