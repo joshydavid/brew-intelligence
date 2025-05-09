@@ -7,7 +7,7 @@ import {
 export interface CoffeeListingDTO {
   listingId: string;
   coffeeName: string;
-  roastDate: string;
+  roastDate: Date;
   weightInKg: string;
   roastType: RoastType;
   brewMethod: BrewMethod;

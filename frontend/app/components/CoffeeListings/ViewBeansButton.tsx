@@ -9,6 +9,8 @@ export default function ViewBeansButton() {
   const router = useRouter();
   return (
     <Button
+      variant="outline"
+      className="rounded-3xl"
       size="lg"
       onClick={() => router.push(CLIENT_ROUTES.COFFEE_LISTINGS)}
     >

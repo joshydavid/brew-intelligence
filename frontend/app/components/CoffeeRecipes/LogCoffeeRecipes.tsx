@@ -16,19 +16,19 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
 } from "@/components/ui/select";
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
 import { MethodType } from "@/lib/constants/coffee-listing";
-import { BookOpen } from "lucide-react";
+import { CoffeeRecipeDTO } from "@/models/api-dto";
+import { BookOpen, Plus, X } from "lucide-react";
 import { useState } from "react";
 
 export function LogCoffeeRecipes() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg">
+        <Button size="lg" variant="outline" className="rounded-3xl">
           <BookOpen className="h-4 w-4" />
           Log Recipes
         </Button>
@@ -47,11 +47,11 @@ export function LogCoffeeRecipes() {
 }
 
 const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
-  const [formData, setFormData] = useState({
-    methodType: "",
-    coffeeDose: "",
-    waterAmount: "",
-    brewTemp: "",
+  const [formData, setFormData] = useState<Omit<CoffeeRecipeDTO, "recipeId">>({
+    methodType: MethodType.ICED,
+    coffeeDose: 0,
+    waterAmount: 0,
+    brewTemp: 0,
     brewTime: "",
     brewInstructions: [""],
     createdBy: "",
@@ -116,11 +116,15 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
         <Select
           value={formData.methodType}
           onValueChange={(value) =>
-            setFormData({ ...formData, methodType: value })
+            setFormData({ ...formData, methodType: value as MethodType })
           }
         >
           <SelectTrigger className="w-full sm:col-span-3">
-            <SelectValue placeholder="Select brewing method" />
+            <span className="text-sm font-medium text-muted-foreground">
+              {formData.methodType
+                ? formData.methodType.replace("_", " ")
+                : "Select brewing method"}
+            </span>
           </SelectTrigger>
           <SelectContent>
             {Object.values(MethodType).map((method) => (
@@ -194,7 +198,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
         <Label className="sm:text-right">Brew Steps</Label>
         <div className="grid gap-4 sm:col-span-3">
           {formData.brewInstructions.map((step, i) => (
-            <div key={i} className="flex items-center gap-2">
+            <div key={`${step}-${i}`} className="flex items-center gap-2">
               <Input
                 value={step}
                 onChange={(e) => handleInstructionChange(i, e.target.value)}
@@ -207,19 +211,19 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
                   size="icon"
                   onClick={() => removeInstruction(i)}
                 >
-                  ×
+                  <X />
                 </Button>
               )}
             </div>
           ))}
-          <Button variant="secondary" onClick={addInstruction}>
-            + Add Step
+          <Button variant="secondary" onClick={addInstruction} size="md">
+            <Plus /> Add Step
           </Button>
         </div>
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit" size="lg" onClick={handleSubmit}>
+        <Button type="submit" size="md" onClick={handleSubmit}>
           <BookOpen className="mr-1 h-4 w-4" />
           Save Recipe
         </Button>

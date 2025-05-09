@@ -21,7 +21,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import * as React from "react";
+import { useState } from "react";
 
 interface ResponseDialogProps {
   dialogButton: string;
@@ -30,7 +30,7 @@ interface ResponseDialogProps {
 export function ResponsiveDialog({
   dialogButton,
 }: Readonly<ResponseDialogProps>) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const isDesktop = useMediaQuery("(min-width: 768px)");
 
   if (isDesktop) {
