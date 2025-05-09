@@ -6,9 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
+import { BrewMethod } from "@/lib/constants/coffee-listing";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { formatDate, sortByLatestDate } from "@/lib/constants/utils";
-import Coffee from "@/public/coffee.jpg";
+import { CoffeeListingDTO } from "@/models/api-dto";
+import Espresso from "@/public/Espresso.jpeg";
+import V60 from "@/public/V60.jpg";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 
@@ -17,7 +20,7 @@ export default function DisplayCoffeeListings() {
     data: coffeeListings,
     error: coffeeListingsErr,
     isLoading: coffeeListingsLoading,
-  } = useQuery({
+  } = useQuery<CoffeeListingDTO[]>({
     queryKey: [QUERY_KEYS.COFFEE_LISTINGS],
     queryFn: () => getRequest(API_ROUTES.COFFEE_LISTINGS),
   });
@@ -30,7 +33,21 @@ export default function DisplayCoffeeListings() {
       </ParentWrapper>
     );
 
-  const sortedCoffeeListings = sortByLatestDate(coffeeListings, "roastDate");
+  const sortedCoffeeListings = sortByLatestDate(
+    coffeeListings ?? [],
+    "roastDate",
+  );
+
+  const getCoffeeImage = (brewMethod: BrewMethod) => {
+    switch (brewMethod) {
+      case BrewMethod.ESPRESSO:
+        return Espresso;
+      case BrewMethod.V60:
+        return V60;
+      default:
+        return Espresso;
+    }
+  };
 
   return (
     <ParentWrapper>
@@ -42,11 +59,11 @@ export default function DisplayCoffeeListings() {
             roastType,
             brewMethod,
             roastDate,
-          }: any) => (
+          }: CoffeeListingDTO) => (
             <Card key={listingId}>
-              <CardHeader>
+              <CardHeader className="relative h-55 overflow-hidden">
                 <Image
-                  src={Coffee}
+                  src={getCoffeeImage(brewMethod)}
                   alt="coffee"
                   height="1000"
                   width="1000"
@@ -57,9 +74,10 @@ export default function DisplayCoffeeListings() {
                 <CardTitle className="text-xl">{coffeeName}</CardTitle>
                 <div className="my-2 flex flex-wrap gap-2">
                   <Badge variant="secondary">{roastType}</Badge>
-                  <Badge variant="secondary">{brewMethod}</Badge>
+                  <Badge variant="secondary">
+                    {BrewMethod[brewMethod as keyof typeof BrewMethod]}
+                  </Badge>
                 </div>
-
                 <p className="text-xs font-medium text-muted-foreground">
                   Roast Date
                 </p>

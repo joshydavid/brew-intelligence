@@ -4,10 +4,14 @@ export const formatDate = (date: Date) => {
   return format(date, "d MMMM yyyy");
 };
 
-export const sortByLatestDate = (listings: any[], dateField: string) => {
+export const sortByLatestDate = <T extends { [key: string]: any }>(
+  listings: T[],
+  dateField: string,
+): T[] => {
   return [...listings].sort(
     (a, b) =>
-      new Date(b[dateField]).getTime() - new Date(a[dateField]).getTime(),
+      new Date(b[dateField] as string).getTime() -
+      new Date(a[dateField] as string).getTime(),
   );
 };
 
