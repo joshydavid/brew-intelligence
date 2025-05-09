@@ -41,6 +41,15 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --animate-border: rotate-border 3s linear infinite;
+  @keyframes rotate-border {
+    from {
+      --border-angle: 0deg;
+    }
+    to {
+      --border-angle: 360deg;
+    }
+  }
 }
 
 :root {
@@ -119,4 +128,10 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@property --border-angle {
+  inherits: false;
+  initial-value: 0deg;
+  syntax: "<angle>";
 }

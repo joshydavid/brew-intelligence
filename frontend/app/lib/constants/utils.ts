@@ -10,3 +10,10 @@ export const sortByLatestDate = (listings: any[], dateField: string) => {
       new Date(b[dateField]).getTime() - new Date(a[dateField]).getTime(),
   );
 };
+
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
+
+export const cn = (...inputs: ClassValue[]) => {
+  return twMerge(clsx(inputs));
+};
