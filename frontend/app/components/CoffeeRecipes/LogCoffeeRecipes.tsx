@@ -116,7 +116,10 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
         <Select
           value={formData.methodType}
           onValueChange={(value) =>
-            setFormData({ ...formData, methodType: value as MethodType })
+            setFormData({
+              ...formData,
+              methodType: value as MethodType,
+            })
           }
         >
           <SelectTrigger className="w-full sm:col-span-3">
@@ -126,6 +129,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
                 : "Select brewing method"}
             </span>
           </SelectTrigger>
+
           <SelectContent>
             {Object.values(MethodType).map((method) => (
               <SelectItem key={method} value={method.toUpperCase()}>
