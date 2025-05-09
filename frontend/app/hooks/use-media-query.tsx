@@ -1,7 +1,8 @@
 import * as React from "react";
+import { useState } from "react";
 
 export function useMediaQuery(query: string) {
-  const [value, setValue] = React.useState(false);
+  const [value, setValue] = useState<boolean>(false);
 
   React.useEffect(() => {
     function onChange(event: MediaQueryListEvent) {

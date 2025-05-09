@@ -20,10 +20,8 @@ export default function LandingIntro() {
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-1 lg:grid-cols-3">
         <ViewBeansButton />
         <ViewRecipesButton />
-
         <LogCoffeeListing />
         <LogCoffeeRecipes />
-
         <BrewIntelligenceIntro />
       </div>
     </div>
