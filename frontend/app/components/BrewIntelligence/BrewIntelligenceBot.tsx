@@ -1,12 +1,11 @@
-import { Input } from "@/components/ui/input";
-
 export default function BrewIntelligenceBot() {
   return (
     <div className="mx-auto max-w-2xl">
-      <Input
-        placeholder="Analysing coffee grinds..."
-        className="w-full rounded-full border border-gray-300 p-7 text-black outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:text-white"
-      />
+      <div className="w-full cursor-pointer rounded-full border border-gray-300 p-5 dark:border-gray-600 dark:bg-gray-900">
+        <p className="ml-4 text-sm text-gray-600 dark:text-gray-400">
+          Analysing coffee grinds...
+        </p>
+      </div>
     </div>
   );
 }

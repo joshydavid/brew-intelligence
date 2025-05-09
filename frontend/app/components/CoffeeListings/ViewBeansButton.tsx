@@ -5,7 +5,7 @@ import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { Coffee } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-export default function CoffeeListings() {
+export default function ViewBeansButton() {
   const router = useRouter();
   return (
     <Button

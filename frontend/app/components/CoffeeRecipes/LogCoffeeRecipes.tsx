@@ -23,7 +23,7 @@ import { BrewMethod } from "@/lib/constants/coffee-listing";
 import { BookOpen } from "lucide-react";
 import { useState } from "react";
 
-export function CoffeeRecipesEntry() {
+export function LogCoffeeRecipes() {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -41,7 +41,7 @@ export function CoffeeRecipesEntry() {
         </DialogHeader>
         <CoffeeRecipeForm />
         <DialogFooter>
-          <Button type="submit">
+          <Button type="submit" size="lg">
             <BookOpen className="mr-1 h-4 w-4" />
             Save Recipe
           </Button>
