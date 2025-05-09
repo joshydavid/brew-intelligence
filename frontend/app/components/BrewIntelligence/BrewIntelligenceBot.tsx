@@ -9,6 +9,8 @@ export default function BrewIntelligenceBot() {
   return (
     <div
       className={gradientBorderClass}
+      role="button"
+      tabIndex={0}
       onClick={() => router.push(CLIENT_ROUTES.BREW_INTELLIGENCE)}
     >
       <p className="text-md ml-4 p-3 text-gray-200 dark:text-gray-400">

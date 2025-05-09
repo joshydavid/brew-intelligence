@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 export default function BackButton() {
   const router = useRouter();
   return (
-    <Button variant="ghost" onClick={() => router.back()}>
+    <Button variant="ghost" onClick={() => router.back()} aria-label="Go back">
       <ArrowLeft />
     </Button>
   );
