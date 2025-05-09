@@ -6,7 +6,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -25,14 +24,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
 import { format } from "date-fns";
 import { Coffee } from "lucide-react";
 import { useState } from "react";
 
 export function LogCoffeeListing() {
+  const [open, setOpen] = useState(false);
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button size="lg">
           <Coffee className="h-4 w-4" />
@@ -46,19 +47,13 @@ export function LogCoffeeListing() {
             Log details like roast date, weight, and brew method.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeListingEntryForm />
-        <DialogFooter>
-          <Button type="submit" size="lg">
-            <Coffee className="mr-1 h-4 w-4" />
-            Log Beans
-          </Button>
-        </DialogFooter>
+        <CoffeeListingEntryForm onSuccess={() => setOpen(false)} />
       </DialogContent>
     </Dialog>
   );
 }
 
-const CoffeeListingEntryForm = () => {
+const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const [formData, setFormData] = useState({
     coffeeName: "",
     roastDate: new Date(),
@@ -66,9 +61,21 @@ const CoffeeListingEntryForm = () => {
     roastType: "",
     brewMethod: "",
   });
+  const { mutate } = useLogCoffeeMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+  };
+
+  const handleSubmit = () => {
+    mutate(formData, {
+      onSuccess: () => {
+        onSuccess();
+      },
+      onError: (error) => {
+        console.log("Mutation failed:", error);
+      },
+    });
   };
 
   return (
@@ -115,7 +122,7 @@ const CoffeeListingEntryForm = () => {
 
       <div className="grid grid-cols-1 items-center gap-2 sm:grid-cols-4 sm:gap-4">
         <Label htmlFor="weightInKg" className="sm:text-right">
-          Weight (KG)
+          Weight (kg)
         </Label>
         <Input
           id="weightInKg"
@@ -140,7 +147,7 @@ const CoffeeListingEntryForm = () => {
           </SelectTrigger>
           <SelectContent>
             {Object.values(RoastType).map((type) => (
-              <SelectItem key={type} value={type}>
+              <SelectItem key={type} value={type.toUpperCase()}>
                 {type}
               </SelectItem>
             ))}
@@ -161,12 +168,18 @@ const CoffeeListingEntryForm = () => {
           </SelectTrigger>
           <SelectContent>
             {Object.values(BrewMethod).map((method) => (
-              <SelectItem key={method} value={method}>
+              <SelectItem key={method} value={method.toUpperCase()}>
                 {method.replace("_", " ")}
               </SelectItem>
             ))}
           </SelectContent>
         </Select>
+      </div>
+      <div className="flex justify-end">
+        <Button type="submit" size="lg" onClick={handleSubmit}>
+          <Coffee className="mr-1 h-4 w-4" />
+          Log Beans
+        </Button>
       </div>
     </div>
   );
