@@ -20,7 +20,7 @@ import {
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
-import { BookOpen, Plus, X } from "lucide-react";
+import { BookOpen, Check, Plus, X } from "lucide-react";
 import { useState } from "react";
 
 export function LogCoffeeRecipes() {
@@ -223,9 +223,14 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
       </div>
 
       <div className="flex justify-end">
-        <Button type="submit" size="md" onClick={handleSubmit}>
-          <BookOpen className="mr-1 h-4 w-4" />
-          Save Recipe
+        <Button
+          type="submit"
+          size="md"
+          onClick={handleSubmit}
+          variant="outline"
+        >
+          <Check className="h-4 w-4" />
+          Save
         </Button>
       </div>
     </div>

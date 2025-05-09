@@ -22,16 +22,16 @@ import {
   SelectContent,
   SelectItem,
   SelectTrigger,
+  SelectValue,
 } from "@/components/ui/select";
 import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
-import { CoffeeListingDTO } from "@/models/api-dto";
 import { format } from "date-fns";
-import { Coffee } from "lucide-react";
+import { Check, Coffee } from "lucide-react";
 import { useState } from "react";
 
 export function LogCoffeeListing() {
-  const [open, setOpen] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -54,15 +54,13 @@ export function LogCoffeeListing() {
 }
 
 const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
-  const [formData, setFormData] = useState<Omit<CoffeeListingDTO, "listingId">>(
-    {
-      coffeeName: "",
-      roastDate: new Date(),
-      weightInKg: "",
-      roastType: RoastType.LIGHT,
-      brewMethod: BrewMethod.V60,
-    },
-  );
+  const [formData, setFormData] = useState({
+    coffeeName: "",
+    roastDate: new Date(),
+    weightInKg: "",
+    roastType: "",
+    brewMethod: "",
+  });
   const { mutate } = useLogCoffeeMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -141,15 +139,11 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
         <Select
           value={formData.roastType}
           onValueChange={(value) =>
-            setFormData({ ...formData, roastType: value as RoastType })
+            setFormData({ ...formData, roastType: value })
           }
         >
           <SelectTrigger className="w-full sm:col-span-3">
-            <span className="text-sm font-medium text-muted-foreground">
-              {formData.roastType
-                ? formData.roastType.replace("_", " ")
-                : "Select roast type"}
-            </span>
+            <SelectValue placeholder="Select roast type" />
           </SelectTrigger>
           <SelectContent>
             {Object.values(RoastType).map((type) => (
@@ -166,15 +160,11 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
         <Select
           value={formData.brewMethod}
           onValueChange={(value) =>
-            setFormData({ ...formData, brewMethod: value as BrewMethod })
+            setFormData({ ...formData, brewMethod: value })
           }
         >
           <SelectTrigger className="w-full sm:col-span-3">
-            <span className="text-sm font-medium text-muted-foreground">
-              {formData.brewMethod
-                ? formData.brewMethod.replace("_", " ")
-                : "Select brew method"}
-            </span>
+            <SelectValue placeholder="Select brew method" />
           </SelectTrigger>
           <SelectContent>
             {Object.values(BrewMethod).map((method) => (
@@ -186,9 +176,14 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
         </Select>
       </div>
       <div className="flex justify-end">
-        <Button type="submit" size="md" onClick={handleSubmit}>
-          <Coffee className="mr-1 h-4 w-4" />
-          Log Beans
+        <Button
+          type="submit"
+          size="md"
+          variant="outline"
+          onClick={handleSubmit}
+        >
+          <Check className="h-4 w-4" />
+          Save
         </Button>
       </div>
     </div>
