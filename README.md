@@ -4,6 +4,10 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
+<img src="https://github.com/user-attachments/assets/e7785343-ddeb-4ce4-bbda-bb62e47c4b70" width="800" alt="brew intelligence"  />
+<br />
+<br />
+
 Brew Intelligence — your personal coffee companion. Whether you’re pulling a perfect espresso, dialing in a V60, or experimenting with your coffee setup, Brew Intelligence is here to help you brew better.
 
 - [View Project](https://brew.joshydavid.com)
