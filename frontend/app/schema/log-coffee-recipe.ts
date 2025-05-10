@@ -11,7 +11,7 @@ export const logCoffeeRecipeSchema = z.object({
       required_error: CoffeeRecipeErrMsg.COFFEE_DOSE_REQUIRED,
       invalid_type_error: CoffeeRecipeErrMsg.COFFEE_DOSE_NUMBER,
     })
-    .min(1, { message: CoffeeRecipeErrMsg.COFFEE_DOSE_MIN }),
+    .min(15, { message: CoffeeRecipeErrMsg.COFFEE_DOSE_MIN }),
   waterAmount: z.coerce
     .number({
       required_error: CoffeeRecipeErrMsg.WATER_AMOUNT_REQUIRED,

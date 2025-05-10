@@ -1,5 +1,5 @@
-import LogCoffeeListing from "@/components//CoffeeListings/LogCoffeeListing";
 import BrewIntelligenceIntro from "@/components/BrewIntelligence/BrewIntelligenceIntro";
+import LogCoffeeListing from "@/components/CoffeeListings/LogCoffeeListing";
 import ViewBeansButton from "@/components/CoffeeListings/ViewBeansButton";
 import LogCoffeeRecipes from "@/components/CoffeeRecipes/LogCoffeeRecipes";
 import ViewRecipesButton from "@/components/CoffeeRecipes/ViewRecipesButton";
