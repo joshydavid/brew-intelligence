@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.bi.constant.ApiPaths;
 import com.bi.constant.Authentication;
 import com.bi.service.XLoginService;
 import com.github.scribejava.apis.TwitterApi;
@@ -80,16 +81,15 @@ public class XLoginServiceImpl implements XLoginService {
 
         String userProfile = this.getUser(service, accessToken);
         session.setAttribute(Authentication.USER, userProfile);
-
         response.sendRedirect(frontendRedirectUrl);
     }
 
     @Override
     public String getUser(OAuth10aService service, OAuth1AccessToken accessToken)
             throws IOException, InterruptedException, ExecutionException {
-        OAuthRequest request = new OAuthRequest(Verb.GET,
-                "https://api.twitter.com/1.1/account/verify_credentials.json");
+        OAuthRequest request = new OAuthRequest(Verb.GET, ApiPaths.X_VERIFY_CREDENTIALS);
         service.signRequest(accessToken, request);
+
         Response response = service.execute(request);
         return response.getBody();
     }

@@ -7,4 +7,5 @@ public class ApiPaths {
     public static final String LOGIN_WITH_X = BASE_API + "/login";
     public static final String X_CALLBACK = "/callback";
     public static final String X_USER = "/user";
+    public static final String X_VERIFY_CREDENTIALS = "https://api.twitter.com/1.1/account/verify_credentials.json";
 }
