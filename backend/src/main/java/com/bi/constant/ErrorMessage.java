@@ -1,6 +1,9 @@
 package com.bi.constant;
 
 public class ErrorMessage {
+    // Authentication
+    public static final String UNAUTHORISED_USER = "User is unauthorised. Please login.";
+
     // AddOrUpdateCoffeeListingDTO
     public static final String COFFEE_NAME_REQUIRED = "Coffee name is required";
     public static final String ROAST_DATE_REQUIRED = "Roast date is required";

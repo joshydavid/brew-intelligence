@@ -6,4 +6,5 @@ export const API_ROUTES: ApiEndpoints = {
   COFFEE_LISTINGS: `${API_BASE_URL}/api/v1/coffee-listings`,
   RECIPES: `${API_BASE_URL}/api/v1/recipes`,
   LOGIN_WITH_X: `${API_BASE_URL}/api/v1/login`,
+  GET_USER: `${API_BASE_URL}/api/v1//login/user`,
 };
