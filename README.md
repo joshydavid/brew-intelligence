@@ -4,9 +4,19 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
+Brew Intelligence — your personal coffee companion. Whether you’re pulling a perfect espresso, dialing in a V60, or experimenting with your coffee setup, Brew Intelligence is here to help you brew better.
+
 - [View Project](https://brew.joshydavid.com)
 - [View API Documentation](https://brew.joshydavid.com/docs.html)
 - [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
+
+## Features
+
+- Browse a curated coffee bean library featuring origins, roast profiles, tasting notes, and processing methods.
+- Unlock expert recipes, including Jeff Hoffman’s precision brews—from his world championship V60 to clever AeroPress ratios and beyond.
+- Add your own recipes and fine-tune them over time—track your tweaks, dial-ins.
+- Track your personal coffee beans—log roast dates, origin details, and freshness reminders to keep every cup at its peak.
+- Chat with Brew Intelligence to get real-time support guidance, from dialing in espresso to troubleshooting your pour-over.
 
 ## Tech Stack
 
