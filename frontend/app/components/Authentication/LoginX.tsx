@@ -26,7 +26,7 @@ export default function LoginX() {
   };
 
   return (
-    <Button variant="ghost" size="md" onClick={handleLogin}>
+    <Button variant="outline" size="md" onClick={handleLogin}>
       Login with
       <Image
         src={xBlack}

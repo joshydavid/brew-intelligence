@@ -12,7 +12,7 @@ export function AppearanceToggle() {
   };
 
   return (
-    <Button variant="outline" onClick={toggleTheme}>
+    <Button variant="outline" size="md" onClick={toggleTheme}>
       <Sun className="h-[1.2rem] w-[1.2rem] transition-all dark:hidden" />
       <Moon className="hidden h-[1.2rem] w-[1.2rem] transition-all dark:block" />
       <span className="sr-only">Toggle theme</span>
