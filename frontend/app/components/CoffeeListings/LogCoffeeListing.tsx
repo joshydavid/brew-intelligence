@@ -30,7 +30,7 @@ import { format } from "date-fns";
 import { Check, Coffee } from "lucide-react";
 import { useState } from "react";
 
-export function LogCoffeeListing() {
+export default function LogCoffeeListing() {
   const [open, setOpen] = useState(false);
   return (
     <Dialog open={open} onOpenChange={setOpen}>
