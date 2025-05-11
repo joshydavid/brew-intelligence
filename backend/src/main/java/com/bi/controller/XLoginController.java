@@ -1,15 +1,12 @@
 package com.bi.controller;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.bi.constant.ApiPaths;
 import com.bi.constant.Authentication;
-import com.bi.constant.ErrorMessage;
 import com.bi.service.XLoginService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
@@ -40,13 +37,5 @@ public class XLoginController {
         OAuth1RequestToken requestToken = (OAuth1RequestToken) session.getAttribute(Authentication.REQUEST_TOKEN);
         OAuth1AccessToken accessToken = this.xLoginService.getAccessToken(requestToken, oAuthVerifier);
         this.xLoginService.handleCallback(requestToken, oAuthVerifier, session, response, accessToken);
-    }
-
-    @GetMapping(ApiPaths.X_USER)
-    public String getLoggedInUser(HttpSession session) {
-        String user = session.getAttribute(Authentication.USER).toString();
-        if (user == null)
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, ErrorMessage.UNAUTHORISED_USER);
-        return user;
     }
 }

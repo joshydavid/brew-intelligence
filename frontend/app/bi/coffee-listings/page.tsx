@@ -8,7 +8,11 @@ import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod } from "@/lib/constants/coffee-listing";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
-import { formatDate, sortByLatestDate } from "@/lib/constants/utils";
+import {
+  formatDate,
+  getTimeFrame,
+  sortByLatestDate,
+} from "@/lib/constants/utils";
 import { CoffeeListingDTO } from "@/models/api-dto";
 import Espresso from "@/public/Espresso.jpeg";
 import V60 from "@/public/V60.jpg";
@@ -59,6 +63,7 @@ export default function DisplayCoffeeListings() {
             roastType,
             brewMethod,
             roastDate,
+            createdAt,
           }: CoffeeListingDTO) => (
             <Card key={listingId}>
               <CardHeader className="relative h-55 overflow-hidden">
@@ -71,7 +76,16 @@ export default function DisplayCoffeeListings() {
                 />
               </CardHeader>
               <CardContent className="flex flex-col gap-2">
-                <CardTitle className="text-xl">{coffeeName}</CardTitle>
+                <div className="flex justify-between">
+                  <CardTitle className="max-w-[200px] text-xl">
+                    {coffeeName}
+                  </CardTitle>
+                  <div className="flex justify-end">
+                    <Badge variant="outline" className="px-3.5 py-2">
+                      {getTimeFrame(createdAt)}
+                    </Badge>
+                  </div>
+                </div>
                 <div className="my-2 flex flex-wrap gap-2">
                   <Badge variant="secondary">{roastType}</Badge>
                   <Badge variant="secondary">
@@ -81,7 +95,7 @@ export default function DisplayCoffeeListings() {
                 <p className="text-xs font-medium text-muted-foreground">
                   Roast Date
                 </p>
-                <p>{formatDate(new Date(roastDate))}</p>
+                <p className="text-sm">{formatDate(new Date(roastDate))}</p>
               </CardContent>
             </Card>
           ),

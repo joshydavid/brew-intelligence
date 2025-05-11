@@ -17,6 +17,7 @@ public class RecipeMapper {
                 .brewTime(entity.getBrewTime())
                 .brewInstructions(entity.getBrewInstructions())
                 .createdBy(entity.getCreatedBy())
+                .createdAt(entity.getCreatedAt())
                 .build();
     }
 }

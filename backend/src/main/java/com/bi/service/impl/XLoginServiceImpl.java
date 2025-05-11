@@ -6,16 +6,13 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import com.bi.constant.ApiPaths;
 import com.bi.constant.Authentication;
+import com.bi.service.UserService;
 import com.bi.service.XLoginService;
 import com.github.scribejava.apis.TwitterApi;
 import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
-import com.github.scribejava.core.model.OAuthRequest;
-import com.github.scribejava.core.model.Response;
-import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
 
 import jakarta.servlet.http.Cookie;
@@ -31,16 +28,20 @@ public class XLoginServiceImpl implements XLoginService {
     private Boolean isCookieSecure;
 
     private final OAuth10aService service;
+    private final UserService userService;
 
     public XLoginServiceImpl(
             @Value("${x.api.key}") String apiKey,
             @Value("${x.api.secret}") String apiSecret,
-            @Value("${x.callback.url}") String callbackUrl) {
+            @Value("${x.callback.url}") String callbackUrl,
+            UserService userService) {
 
         this.service = new ServiceBuilder(apiKey)
                 .apiSecret(apiSecret)
                 .callback(callbackUrl)
                 .build(TwitterApi.instance());
+
+        this.userService = userService;
     }
 
     @Override
@@ -79,18 +80,8 @@ public class XLoginServiceImpl implements XLoginService {
         cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
 
-        String userProfile = this.getUser(service, accessToken);
+        String userProfile = this.userService.getUser(service, accessToken);
         session.setAttribute(Authentication.USER, userProfile);
         response.sendRedirect(frontendRedirectUrl);
-    }
-
-    @Override
-    public String getUser(OAuth10aService service, OAuth1AccessToken accessToken)
-            throws IOException, InterruptedException, ExecutionException {
-        OAuthRequest request = new OAuthRequest(Verb.GET, ApiPaths.X_VERIFY_CREDENTIALS);
-        service.signRequest(accessToken, request);
-
-        Response response = service.execute(request);
-        return response.getBody();
     }
 }
