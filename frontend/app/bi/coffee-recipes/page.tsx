@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
-import { getTimeFrame } from "@/lib/constants/utils";
+import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
 import { useQuery } from "@tanstack/react-query";
@@ -31,10 +31,15 @@ export default function DisplayCoffeeRecipes() {
       </ParentWrapper>
     );
 
+  const sortedCoffeeRecipes = sortByLatestDate(
+    coffeeRecipes ?? [],
+    "createdAt",
+  );
+
   return (
     <ParentWrapper>
       <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
-        {coffeeRecipes?.map(
+        {sortedCoffeeRecipes?.map(
           ({
             recipeId,
             createdBy,

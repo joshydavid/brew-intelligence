@@ -39,7 +39,7 @@ export default function DisplayCoffeeListings() {
 
   const sortedCoffeeListings = sortByLatestDate(
     coffeeListings ?? [],
-    "roastDate",
+    "createdAt",
   );
 
   const getCoffeeImage = (brewMethod: BrewMethod) => {
