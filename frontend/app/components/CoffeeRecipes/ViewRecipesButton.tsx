@@ -17,8 +17,14 @@ export default function ViewRecipesButton() {
       onClick={() => navigate(CLIENT_ROUTES.COFFEE_RECIPES)}
       disabled={isLoading}
     >
-      {isLoading ? <BeatLoaderSpiner /> : <BookOpen className="h-4 w-4" />}
-      {!isLoading && "View Recipes"}
+      {isLoading ? (
+        <BeatLoaderSpiner />
+      ) : (
+        <>
+          <BookOpen className="h-4 w-4" />
+          View Recipes
+        </>
+      )}
     </Button>
   );
 }

@@ -17,8 +17,13 @@ export default function ViewBeansButton() {
       onClick={() => navigate(CLIENT_ROUTES.COFFEE_LISTINGS)}
       disabled={isLoading}
     >
-      {isLoading ? <BeatLoaderSpiner /> : <Coffee className="mr-2 h-4 w-4" />}
-      {!isLoading && "View Beans"}
+      {isLoading ? (
+        <BeatLoaderSpiner />
+      ) : (
+        <>
+          <Coffee className="mr-2 h-4 w-4" /> View Beans
+        </>
+      )}
     </Button>
   );
 }
