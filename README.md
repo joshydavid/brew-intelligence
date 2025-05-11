@@ -4,7 +4,7 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
-<img src="https://github.com/user-attachments/assets/e7785343-ddeb-4ce4-bbda-bb62e47c4b70" width="800" alt="brew intelligence"  />
+<img src="https://github.com/user-attachments/assets/4a195810-bcd4-42ea-9301-4cdfc3814bff" width="800" alt="brew intelligence"  />
 <br />
 <br />
 
@@ -27,10 +27,10 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 - Java Spring Boot
 - PostgreSQL
 - Redis
-- Swagger
 - React
 - Tailwind CSS
 - Amazon Web Services
+- Swagger UI (API Documentation)
 
 ## Getting Started
 
@@ -43,6 +43,10 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 2. Install dependencies
 
    ```
+   # frontend
+   bun install
+
+   # backend
    mvn clean install -U
    ```
 
@@ -53,14 +57,18 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 4. Run the project in development environment
 
    ```
+   # frontend
+   bun run dev
+
+   # backend
    source .env
    mvn spring-boot:run
    ```
 
 ## Acknowledgement
 
-Developed by [Joshua](https://linkedin.com/in/joshydavid)
+Developed by [Joshua David](https://joshydavid.com)
 
-<a href="https://linkedin.com/in/joshydavid/">
+<a href="https://joshydavid.com">
   <img src="https://github.com/user-attachments/assets/4dfe0c89-8ced-4e08-bcf3-6261bdbb956d" width="80">
 </a>
