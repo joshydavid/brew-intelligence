@@ -7,7 +7,7 @@ export const formatDate = (date: Date): string => {
 };
 
 export const getTimeFrame = (createdAt: Date): string => {
-  return formatDistanceToNow(new Date(createdAt), {
+  return formatDistanceToNow(createdAt, {
     addSuffix: true,
   });
 };
