@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
-import { Coffee } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function ViewRecipesButton() {
@@ -14,7 +14,7 @@ export default function ViewRecipesButton() {
       className="rounded-3xl"
       onClick={() => router.push(CLIENT_ROUTES.COFFEE_RECIPES)}
     >
-      <Coffee className="h-4 w-4" />
+      <BookOpen className="h-4 w-4" />
       View Recipes
     </Button>
   );

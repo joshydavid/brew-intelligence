@@ -17,10 +17,10 @@ export default function LandingIntro() {
         Discover the art and science of great coffee — and log your beans by
         origin, roast date, weight, and more.
       </p>
-      <div className="grid grid-cols-2 gap-4 sm:grid-cols-1 lg:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <ViewBeansButton />
-        <ViewRecipesButton />
         <LogCoffeeListing />
+        <ViewRecipesButton />
         <LogCoffeeRecipes />
         <BrewIntelligenceIntro />
       </div>

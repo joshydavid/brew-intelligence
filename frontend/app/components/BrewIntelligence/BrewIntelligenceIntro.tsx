@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 export default function BrewIntelligenceIntro() {
   const router = useRouter();
   return (
-    <div className="col-span-2 flex justify-center sm:col-span-1 lg:col-span-1">
+    <div className="col-span-2 flex justify-center lg:col-span-1">
       <Button
         size="lg"
         className="rounded-3xl"
