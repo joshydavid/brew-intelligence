@@ -1,4 +1,4 @@
-# 🎨 Brew Intelligence
+# 🤖 Brew Intelligence
 
 ![Issue](https://img.shields.io/github/issues/joshydavid/joshua-david)
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
@@ -22,12 +22,13 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 - Track your personal coffee beans—log roast dates, origin details, and freshness reminders to keep every cup at its peak.
 - Chat with Brew Intelligence to get real-time support guidance, from dialing in espresso to troubleshooting your pour-over.
 
-## Frontend Tech Stack
+## Backend Tech Stack
 
-- React
-- Next.js
-- Shadcn UI
-- Tailwind CSS
+- Java Spring Boot
+- PostgreSQL
+- Redis
+- Amazon Web Services
+- Swagger UI (API Documentation)
 
 ## Getting Started
 
@@ -40,7 +41,7 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 2. Install dependencies
 
    ```
-   bun install
+   mvn clean install -U
    ```
 
 3. Set up environment variables. Refer to `.env.sample`
@@ -50,7 +51,8 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 4. Run the project in development environment
 
    ```
-   bun run dev
+   source .env
+   mvn spring-boot:run
    ```
 
 ## Acknowledgement
