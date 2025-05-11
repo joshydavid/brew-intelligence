@@ -10,9 +10,7 @@ export function useLoading() {
   const navigate = useCallback(
     (path: string) => {
       setIsLoading(true);
-      setTimeout(() => {
-        router.push(path);
-      });
+      router.push(path);
     },
     [router],
   );
