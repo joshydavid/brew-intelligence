@@ -23,4 +23,5 @@ public class CoffeeListingDTO implements Serializable {
     private Date roastDate;
     private int weightInKg;
     private BrewMethod brewMethod;
+    private Date createdAt;
 }

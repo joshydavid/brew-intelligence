@@ -1,6 +1,7 @@
 package com.bi.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,4 +25,5 @@ public class RecipeDTO implements Serializable {
     private String brewTime;
     private List<String> brewInstructions;
     private String createdBy;
+    private Date createdAt;
 }

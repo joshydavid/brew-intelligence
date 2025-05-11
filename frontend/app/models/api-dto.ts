@@ -11,6 +11,7 @@ export interface CoffeeListingDTO {
   weightInKg: string;
   roastType: RoastType;
   brewMethod: BrewMethod;
+  createdAt: Date;
 }
 
 export interface CoffeeRecipeDTO {
@@ -22,4 +23,5 @@ export interface CoffeeRecipeDTO {
   brewTemp: number;
   brewTime: string;
   brewInstructions: string[];
+  createdAt: Date;
 }

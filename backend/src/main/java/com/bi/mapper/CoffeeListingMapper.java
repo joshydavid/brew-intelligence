@@ -15,6 +15,7 @@ public class CoffeeListingMapper {
                 .roastDate(entity.getRoastDate())
                 .weightInKg(entity.getWeightInKg())
                 .brewMethod(entity.getBrewMethod())
+                .createdAt(entity.getCreatedAt())
                 .build();
     }
 }

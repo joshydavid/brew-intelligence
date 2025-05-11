@@ -1,7 +1,15 @@
-import { format } from "date-fns";
+import { clsx, type ClassValue } from "clsx";
+import { format, formatDistanceToNow } from "date-fns";
+import { twMerge } from "tailwind-merge";
 
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date): string => {
   return format(date, "d MMMM yyyy");
+};
+
+export const getTimeFrame = (createdAt: Date): string => {
+  return formatDistanceToNow(createdAt, {
+    addSuffix: true,
+  });
 };
 
 export const sortByLatestDate = <T extends { [key: string]: any }>(
@@ -14,9 +22,6 @@ export const sortByLatestDate = <T extends { [key: string]: any }>(
       new Date(a[dateField] as string).getTime(),
   );
 };
-
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));

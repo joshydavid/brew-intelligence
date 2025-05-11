@@ -24,7 +24,4 @@ public interface XLoginService {
             String oAuthVerifier,
             HttpSession session,
             HttpServletResponse response, OAuth1AccessToken accessToken) throws Exception;
-
-    public String getUser(OAuth10aService service, OAuth1AccessToken accessToken)
-            throws IOException, InterruptedException, ExecutionException;
 }
