@@ -1,21 +1,29 @@
 "use client";
 
+import BeatLoaderSpiner from "@/components/Spinner/BeatLoaderSpinner";
 import { Button } from "@/components/ui/button";
+import { useLoading } from "@/hooks/use-loading";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { Coffee } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export default function ViewBeansButton() {
-  const router = useRouter();
+  const { isLoading, navigate } = useLoading();
+
   return (
     <Button
       variant="outline"
       className="rounded-3xl"
       size="lg"
-      onClick={() => router.push(CLIENT_ROUTES.COFFEE_LISTINGS)}
+      onClick={() => navigate(CLIENT_ROUTES.COFFEE_LISTINGS)}
+      disabled={isLoading}
     >
-      <Coffee className="h-4 w-4" />
-      View Beans
+      {isLoading ? (
+        <BeatLoaderSpiner />
+      ) : (
+        <>
+          <Coffee className="mr-2 h-4 w-4" /> View Beans
+        </>
+      )}
     </Button>
   );
 }

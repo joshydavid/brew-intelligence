@@ -1,21 +1,30 @@
 "use client";
 
+import BeatLoaderSpiner from "@/components/Spinner/BeatLoaderSpinner";
 import { Button } from "@/components/ui/button";
+import { useLoading } from "@/hooks/use-loading";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { BookOpen } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 export default function ViewRecipesButton() {
-  const router = useRouter();
+  const { isLoading, navigate } = useLoading();
+
   return (
     <Button
       variant="outline"
       size="lg"
       className="rounded-3xl"
-      onClick={() => router.push(CLIENT_ROUTES.COFFEE_RECIPES)}
+      onClick={() => navigate(CLIENT_ROUTES.COFFEE_RECIPES)}
+      disabled={isLoading}
     >
-      <BookOpen className="h-4 w-4" />
-      View Recipes
+      {isLoading ? (
+        <BeatLoaderSpiner />
+      ) : (
+        <>
+          <BookOpen className="h-4 w-4" />
+          View Recipes
+        </>
+      )}
     </Button>
   );
 }
