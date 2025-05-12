@@ -22,17 +22,14 @@ import com.bi.service.CoffeeListingService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiPaths.GET_COFFEE_LISTINGS)
 @Tag(name = "Coffee Listings", description = "APIs for listing coffee")
 public class CoffeeListingController {
-
     private final CoffeeListingService coffeeListingService;
-
-    public CoffeeListingController(CoffeeListingService coffeeListingService) {
-        this.coffeeListingService = coffeeListingService;
-    }
 
     @GetMapping
     public ResponseEntity<List<CoffeeListingDTO>> getCoffeeListings() {

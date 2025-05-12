@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import com.bi.constant.Authentication;
 import com.bi.service.UserService;
 import com.bi.service.XLoginService;
-import com.github.scribejava.apis.TwitterApi;
-import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
 import com.github.scribejava.core.oauth.OAuth10aService;
@@ -18,8 +16,10 @@ import com.github.scribejava.core.oauth.OAuth10aService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class XLoginServiceImpl implements XLoginService {
     @Value("${frontend.redirect.url}")
     private String frontendRedirectUrl;
@@ -29,25 +29,6 @@ public class XLoginServiceImpl implements XLoginService {
 
     private final OAuth10aService service;
     private final UserService userService;
-
-    public XLoginServiceImpl(
-            @Value("${x.api.key}") String apiKey,
-            @Value("${x.api.secret}") String apiSecret,
-            @Value("${x.callback.url}") String callbackUrl,
-            UserService userService) {
-
-        this.service = new ServiceBuilder(apiKey)
-                .apiSecret(apiSecret)
-                .callback(callbackUrl)
-                .build(TwitterApi.instance());
-
-        this.userService = userService;
-    }
-
-    @Override
-    public OAuth10aService getService() {
-        return this.service;
-    }
 
     @Override
     public OAuth1RequestToken getRequestToken() throws IOException,
