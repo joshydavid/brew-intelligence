@@ -33,7 +33,7 @@ export default function LogCoffeeListing() {
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="rounded-3xl">
           <Coffee className="h-4 w-4" />
-          Log Beans
+          <p className="text-xs md:text-sm">Log Beans</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[500px]">

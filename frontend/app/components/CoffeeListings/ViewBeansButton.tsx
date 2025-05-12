@@ -21,7 +21,8 @@ export default function ViewBeansButton() {
         <BeatLoaderSpiner />
       ) : (
         <>
-          <Coffee className="mr-2 h-4 w-4" /> View Beans
+          <Coffee className="h-4 w-4" />{" "}
+          <p className="text-xs md:text-sm">View Beans</p>
         </>
       )}
     </Button>

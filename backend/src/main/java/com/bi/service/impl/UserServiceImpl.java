@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutionException;
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.ApiPaths;
+import com.bi.constant.ErrorMessage;
 import com.bi.model.UserProfile;
 import com.bi.repository.UserServiceRepository;
 import com.bi.service.UserService;
@@ -35,8 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserProfile getUserById(UUID userId) {
-        // TODO: Refactor error code
         return userServiceRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
+                .orElseThrow(() -> new RuntimeException(ErrorMessage.USER_DOES_NOT_EXIST + " " + userId));
     }
 }

@@ -13,7 +13,7 @@ export default function BrewIntelligenceBot() {
       tabIndex={0}
       onClick={() => router.push(CLIENT_ROUTES.BREW_INTELLIGENCE)}
     >
-      <p className="text-md ml-4 p-3 text-gray-200 dark:text-gray-400">
+      <p className="md:text-md ml-4 p-4 text-sm text-gray-200 dark:text-gray-400">
         Analysing coffee grinds...
       </p>
     </div>
