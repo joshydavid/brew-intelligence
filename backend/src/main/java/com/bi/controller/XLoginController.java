@@ -13,15 +13,13 @@ import com.github.scribejava.core.model.OAuth1RequestToken;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiPaths.LOGIN_WITH_X)
 public class XLoginController {
     private final XLoginService xLoginService;
-
-    public XLoginController(XLoginService xLoginService) {
-        this.xLoginService = xLoginService;
-    }
 
     @GetMapping
     public String loginWithX(HttpSession session) throws Exception {

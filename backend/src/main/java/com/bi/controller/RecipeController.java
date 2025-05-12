@@ -20,17 +20,14 @@ import com.bi.service.RecipeService;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping(ApiPaths.GET_RECIPES)
 @Tag(name = "Recipes Listings", description = "APIs for listing recipes")
 public class RecipeController {
-
     private final RecipeService recipeService;
-
-    public RecipeController(RecipeService recipeService) {
-        this.recipeService = recipeService;
-    }
 
     @GetMapping
     public List<RecipeDTO> getRecipes() {

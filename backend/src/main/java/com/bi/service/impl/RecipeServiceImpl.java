@@ -13,18 +13,19 @@ import com.bi.dto.RecipeDTO;
 import com.bi.exception.EntityNotFoundException;
 import com.bi.mapper.RecipeMapper;
 import com.bi.model.Recipe;
+import com.bi.model.UserProfile;
 import com.bi.repository.RecipeRepository;
 import com.bi.service.RecipeService;
+import com.bi.service.UserService;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class RecipeServiceImpl implements RecipeService {
     private final RecipeRepository recipeRepo;
-
-    public RecipeServiceImpl(RecipeRepository recipeRepo) {
-        this.recipeRepo = recipeRepo;
-    }
+    private final UserService userService;
 
     @Override
     @Cacheable(value = RedisCacheKey.GET_RECIPES_KEY)
@@ -38,7 +39,11 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
     public RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto) {
+        UUID userId = dto.getUserId();
+        UserProfile userProfile = this.userService.getUserById(userId);
+
         Recipe newRecipe = Recipe.builder()
+                .userProfile(userProfile)
                 .methodType(dto.getMethodType())
                 .coffeeDose(dto.getCoffeeDose())
                 .waterAmount(dto.getWaterAmount())
@@ -56,6 +61,7 @@ public class RecipeServiceImpl implements RecipeService {
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
     @Transactional
     public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
+        // TODO: Refactor error code
         Recipe existingRecipe = this.recipeRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Recipe", id));
 

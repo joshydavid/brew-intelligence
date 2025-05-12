@@ -1,6 +1,7 @@
 package com.bi.dto;
 
 import java.util.List;
+import java.util.UUID;
 
 import com.bi.constant.ErrorMessage;
 import com.bi.model.enums.MethodType;
@@ -11,6 +12,9 @@ import lombok.Data;
 
 @Data
 public class AddOrUpdateRecipeDTO {
+    @NotNull(message = ErrorMessage.USER_ID_REQUIRED)
+    private UUID userId;
+
     @NotNull(message = ErrorMessage.METHOD_TYPE_REQUIRED)
     private MethodType methodType;
 

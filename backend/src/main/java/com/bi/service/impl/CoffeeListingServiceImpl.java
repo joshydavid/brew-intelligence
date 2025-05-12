@@ -13,19 +13,20 @@ import com.bi.dto.CoffeeListingDTO;
 import com.bi.exception.EntityNotFoundException;
 import com.bi.mapper.CoffeeListingMapper;
 import com.bi.model.CoffeeListing;
+import com.bi.model.UserProfile;
 import com.bi.model.enums.RoastType;
 import com.bi.repository.CoffeeListingRepository;
 import com.bi.service.CoffeeListingService;
+import com.bi.service.UserService;
 
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class CoffeeListingServiceImpl implements CoffeeListingService {
     private final CoffeeListingRepository coffeeListingRepo;
-
-    public CoffeeListingServiceImpl(CoffeeListingRepository coffeeListingRepo) {
-        this.coffeeListingRepo = coffeeListingRepo;
-    }
+    private final UserService userService;
 
     @Override
     @Cacheable(value = RedisCacheKey.GET_COFFEE_LISTINGS_KEY)
@@ -50,7 +51,11 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
     public CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto) {
+        UUID userId = dto.getUserId();
+        UserProfile userProfile = this.userService.getUserById(userId);
+
         CoffeeListing coffeeListing = CoffeeListing.builder()
+                .userProfile(userProfile)
                 .coffeeName(dto.getCoffeeName())
                 .roastDate(dto.getRoastDate())
                 .weightInKg(dto.getWeightInKg())
@@ -67,6 +72,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
     public CoffeeListingDTO updateCoffeeListing(UUID id, AddOrUpdateCoffeeListingDTO updatedCoffeeListing) {
+        // TODO: Refactor error code
         CoffeeListing existingListing = this.coffeeListingRepo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
 
