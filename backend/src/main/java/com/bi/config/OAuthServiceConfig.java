@@ -9,7 +9,7 @@ import com.github.scribejava.core.builder.ServiceBuilder;
 import com.github.scribejava.core.oauth.OAuth10aService;
 
 @Configuration
-public class OAuthServiceConfig {
+class OAuthServiceConfig {
     @Value("${x.api.key}")
     private String apiKey;
 
@@ -20,7 +20,7 @@ public class OAuthServiceConfig {
     private String callbackUrl;
 
     @Bean
-    public OAuth10aService xOAuthService() {
+    OAuth10aService xOAuthService() {
         return new ServiceBuilder(apiKey)
                 .apiSecret(apiSecret)
                 .callback(callbackUrl)

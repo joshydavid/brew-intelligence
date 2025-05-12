@@ -4,6 +4,10 @@ public class ErrorMessage {
     // Authentication
     public static final String UNAUTHORISED_USER = "User is unauthorised. Please login.";
     public static final String USER_ID_REQUIRED = "UserId cannot be null";
+    public static final String USER_DOES_NOT_EXIST = "User does not exist";
+
+    // Rate Limiting
+    public static final String TOO_MANY_REQUESTS = "Too many requests. Please try again later.";
 
     // AddOrUpdateCoffeeListingDTO
     public static final String COFFEE_NAME_REQUIRED = "Coffee name is required";
