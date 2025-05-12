@@ -33,7 +33,7 @@ export default function LogCoffeeRecipes() {
       <DialogTrigger asChild>
         <Button size="lg" variant="outline" className="rounded-3xl">
           <BookOpen className="h-4 w-4" />
-          Log Recipes
+          <p className="text-xs md:text-sm">Log Recipes</p>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[70vh] overflow-y-auto sm:max-w-[650px]">

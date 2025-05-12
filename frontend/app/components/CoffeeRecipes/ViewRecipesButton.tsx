@@ -22,7 +22,7 @@ export default function ViewRecipesButton() {
       ) : (
         <>
           <BookOpen className="h-4 w-4" />
-          View Recipes
+          <p className="text-xs md:text-sm">View Recipes</p>
         </>
       )}
     </Button>

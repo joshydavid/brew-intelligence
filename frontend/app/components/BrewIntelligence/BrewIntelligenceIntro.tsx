@@ -18,7 +18,7 @@ export default function BrewIntelligenceIntro() {
         disabled={isLoading}
       >
         <Bot className="h-4 w-4" />
-        Ask Brew Intelligence
+        <p className="text-xs md:text-sm">Ask Brew Intelligence</p>
       </Button>
     </div>
   );
