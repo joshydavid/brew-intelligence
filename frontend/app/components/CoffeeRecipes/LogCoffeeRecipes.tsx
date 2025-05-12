@@ -73,6 +73,8 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const onSubmit = (data: LogCoffeeRecipeSchema) => {
     const sanitisedData = {
       ...data,
+      // TODO: Remove this
+      userId: "9f4efa3a-ae76-444f-8ad9-ee18bc9aae70",
       methodType: data.methodType.toUpperCase() as MethodType,
     };
     mutate(sanitisedData, {

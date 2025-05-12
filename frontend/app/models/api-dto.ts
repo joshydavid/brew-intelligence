@@ -6,6 +6,7 @@ import {
 
 export interface CoffeeListingDTO {
   listingId: string;
+  userId: string;
   coffeeName: string;
   roastDate: Date;
   weightInKg: string;
@@ -16,6 +17,7 @@ export interface CoffeeListingDTO {
 
 export interface CoffeeRecipeDTO {
   recipeId: string;
+  userId: string;
   createdBy: string;
   methodType: MethodType;
   coffeeDose: number;

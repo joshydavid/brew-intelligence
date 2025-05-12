@@ -66,6 +66,8 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const onSubmit = (data: LogCoffeeListingSchema) => {
     const sanitisedData = {
       ...data,
+      // TODO: Remove this
+      userId: "9f4efa3a-ae76-444f-8ad9-ee18bc9aae70",
       roastType: data.roastType.toUpperCase() as RoastType,
     };
     mutate(sanitisedData, {
