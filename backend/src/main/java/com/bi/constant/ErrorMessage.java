@@ -3,6 +3,7 @@ package com.bi.constant;
 public class ErrorMessage {
     // Authentication
     public static final String UNAUTHORISED_USER = "User is unauthorised. Please login.";
+    public static final String USER_ID_REQUIRED = "UserId cannot be null";
 
     // AddOrUpdateCoffeeListingDTO
     public static final String COFFEE_NAME_REQUIRED = "Coffee name is required";

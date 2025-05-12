@@ -18,6 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CoffeeListingDTO implements Serializable {
     private UUID listingId;
+    private UUID userId;
     private String coffeeName;
     private RoastType roastType;
     private Date roastDate;

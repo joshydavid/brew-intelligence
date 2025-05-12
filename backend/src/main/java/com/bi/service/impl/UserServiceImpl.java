@@ -1,11 +1,14 @@
 package com.bi.service.impl;
 
 import java.io.IOException;
+import java.util.UUID;
 import java.util.concurrent.ExecutionException;
 
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.ApiPaths;
+import com.bi.model.UserProfile;
+import com.bi.repository.UserServiceRepository;
 import com.bi.service.UserService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuthRequest;
@@ -13,8 +16,13 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
+    private final UserServiceRepository userServiceRepository;
+
     @Override
     public String getUser(OAuth10aService service, OAuth1AccessToken accessToken)
             throws IOException, InterruptedException, ExecutionException {
@@ -23,5 +31,12 @@ public class UserServiceImpl implements UserService {
 
         Response response = service.execute(request);
         return response.getBody();
+    }
+
+    @Override
+    public UserProfile getUserById(UUID userId) {
+        // TODO: Refactor error code
+        return userServiceRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with ID: " + userId));
     }
 }
