@@ -4,7 +4,7 @@
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
 
-<img src="https://github.com/user-attachments/assets/a0cb7229-eddb-4721-bd26-e8a967bd3071" width="800" alt="brew intelligence"  />
+<img src="https://github.com/user-attachments/assets/21b14349-4657-4aea-a82a-dcef198fcfbc" width="800" alt="brew intelligence"  />
 <br />
 <br />
 

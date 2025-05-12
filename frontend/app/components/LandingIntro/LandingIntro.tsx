@@ -6,7 +6,7 @@ import ViewRecipesButton from "@/components/CoffeeRecipes/ViewRecipesButton";
 
 export default function LandingIntro() {
   return (
-    <div className="mx-auto max-w-2xl py-12">
+    <div className="mx-auto max-w-2xl px-2 py-12">
       <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
         Welcome to{" "}
         <span className="text-blue-600 dark:text-blue-500">
