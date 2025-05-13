@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import Header from "./components/Header";
 import { ThemeProvider } from "./components/theme-provider";
+import { Toaster } from "./components/ui/sonner";
 import "./globals.css";
 import { TanStackProvider } from "./TanStackProvider";
 
@@ -30,6 +31,7 @@ export default function RootLayout({
           >
             <Header />
             {children}
+            <Toaster position="top-center" />
           </ThemeProvider>
         </TanStackProvider>
       </body>

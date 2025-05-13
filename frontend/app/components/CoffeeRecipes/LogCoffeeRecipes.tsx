@@ -16,6 +16,8 @@ import {
 import { Form } from "@/components/ui/form";
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
 import { MethodType } from "@/lib/constants/coffee-listing";
+import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
+import { handleSuccess } from "@/lib/constants/utils";
 import {
   logCoffeeRecipeSchema,
   LogCoffeeRecipeSchema,
@@ -43,7 +45,14 @@ export default function LogCoffeeRecipes() {
             Craft and record your ideal brew: dose, temp, time, and steps.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeRecipeForm onSuccess={() => setOpen(false)} />
+        <CoffeeRecipeForm
+          onSuccess={() =>
+            handleSuccess(
+              COFFEE_RECIPE_SUCCESS_MESSAGE.RECIPE_SUCCESSFULLY_ADDED,
+              setOpen,
+            )
+          }
+        />
       </DialogContent>
     </Dialog>
   );

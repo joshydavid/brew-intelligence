@@ -17,6 +17,8 @@ import {
 import { Form } from "@/components/ui/form";
 import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
+import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
+import { handleSuccess } from "@/lib/constants/utils";
 import {
   logCoffeeListingSchema,
   LogCoffeeListingSchema,
@@ -43,7 +45,14 @@ export default function LogCoffeeListing() {
             Log details like roast date, weight, and brew method.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeListingEntryForm onSuccess={() => setOpen(false)} />
+        <CoffeeListingEntryForm
+          onSuccess={() =>
+            handleSuccess(
+              COFFEE_LISTING_SUCCESS_MESSAGE.LISTING_SUCCESSFULLY_ADDED,
+              setOpen,
+            )
+          }
+        />
       </DialogContent>
     </Dialog>
   );
