@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx";
 import { format, formatDistanceToNow } from "date-fns";
+import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
 
 export const formatDate = (date: Date): string => {
@@ -25,4 +26,12 @@ export const sortByLatestDate = <T extends { [key: string]: any }>(
 
 export const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
+};
+
+export const handleSuccess = (
+  successMessage: string,
+  setOpen: (open: boolean) => void,
+) => {
+  toast.success(successMessage);
+  setOpen(false);
 };

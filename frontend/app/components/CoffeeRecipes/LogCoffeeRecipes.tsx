@@ -17,6 +17,7 @@ import { Form } from "@/components/ui/form";
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
+import { handleSuccess } from "@/lib/constants/utils";
 import {
   logCoffeeRecipeSchema,
   LogCoffeeRecipeSchema,
@@ -25,7 +26,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BookOpen, Check } from "lucide-react";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import { CoffeeRecipesBrewSteps } from "./CoffeeRecipesBrewSteps";
 
 export default function LogCoffeeRecipes() {
@@ -46,12 +46,12 @@ export default function LogCoffeeRecipes() {
           </DialogDescription>
         </DialogHeader>
         <CoffeeRecipeForm
-          onSuccess={() => {
-            toast.success(
+          onSuccess={() =>
+            handleSuccess(
               COFFEE_RECIPE_SUCCESS_MESSAGE.RECIPE_SUCCESSFULLY_ADDED,
-            );
-            setOpen(false);
-          }}
+              setOpen,
+            )
+          }
         />
       </DialogContent>
     </Dialog>
