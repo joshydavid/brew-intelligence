@@ -1,3 +1,18 @@
+export enum HTTP_STATUS_CODE {
+  OK = 200,
+  CREATED = 201,
+  BAD_REQUEST = 400,
+  FORBIDDEN = 403,
+  NOT_FOUND = 404,
+  REQUEST_TIMEOUT = 408,
+  TOO_MANY_REQUESTS = 409,
+}
+
+export enum API_ERROR_MESSAGE {
+  ERROR_403_FORBIDDEN = "No permission to view this resource. Please login.",
+  ERROR_409_RATE_LIMIT_EXCEEDED = "Too many requests. Please try again later.",
+}
+
 export enum CoffeeRecipeErrMsg {
   COFFEE_DOSE_REQUIRED = "Coffee dose is required",
   COFFEE_DOSE_NUMBER = "Coffee dose must be a number",
