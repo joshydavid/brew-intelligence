@@ -67,17 +67,21 @@ CREATE TABLE recipe (
 );
 
 WITH user_cte AS (
-    SELECT name, user_id
+    SELECT user_id, name
     FROM user_profile
-    WHERE name IN ('Joshua David', 'Joshy Davidson', 'Charlie Brown')
+    WHERE name IN ('Tim Cook', 'Steve Jobs', 'Charlie Brown')
 )
 INSERT INTO recipe (
     method_type, coffee_dose, water_amount, brew_temp, brew_time, brew_instructions, created_by, user_id
 )
 SELECT 'ICED', 15.0, 250.0, 93, '2:30',
        ARRAY['Grind coffee', 'Rinse filter', 'Pour in circles'], 'James Hoffman', u.user_id
-FROM user_cte u WHERE u.name = 'Joshua David'
+FROM user_cte u WHERE u.name = 'Tim Cook'
 UNION ALL
 SELECT 'HOT', 18.0, 36.0, 92, '0:30',
        ARRAY['Tamp coffee', 'Extract under pressure'], 'Joshua David', u.user_id
-FROM user_cte u WHERE u.name = 'Joshy Davidson';
+FROM user_cte u WHERE u.name = 'Steve Jobs'
+UNION ALL
+SELECT 'ICED', 16.5, 300.0, 94, '3:00',
+       ARRAY['Bloom for 30s', 'Pour in slow circles', 'Stir gently'], 'Charlie B.', u.user_id
+FROM user_cte u WHERE u.name = 'Charlie Brown';
