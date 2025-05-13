@@ -18,7 +18,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(ApiPaths.LOGIN_WITH_X).permitAll()
                         .requestMatchers(ApiPaths.LOGIN_WITH_X + ApiPaths.X_CALLBACK).permitAll()
-                        .anyRequest().authenticated());
+                        .anyRequest()
+                        .authenticated());
 
         return http.build();
     }

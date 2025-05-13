@@ -5,7 +5,9 @@ import axios from "axios";
 export const useLogCoffeeMutation = () => {
   return useMutation({
     mutationFn: async (formData: any) => {
-      const response = await axios.post(API_ROUTES.COFFEE_LISTINGS, formData);
+      const response = await axios.post(API_ROUTES.COFFEE_LISTINGS, formData, {
+        withCredentials: true,
+      });
       return response.data;
     },
   });

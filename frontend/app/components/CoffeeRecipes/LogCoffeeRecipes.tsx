@@ -74,7 +74,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const sanitisedData = {
       ...data,
       // TODO: Remove this
-      userId: "9f4efa3a-ae76-444f-8ad9-ee18bc9aae70",
+      userId: "1344041768141000705",
       methodType: data.methodType.toUpperCase() as MethodType,
     };
     mutate(sanitisedData, {
