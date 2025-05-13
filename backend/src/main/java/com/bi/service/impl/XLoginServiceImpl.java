@@ -1,16 +1,24 @@
 package com.bi.service.impl;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.bi.constant.ApiPaths;
 import com.bi.constant.Authentication;
 import com.bi.service.UserService;
 import com.bi.service.XLoginService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Response;
+import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth10aService;
 
 import jakarta.servlet.http.Cookie;
@@ -61,8 +69,29 @@ public class XLoginServiceImpl implements XLoginService {
         cookie.setMaxAge(60 * 60);
         response.addCookie(cookie);
 
-        String userProfile = this.userService.getUser(service, accessToken);
-        session.setAttribute(Authentication.USER, userProfile);
+        this.authenticateUser(session, accessToken);
         response.sendRedirect(frontendRedirectUrl);
     }
+
+    private void authenticateUser(HttpSession session, OAuth1AccessToken accessToken)
+            throws IOException, InterruptedException, ExecutionException {
+
+        OAuthRequest request = new OAuthRequest(Verb.GET, ApiPaths.X_VERIFY_CREDENTIALS);
+        service.signRequest(accessToken, request);
+
+        Response userProfile = service.execute(request);
+        JSONObject userProfileSanitised = new JSONObject(userProfile.getBody());
+
+        String xId = userProfileSanitised.getString("id_str");
+        String xName = userProfileSanitised.getString("name");
+        this.userService.insertUser(xId, xName);
+
+        session.setAttribute(Authentication.X_ACCESS_TOKEN, accessToken);
+        UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
+                xId, null, List.of());
+
+        SecurityContextHolder.getContext().setAuthentication(authToken);
+        session.setAttribute(Authentication.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
+    }
+
 }

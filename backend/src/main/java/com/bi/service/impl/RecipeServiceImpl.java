@@ -39,7 +39,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
     public RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto) {
-        UUID userId = dto.getUserId();
+        String userId = dto.getUserId();
         UserProfile userProfile = this.userService.getUserById(userId);
 
         Recipe newRecipe = Recipe.builder()

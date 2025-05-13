@@ -1,7 +1,6 @@
 package com.bi.dto;
 
 import java.util.Date;
-import java.util.UUID;
 
 import com.bi.constant.ErrorMessage;
 import com.bi.model.enums.BrewMethod;
@@ -16,7 +15,7 @@ import lombok.Data;
 @Data
 public class AddOrUpdateCoffeeListingDTO {
     @NotNull(message = ErrorMessage.USER_ID_REQUIRED)
-    private UUID userId;
+    private String userId;
 
     @NotBlank(message = ErrorMessage.COFFEE_NAME_REQUIRED)
     private String coffeeName;

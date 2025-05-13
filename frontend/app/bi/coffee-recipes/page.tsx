@@ -6,11 +6,16 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { API_ROUTES } from "@/lib/constants/api-routes";
+import {
+  API_ERROR_MESSAGE,
+  HTTP_STATUS_CODE,
+} from "@/lib/constants/error-message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
 import { useQuery } from "@tanstack/react-query";
+import { AxiosError } from "axios";
 import Image from "next/image";
 
 export default function DisplayCoffeeRecipes() {
@@ -18,12 +23,30 @@ export default function DisplayCoffeeRecipes() {
     data: coffeeRecipes,
     error: coffeeRecipesErr,
     isLoading: coffeeRecipesLoading,
-  } = useQuery<CoffeeRecipeDTO[]>({
+  } = useQuery<CoffeeRecipeDTO[], AxiosError<string>>({
     queryKey: [QUERY_KEYS.COFFEE_RECIPES],
     queryFn: () => getRequest(API_ROUTES.RECIPES),
   });
 
-  if (coffeeRecipesErr) return <ParentWrapper>Error</ParentWrapper>;
+  if (coffeeRecipesErr) {
+    switch (coffeeRecipesErr.status) {
+      case HTTP_STATUS_CODE.FORBIDDEN:
+        return (
+          <ParentWrapper>{API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}</ParentWrapper>
+        );
+      case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
+        return (
+          <ParentWrapper>
+            {API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
+          </ParentWrapper>
+        );
+      default:
+        return (
+          <ParentWrapper>{coffeeRecipesErr?.response?.data}</ParentWrapper>
+        );
+    }
+  }
+
   if (coffeeRecipesLoading)
     return (
       <ParentWrapper>
