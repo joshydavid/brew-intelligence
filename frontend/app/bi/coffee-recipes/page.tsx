@@ -26,23 +26,34 @@ export default function DisplayCoffeeRecipes() {
   } = useQuery<CoffeeRecipeDTO[], AxiosError<string>>({
     queryKey: [QUERY_KEYS.COFFEE_RECIPES],
     queryFn: () => getRequest(API_ROUTES.RECIPES),
+    retry: 1,
   });
 
   if (coffeeRecipesErr) {
     switch (coffeeRecipesErr.status) {
       case HTTP_STATUS_CODE.FORBIDDEN:
         return (
-          <ParentWrapper>{API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}</ParentWrapper>
+          <ParentWrapper>
+            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
+              {API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
+            </div>
+          </ParentWrapper>
         );
       case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
         return (
           <ParentWrapper>
-            {API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
+            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
+              {API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}{" "}
+            </div>
           </ParentWrapper>
         );
       default:
         return (
-          <ParentWrapper>{coffeeRecipesErr?.response?.data}</ParentWrapper>
+          <ParentWrapper>
+            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
+              {coffeeRecipesErr?.response?.data}{" "}
+            </div>
+          </ParentWrapper>
         );
     }
   }

@@ -17,6 +17,7 @@ import {
 import { Form } from "@/components/ui/form";
 import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
+import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import {
   logCoffeeListingSchema,
   LogCoffeeListingSchema,
@@ -25,6 +26,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Coffee } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function LogCoffeeListing() {
   const [open, setOpen] = useState(false);
@@ -43,7 +45,14 @@ export default function LogCoffeeListing() {
             Log details like roast date, weight, and brew method.
           </DialogDescription>
         </DialogHeader>
-        <CoffeeListingEntryForm onSuccess={() => setOpen(false)} />
+        <CoffeeListingEntryForm
+          onSuccess={() => {
+            toast.success(
+              COFFEE_LISTING_SUCCESS_MESSAGE.LISTING_SUCCESSFULLY_ADDED,
+            );
+            setOpen(false);
+          }}
+        />
       </DialogContent>
     </Dialog>
   );
