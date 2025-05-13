@@ -51,7 +51,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
     public CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto) {
-        UUID userId = dto.getUserId();
+        String userId = dto.getUserId();
         UserProfile userProfile = this.userService.getUserById(userId);
 
         CoffeeListing coffeeListing = CoffeeListing.builder()

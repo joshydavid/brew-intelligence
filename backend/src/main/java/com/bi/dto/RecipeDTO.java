@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class RecipeDTO implements Serializable {
     private UUID recipeId;
-    private UUID userId;
+    private String userId;
     private MethodType methodType;
     private double coffeeDose;
     private double waterAmount;

@@ -1,11 +1,9 @@
 package com.bi.model;
 
 import java.util.List;
-import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
@@ -24,8 +22,7 @@ import lombok.ToString;
 @ToString(exclude = { "listings", "recipes" })
 public class UserProfile extends BaseEntity {
     @Id
-    @GeneratedValue
-    private UUID userId;
+    private String userId;
 
     private String name;
 

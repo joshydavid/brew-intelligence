@@ -1,14 +1,14 @@
 CREATE TABLE user_profile (
-    user_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id VARCHAR(100) PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW()
 );
 
-INSERT INTO user_profile (name) VALUES
-('Joshua David'),
-('Joshy Davidson'),
-('Charlie Brown');
+INSERT INTO user_profile (user_id, name) VALUES
+('1344041768141000706', 'Tim Cook'),
+('1344041768141000707', 'Steve Jobs'),
+('1344041768141000708', 'Charlie Brown');
 
 CREATE TABLE coffee_listing (
     listing_id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -17,7 +17,7 @@ CREATE TABLE coffee_listing (
     roast_date TIMESTAMP NOT NULL,
     weight_in_kg INT NOT NULL,
     brew_method VARCHAR(50) NOT NULL,
-    user_id UUID NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES user_profile(user_id)
@@ -60,7 +60,7 @@ CREATE TABLE recipe (
     brew_time VARCHAR(50) NOT NULL,
     brew_instructions TEXT[],
     created_by VARCHAR(50) NOT NULL,
-    user_id UUID NOT NULL,
+    user_id VARCHAR(100) NOT NULL,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_at TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY (user_id) REFERENCES user_profile(user_id)

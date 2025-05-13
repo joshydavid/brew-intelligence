@@ -17,7 +17,7 @@ public interface XLoginService {
     OAuth1AccessToken getAccessToken(OAuth1RequestToken requestToken, String oAuthVerifier)
             throws IOException, ExecutionException, InterruptedException;
 
-    public void handleCallback(OAuth1RequestToken requestToken,
+    void handleCallback(OAuth1RequestToken requestToken,
             String oAuthVerifier,
             HttpSession session,
             HttpServletResponse response, OAuth1AccessToken accessToken) throws Exception;
