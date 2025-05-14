@@ -21,4 +21,6 @@ export default function AuthSuccess() {
       </ParentWrapper>
     );
   }
+
+  return null;
 }

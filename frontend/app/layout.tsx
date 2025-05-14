@@ -1,4 +1,3 @@
-import { QueryClient } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import Header from "./components/Header";
@@ -16,8 +15,6 @@ export const metadata: Metadata = {
   title: "Brew Intelligence",
   description: "AI-Powered Coffee Grind Analysis App",
 };
-
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,

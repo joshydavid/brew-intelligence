@@ -3,8 +3,8 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
 interface AuthContextType {
-  authId: any;
-  setAuthId: (status: any) => void;
+  authId: string;
+  setAuthId: (id: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
