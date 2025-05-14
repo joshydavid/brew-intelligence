@@ -11,7 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.bi.constant.ApiPaths;
-import com.bi.constant.Authentication;
+import com.bi.constant.Auth;
 import com.bi.service.UserService;
 import com.bi.service.XLoginService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -62,7 +62,7 @@ public class XLoginServiceImpl implements XLoginService {
             HttpSession session,
             HttpServletResponse response, OAuth1AccessToken accessToken) throws Exception {
 
-        Cookie cookie = new Cookie(Authentication.X_ACCESS_TOKEN, accessToken.getToken());
+        Cookie cookie = new Cookie(Auth.X_ACCESS_TOKEN, accessToken.getToken());
         cookie.setHttpOnly(true);
         cookie.setSecure(isCookieSecure);
         cookie.setPath("/");
@@ -86,12 +86,12 @@ public class XLoginServiceImpl implements XLoginService {
         String xName = userProfileSanitised.getString("name");
         this.userService.insertUser(xId, xName);
 
-        session.setAttribute(Authentication.X_ACCESS_TOKEN, accessToken);
+        session.setAttribute(Auth.X_ACCESS_TOKEN, accessToken);
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                 xId, null, List.of());
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
-        session.setAttribute(Authentication.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
+        session.setAttribute(Auth.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());
     }
 
 }

@@ -2,11 +2,12 @@ package com.bi.constant;
 
 public class ErrorMessage {
     // Authentication
-    public static final String UNAUTHORISED_USER = "User is unauthorised. Please login.";
+    public static final String UNAUTHENTICATED_USER = "User is unauthenticated. Please login.";
+    public static final String UNAUTHORISED_USER = "User has insufficient permission to view this resource.";
     public static final String USER_ID_REQUIRED = "UserId cannot be null";
     public static final String USER_DOES_NOT_EXIST = "User does not exist";
 
-    // Rate Limiting
+    // Rate Limit
     public static final String TOO_MANY_REQUESTS = "Too many requests. Please try again later.";
 
     // AddOrUpdateCoffeeListingDTO

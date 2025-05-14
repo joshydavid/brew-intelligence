@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bi.constant.ApiPaths;
-import com.bi.constant.Authentication;
+import com.bi.constant.Auth;
 import com.bi.service.XLoginService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
 import com.github.scribejava.core.model.OAuth1RequestToken;
@@ -24,7 +24,7 @@ public class XLoginController {
     @GetMapping
     public String loginWithX(HttpSession session) throws Exception {
         OAuth1RequestToken requestToken = this.xLoginService.getRequestToken();
-        session.setAttribute(Authentication.REQUEST_TOKEN, requestToken);
+        session.setAttribute(Auth.REQUEST_TOKEN, requestToken);
         return this.xLoginService.getAuthorizationUrl(requestToken);
     }
 
@@ -32,7 +32,7 @@ public class XLoginController {
     public void callback(@RequestParam("oauth_verifier") String oAuthVerifier, HttpSession session,
             HttpServletResponse response)
             throws Exception {
-        OAuth1RequestToken requestToken = (OAuth1RequestToken) session.getAttribute(Authentication.REQUEST_TOKEN);
+        OAuth1RequestToken requestToken = (OAuth1RequestToken) session.getAttribute(Auth.REQUEST_TOKEN);
         OAuth1AccessToken accessToken = this.xLoginService.getAccessToken(requestToken, oAuthVerifier);
         this.xLoginService.handleCallback(requestToken, oAuthVerifier, session, response, accessToken);
     }
