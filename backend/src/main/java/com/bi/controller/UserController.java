@@ -1,17 +1,18 @@
 package com.bi.controller;
 
+import java.util.Map;
+
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import com.bi.constant.ApiPaths;
-import com.bi.constant.Authentication;
 import com.bi.constant.ErrorMessage;
 import com.bi.service.UserService;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -20,11 +21,24 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping
-    public String getUser(HttpSession session) {
-        String user = session.getAttribute(Authentication.USER).toString();
-        if (user == null)
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, ErrorMessage.UNAUTHORISED_USER);
-        return user;
+    // TODO: refactor
+    // @GetMapping
+    // public String getUser(HttpSession session) {
+    // String user = session.getAttribute(Auth.USER).toString();
+    // if (user == null)
+    // throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,
+    // ErrorMessage.UNAUTHORISED_USER);
+    // return user;
+    // }
+
+    @GetMapping(ApiPaths.X_AUTH_STATUS)
+    public ResponseEntity<Map<String, String>> getUserId(Authentication authentication) {
+        if (authentication != null && authentication.isAuthenticated()) {
+            String userId = authentication.getName();
+            return ResponseEntity.ok(Map.of("userId", userId));
+        }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(Map.of("error", ErrorMessage.UNAUTHENTICATED_USER));
     }
 }
