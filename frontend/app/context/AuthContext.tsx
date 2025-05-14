@@ -7,7 +7,7 @@ interface AuthContextType {
   setAuthId: (id: string) => void;
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+const AuthContext = createContext<AuthContextType | null>(null);
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -22,7 +22,7 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [authId, setAuthId] = useState<string>();
+  const [authId, setAuthId] = useState<string>("");
   return (
     <AuthContext.Provider value={{ authId, setAuthId }}>
       {children}
