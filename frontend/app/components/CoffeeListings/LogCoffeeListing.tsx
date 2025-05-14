@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
+import { useAuthStatus } from "@/hooks/use-auth-status";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
 import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import { handleSuccess } from "@/lib/constants/utils";
@@ -59,6 +60,8 @@ export default function LogCoffeeListing() {
 }
 
 const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { authData } = useAuthStatus();
+
   const addCoffeeListingForm = useForm<LogCoffeeListingSchema>({
     resolver: zodResolver(logCoffeeListingSchema),
     defaultValues: {
@@ -75,8 +78,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const onSubmit = (data: LogCoffeeListingSchema) => {
     const sanitisedData = {
       ...data,
-      // TODO: Remove this
-      userId: "1344041768141000705",
+      userId: authData?.userId,
       roastType: data.roastType.toUpperCase() as RoastType,
     };
     mutate(sanitisedData, {

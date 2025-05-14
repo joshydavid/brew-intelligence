@@ -38,6 +38,15 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     }
 
     @Override
+    @Cacheable(value = RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY)
+    public List<CoffeeListingDTO> getCoffeeListingsByUserId(String userId) {
+        List<CoffeeListing> userCoffeeListings = this.coffeeListingRepo.findByUserProfileUserId(userId);
+        return userCoffeeListings.stream()
+                .map(CoffeeListingMapper::toDTO)
+                .toList();
+    }
+
+    @Override
     @Cacheable(value = RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY)
     public List<CoffeeListingDTO> getCoffeeListingsByRoastType(RoastType roastType) {
         List<CoffeeListing> filteredCoffeeListings = this.coffeeListingRepo.findByRoastType(roastType);
@@ -47,7 +56,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     }
 
     @Override
-    @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
+    @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY, RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
     public CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto) {
@@ -68,7 +77,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     }
 
     @Override
-    @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY,
+    @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY, RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
     public CoffeeListingDTO updateCoffeeListing(UUID id, AddOrUpdateCoffeeListingDTO updatedCoffeeListing) {

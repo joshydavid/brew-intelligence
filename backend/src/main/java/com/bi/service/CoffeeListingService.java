@@ -10,6 +10,8 @@ import com.bi.model.enums.RoastType;
 public interface CoffeeListingService {
     List<CoffeeListingDTO> getCoffeeListings();
 
+    List<CoffeeListingDTO> getCoffeeListingsByUserId(String userId);
+
     List<CoffeeListingDTO> getCoffeeListingsByRoastType(RoastType roastType);
 
     CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto);
