@@ -46,7 +46,7 @@ export default function DisplayCoffeeRecipes() {
         return (
           <ErrorMessage
             statusCode={409}
-            header="Forbidden"
+            header="Rate Limit Exceeded"
             message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
           />
         );
