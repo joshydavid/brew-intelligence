@@ -1,7 +1,6 @@
 package com.bi.service.impl;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import org.json.JSONObject;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.bi.constant.ApiPaths;
 import com.bi.constant.Auth;
+import com.bi.security.CustomUserPrincipal;
 import com.bi.service.UserService;
 import com.bi.service.XLoginService;
 import com.github.scribejava.core.model.OAuth1AccessToken;
@@ -87,8 +87,10 @@ public class XLoginServiceImpl implements XLoginService {
         this.userService.insertUser(xId, xName);
 
         session.setAttribute(Auth.X_ACCESS_TOKEN, accessToken);
+
+        CustomUserPrincipal principal = new CustomUserPrincipal(xId, xName);
         UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                xId, null, List.of());
+                principal, null, principal.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(authToken);
         session.setAttribute(Auth.SPRING_SECURITY_CONTEXT, SecurityContextHolder.getContext());

@@ -4,6 +4,10 @@ import {
   RoastType,
 } from "@/lib/constants/coffee-listing";
 
+export interface AuthDTO {
+  userId: string;
+  name: string;
+}
 export interface CoffeeListingDTO {
   listingId: string;
   userId: string;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bi.constant.ApiPaths;
 import com.bi.constant.ErrorMessage;
+import com.bi.security.CustomUserPrincipal;
 import com.bi.service.UserService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,8 +35,12 @@ public class UserController {
     @GetMapping(ApiPaths.X_AUTH_STATUS)
     public ResponseEntity<Map<String, String>> getUserId(Authentication authentication) {
         if (authentication != null && authentication.isAuthenticated()) {
-            String userId = authentication.getName();
-            return ResponseEntity.ok(Map.of("userId", userId));
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof CustomUserPrincipal userPrincipal) {
+                return ResponseEntity.ok(Map.of(
+                        "userId", userPrincipal.getUserId(),
+                        "name", userPrincipal.getName()));
+            }
         }
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
