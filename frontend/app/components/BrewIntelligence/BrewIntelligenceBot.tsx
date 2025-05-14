@@ -1,6 +1,7 @@
 "use client";
 
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
+import { APP } from "@/lib/constants/marketing";
 import { cn } from "@/lib/constants/utils";
 import { useRouter } from "next/navigation";
 
@@ -14,7 +15,7 @@ export default function BrewIntelligenceBot() {
       onClick={() => router.push(CLIENT_ROUTES.BREW_INTELLIGENCE)}
     >
       <p className="md:text-md ml-4 p-4 text-sm text-gray-200 dark:text-gray-400">
-        Analysing coffee grinds...
+        {APP.CTA}
       </p>
     </div>
   );

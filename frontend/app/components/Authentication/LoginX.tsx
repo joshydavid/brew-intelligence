@@ -13,7 +13,7 @@ interface LoginXProps {
   name: string;
 }
 
-export default function LoginX({ name }: LoginXProps) {
+export default function LoginX({ name }: Readonly<LoginXProps>) {
   const {
     data: redirectUrl,
     error: xError,

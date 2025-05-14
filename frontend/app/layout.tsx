@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
+import { APP } from "./lib/constants/marketing";
 import { TanStackProvider } from "./TanStackProvider";
 
 const raleway = Raleway({
@@ -12,8 +13,14 @@ const raleway = Raleway({
 });
 
 export const metadata: Metadata = {
-  title: "Brew Intelligence",
-  description: "AI-Powered Coffee Grind Analysis App",
+  metadataBase: new URL(APP.SITE_URL),
+  title: APP.NAME,
+  description: APP.DESCRIPTION,
+  openGraph: {
+    title: APP.NAME,
+    description: APP.DESCRIPTION,
+    authors: APP.DEVELOPER,
+  },
 };
 
 export default function RootLayout({

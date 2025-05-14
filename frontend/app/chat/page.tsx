@@ -1,6 +1,7 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
+import { APP_AI } from "@/lib/constants/marketing";
 import { cn } from "@/lib/constants/utils";
 import { useState } from "react";
 import ChatHelper from "./ChatHelper";
@@ -20,7 +21,7 @@ export default function Chat() {
             "[background:linear-gradient(45deg,#172033,theme(colors.slate.800)_50%,#172033)_padding-box,conic-gradient(from_var(--border-angle),theme(colors.slate.600/.48)_80%,_theme(colors.indigo.500)_86%,_theme(colors.indigo.300)_90%,_theme(colors.indigo.500)_94%,_theme(colors.slate.600/.48))_border-box]",
             "py-7 pl-7",
           )}
-          placeholder="Why does my brew taste so bitter?"
+          placeholder={APP_AI.INPUT_PLACEHOLDER}
         />
       </footer>
     </div>
