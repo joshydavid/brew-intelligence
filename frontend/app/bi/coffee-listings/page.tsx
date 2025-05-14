@@ -2,6 +2,7 @@
 
 import { getRequest } from "@/api/getRequest";
 import ParentWrapper from "@/bi/ParentWrapper";
+import { ErrorMessage } from "@/components/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
@@ -43,19 +44,19 @@ export default function DisplayCoffeeListings() {
     switch (coffeeListingsErr.status) {
       case HTTP_STATUS_CODE.FORBIDDEN:
         return (
-          <ParentWrapper>
-            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
-              {API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
-            </div>
-          </ParentWrapper>
+          <ErrorMessage
+            statusCode={403}
+            header="Forbidden"
+            message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
+          />
         );
       case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
         return (
-          <ParentWrapper>
-            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
-              {API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
-            </div>
-          </ParentWrapper>
+          <ErrorMessage
+            statusCode={409}
+            header="Forbidden"
+            message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
+          />
         );
       default:
         return (
