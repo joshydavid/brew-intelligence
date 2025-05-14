@@ -37,6 +37,15 @@ public class CoffeeListingController {
         return ResponseEntity.ok(coffeeListings);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<CoffeeListingDTO>> getCoffeeListingById(@PathVariable String id) {
+        List<CoffeeListingDTO> coffeeListing = this.coffeeListingService.getCoffeeListingsByUserId(id);
+        if (coffeeListing == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(coffeeListing);
+    }
+
     // TODO: Refactor this to make it scalable
     @GetMapping("/filter")
     public ResponseEntity<List<CoffeeListingDTO>> getCoffeeListingsByRoastType(

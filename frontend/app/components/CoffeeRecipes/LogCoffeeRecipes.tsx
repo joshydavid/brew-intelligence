@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { Form } from "@/components/ui/form";
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
+import { useAuthStatus } from "@/hooks/use-auth-status";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import { handleSuccess } from "@/lib/constants/utils";
@@ -59,6 +60,7 @@ export default function LogCoffeeRecipes() {
 }
 
 const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
+  const { authData } = useAuthStatus();
   const addCoffeeRecipeForm = useForm<LogCoffeeRecipeSchema>({
     resolver: zodResolver(logCoffeeRecipeSchema),
     defaultValues: {
@@ -82,8 +84,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
   const onSubmit = (data: LogCoffeeRecipeSchema) => {
     const sanitisedData = {
       ...data,
-      // TODO: Remove this
-      userId: "1344041768141000705",
+      userId: authData?.userId,
       methodType: data.methodType.toUpperCase() as MethodType,
     };
     mutate(sanitisedData, {

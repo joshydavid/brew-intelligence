@@ -34,6 +34,15 @@ public class RecipeController {
         return this.recipeService.getRecipes();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<List<RecipeDTO>> getCoffeeRecipesById(@PathVariable String id) {
+        List<RecipeDTO> coffeeRecipes = this.recipeService.getCoffeeRecipesByUserId(id);
+        if (coffeeRecipes == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(coffeeRecipes);
+    }
+
     @PostMapping
     public ResponseEntity<RecipeDTO> addRecipe(@Valid @RequestBody AddOrUpdateRecipeDTO dto) {
         RecipeDTO createdRecipe = this.recipeService.addRecipe(dto);

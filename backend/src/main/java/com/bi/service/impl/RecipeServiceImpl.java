@@ -37,7 +37,16 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
+    @Cacheable(value = RedisCacheKey.GET_USER_RECIPES_KEY)
+    public List<RecipeDTO> getCoffeeRecipesByUserId(String userId) {
+        List<Recipe> userRecipes = this.recipeRepo.findByUserProfileUserId(userId);
+        return userRecipes.stream()
+                .map(RecipeMapper::toDTO)
+                .toList();
+    }
+
+    @Override
+    @CacheEvict(value = { RedisCacheKey.GET_RECIPES_KEY, RedisCacheKey.GET_USER_RECIPES_KEY }, allEntries = true)
     public RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto) {
         String userId = dto.getUserId();
         UserProfile userProfile = this.userService.getUserById(userId);
@@ -58,7 +67,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @CacheEvict(value = RedisCacheKey.GET_RECIPES_KEY, allEntries = true)
+    @CacheEvict(value = { RedisCacheKey.GET_RECIPES_KEY, RedisCacheKey.GET_USER_RECIPES_KEY }, allEntries = true)
     @Transactional
     public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
         // TODO: Refactor error code

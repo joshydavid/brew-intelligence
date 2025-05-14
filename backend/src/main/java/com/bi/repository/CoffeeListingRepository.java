@@ -9,5 +9,7 @@ import com.bi.model.CoffeeListing;
 import com.bi.model.enums.RoastType;
 
 public interface CoffeeListingRepository extends JpaRepository<CoffeeListing, UUID> {
+    List<CoffeeListing> findByUserProfileUserId(String userId);
+
     List<CoffeeListing> findByRoastType(RoastType roastType);
 }

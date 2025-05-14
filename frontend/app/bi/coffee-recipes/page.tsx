@@ -5,6 +5,7 @@ import ParentWrapper from "@/bi/ParentWrapper";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
+import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import {
   API_ERROR_MESSAGE,
@@ -19,13 +20,14 @@ import { AxiosError } from "axios";
 import Image from "next/image";
 
 export default function DisplayCoffeeRecipes() {
+  const { authData } = useAuthStatus();
   const {
     data: coffeeRecipes,
     error: coffeeRecipesErr,
     isLoading: coffeeRecipesLoading,
   } = useQuery<CoffeeRecipeDTO[], AxiosError<string>>({
     queryKey: [QUERY_KEYS.COFFEE_RECIPES],
-    queryFn: () => getRequest(API_ROUTES.RECIPES),
+    queryFn: () => getRequest(`${API_ROUTES.RECIPES}/${authData?.userId}`),
     retry: 1,
   });
 
