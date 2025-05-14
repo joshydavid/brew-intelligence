@@ -1,3 +1,5 @@
+import { APP_AI } from "@/lib/constants/marketing";
+
 export default function ChatHelper() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-8 px-2">
@@ -5,12 +7,7 @@ export default function ChatHelper() {
         👋 Hey, I'm your{" "}
         <span className="text-blue-600 dark:text-blue-500">AI Barista.</span>
       </h1>
-      <p className="text-sm md:text-lg">
-        Here to help you troubleshoot and perfect your coffee. Just tell me how
-        you’re brewing — your method, dose, water, and timing — and I’ll guide
-        you with tips, adjustments, and insights to help you make the best cup
-        possible.
-      </p>
+      <p className="text-sm md:text-lg">{APP_AI.LONG_DESCRIPTION}</p>
     </div>
   );
 }
