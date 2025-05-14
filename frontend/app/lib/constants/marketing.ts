@@ -5,7 +5,7 @@ export const APP = {
   DESCRIPTION: "AI-Powered Coffee Grind Analysis App",
   LONG_DESCRIPTION:
     "Discover the art and science of great coffee — and log your beans by origin, roast date, weight, and more.",
-  CTA: " Analysing coffee grinds...",
+  CTA: "Analysing coffee grinds...",
 };
 
 export const APP_AI = {
