@@ -1,8 +1,10 @@
+import { QueryClient } from "@tanstack/react-query";
 import type { Metadata } from "next";
 import { Raleway } from "next/font/google";
 import Header from "./components/Header";
 import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
+import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
 import { TanStackProvider } from "./TanStackProvider";
 
@@ -15,6 +17,8 @@ export const metadata: Metadata = {
   description: "AI-Powered Coffee Grind Analysis App",
 };
 
+const queryClient = new QueryClient();
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -23,17 +27,19 @@ export default function RootLayout({
   return (
     <html lang="en" className={raleway.className} suppressHydrationWarning>
       <body>
-        <TanStackProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            disableTransitionOnChange
-          >
-            <Header />
-            {children}
-            <Toaster position="top-center" />
-          </ThemeProvider>
-        </TanStackProvider>
+        <AuthProvider>
+          <TanStackProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="dark"
+              disableTransitionOnChange
+            >
+              <Header />
+              {children}
+              <Toaster position="top-center" />
+            </ThemeProvider>
+          </TanStackProvider>
+        </AuthProvider>
       </body>
     </html>
   );
