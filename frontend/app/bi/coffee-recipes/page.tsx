@@ -2,10 +2,12 @@
 
 import { getRequest } from "@/api/getRequest";
 import ParentWrapper from "@/bi/ParentWrapper";
+import { CTADialog } from "@/components/CTADialog";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
+import { useDeleteCoffeeRecipeMutation } from "@/hooks/apis/use-delete-coffee-recipe";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import {
@@ -13,15 +15,20 @@ import {
   HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { X } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function DisplayCoffeeRecipes() {
   const { authData } = useAuthStatus();
+  const queryClient = useQueryClient();
+  const { mutate: deleteCoffeeRecipe } = useDeleteCoffeeRecipeMutation();
   const {
     data: coffeeRecipes,
     error: coffeeRecipesErr,
@@ -73,6 +80,23 @@ export default function DisplayCoffeeRecipes() {
     "createdAt",
   );
 
+  const handleDelete = (recipeId: string) => {
+    deleteCoffeeRecipe(recipeId, {
+      onSuccess: () => {
+        toast.success(
+          COFFEE_RECIPE_SUCCESS_MESSAGE.RECIPE_SUCCESSFULLY_DELETED,
+        );
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.COFFEE_RECIPES],
+        });
+      },
+      onError: (error) => {
+        // TODO: refactor
+        console.error("Delete failed", error);
+      },
+    });
+  };
+
   return (
     <ParentWrapper>
       <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
@@ -89,7 +113,15 @@ export default function DisplayCoffeeRecipes() {
             createdAt,
           }: CoffeeRecipeDTO) => (
             <Card key={recipeId}>
-              <CardHeader className="relative h-50 overflow-hidden">
+              <CardHeader className="relative h-55 overflow-hidden">
+                <div className="absolute top-2 right-2 z-10">
+                  <CTADialog
+                    btn={<X color="white" />}
+                    variant="ghost"
+                    alertDescription=" This action cannot be undone. Your listing will be permanently deleted from our servers."
+                    handleDelete={() => handleDelete(recipeId)}
+                  />
+                </div>
                 <Image
                   src={Brew}
                   alt="coffee"
@@ -98,6 +130,16 @@ export default function DisplayCoffeeRecipes() {
                   className="h-auto w-full rounded-t-lg object-cover"
                 />
               </CardHeader>
+
+              {/* <CardHeader className="relative h-50 overflow-hidden">
+                <Image
+                  src={Brew}
+                  alt="coffee"
+                  height="1000"
+                  width="1000"
+                  className="h-auto w-full rounded-t-lg object-cover"
+                />
+              </CardHeader> */}
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="max-w-[200px] text-xl">

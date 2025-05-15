@@ -14,5 +14,7 @@ public interface RecipeService {
 
     RecipeDTO addRecipe(AddOrUpdateRecipeDTO dto);
 
+    void deleteCoffeeRecipeById(UUID id);
+
     RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe);
 }
