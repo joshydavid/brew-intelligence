@@ -130,16 +130,6 @@ export default function DisplayCoffeeRecipes() {
                   className="h-auto w-full rounded-t-lg object-cover"
                 />
               </CardHeader>
-
-              {/* <CardHeader className="relative h-50 overflow-hidden">
-                <Image
-                  src={Brew}
-                  alt="coffee"
-                  height="1000"
-                  width="1000"
-                  className="h-auto w-full rounded-t-lg object-cover"
-                />
-              </CardHeader> */}
               <CardContent className="space-y-4">
                 <div className="flex items-center justify-between">
                   <CardTitle className="max-w-[200px] text-xl">
