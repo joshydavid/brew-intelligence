@@ -71,7 +71,7 @@ public class RecipeServiceImpl implements RecipeService {
     @Transactional
     public void deleteCoffeeRecipeById(UUID id) {
         Recipe existingListing = this.recipeRepo.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
+                .orElseThrow(() -> new EntityNotFoundException("recipeId", id));
 
         this.recipeRepo.delete(existingListing);
     }
