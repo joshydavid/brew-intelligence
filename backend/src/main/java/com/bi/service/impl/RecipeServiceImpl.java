@@ -69,6 +69,16 @@ public class RecipeServiceImpl implements RecipeService {
     @Override
     @CacheEvict(value = { RedisCacheKey.GET_RECIPES_KEY, RedisCacheKey.GET_USER_RECIPES_KEY }, allEntries = true)
     @Transactional
+    public void deleteCoffeeRecipeById(UUID id) {
+        Recipe existingListing = this.recipeRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
+
+        this.recipeRepo.delete(existingListing);
+    }
+
+    @Override
+    @CacheEvict(value = { RedisCacheKey.GET_RECIPES_KEY, RedisCacheKey.GET_USER_RECIPES_KEY }, allEntries = true)
+    @Transactional
     public RecipeDTO updateRecipe(UUID id, AddOrUpdateRecipeDTO updatedRecipe) {
         // TODO: Refactor error code
         Recipe existingRecipe = this.recipeRepo.findById(id)
