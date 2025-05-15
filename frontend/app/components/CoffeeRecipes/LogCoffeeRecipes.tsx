@@ -1,9 +1,5 @@
 "use client";
 
-import {
-  BrewIntelligenceInput,
-  BrewIntelligenceSelect,
-} from "@/components/BrewIntelligenceForm";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -27,6 +23,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BookOpen, Check } from "lucide-react";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import CoffeeRecipeFields from "./CoffeeRecipeFields";
 import { CoffeeRecipesBrewSteps } from "./CoffeeRecipesBrewSteps";
 
 export default function LogCoffeeRecipes() {
@@ -85,7 +82,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const sanitisedData = {
       ...data,
       userId: authData?.userId,
-      methodType: data.methodType.toUpperCase() as MethodType,
+      methodType: data.methodType.toUpperCase(),
     };
     mutate(sanitisedData, {
       onSuccess: () => onSuccess(),
@@ -97,48 +94,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     <Form {...addCoffeeRecipeForm}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid gap-8 py-4">
-          <BrewIntelligenceInput
-            type="string"
-            control={control}
-            name="createdBy"
-            label="Barista"
-            placeholder="Who crafted this recipe?"
-          />
-          <BrewIntelligenceSelect
-            control={control}
-            name="methodType"
-            label="Brew Method"
-            placeholder="Select method"
-            enumValues={MethodType}
-          />
-          <BrewIntelligenceInput
-            type="number"
-            control={control}
-            name="coffeeDose"
-            label="Coffee Dose (g)"
-            placeholder="15g"
-          />
-          <BrewIntelligenceInput
-            type="number"
-            control={control}
-            name="waterAmount"
-            label="Water Amount"
-            placeholder="e.g 250"
-          />
-          <BrewIntelligenceInput
-            type="number"
-            control={control}
-            name="brewTemp"
-            label="Brew Temp (°C)"
-            placeholder="93"
-          />
-          <BrewIntelligenceInput
-            type="string"
-            control={control}
-            name="brewTime"
-            label="Brew Time"
-            placeholder="02:30s"
-          />
+          <CoffeeRecipeFields control={control} />
           <CoffeeRecipesBrewSteps
             control={control}
             fields={fields}
