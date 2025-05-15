@@ -30,6 +30,7 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 - React
 - Tailwind CSS
 - Amazon Web Services
+- Docker
 - Swagger UI (API Documentation)
 
 ## Getting Started
@@ -61,8 +62,7 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
    bun run dev
 
    # backend
-   source .env
-   mvn spring-boot:run
+   docker compose up --build
    ```
 
 ## Acknowledgement
