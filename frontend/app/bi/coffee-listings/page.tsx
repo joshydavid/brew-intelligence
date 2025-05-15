@@ -2,10 +2,12 @@
 
 import { getRequest } from "@/api/getRequest";
 import ParentWrapper from "@/bi/ParentWrapper";
+import { CTADialog } from "@/components/CTADialog";
 import { ErrorMessage } from "@/components/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
+import { useDeleteCoffeeListingMutation } from "@/hooks/apis/use-delete-coffee-mutation";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod } from "@/lib/constants/coffee-listing";
@@ -14,6 +16,7 @@ import {
   HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import {
   formatDate,
   getTimeFrame,
@@ -22,13 +25,16 @@ import {
 import { CoffeeListingDTO } from "@/models/api-dto";
 import Espresso from "@/public/Espresso.jpeg";
 import V60 from "@/public/V60.jpg";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
+import { X } from "lucide-react";
 import Image from "next/image";
+import { toast } from "sonner";
 
 export default function DisplayCoffeeListings() {
   const { authData } = useAuthStatus();
-
+  const queryClient = useQueryClient();
+  const { mutate: deleteCoffeeListing } = useDeleteCoffeeListingMutation();
   const {
     data: coffeeListings,
     error: coffeeListingsErr,
@@ -92,6 +98,23 @@ export default function DisplayCoffeeListings() {
     }
   };
 
+  const handleDelete = (listingId: string) => {
+    deleteCoffeeListing(listingId, {
+      onSuccess: () => {
+        toast.success(
+          COFFEE_LISTING_SUCCESS_MESSAGE.LISTING_SUCCESSFULLY_DELETED,
+        );
+        queryClient.invalidateQueries({
+          queryKey: [QUERY_KEYS.COFFEE_LISTINGS],
+        });
+      },
+      onError: (error) => {
+        // TODO: refactor
+        console.error("Delete failed", error);
+      },
+    });
+  };
+
   return (
     <ParentWrapper>
       <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
@@ -106,6 +129,14 @@ export default function DisplayCoffeeListings() {
           }: CoffeeListingDTO) => (
             <Card key={listingId}>
               <CardHeader className="relative h-55 overflow-hidden">
+                <div className="absolute top-2 right-2 z-10">
+                  <CTADialog
+                    btn={<X color="white" />}
+                    variant="ghost"
+                    alertDescription=" This action cannot be undone. Your listing will be permanently deleted from our servers."
+                    handleDelete={() => handleDelete(listingId)}
+                  />
+                </div>
                 <Image
                   src={getCoffeeImage(brewMethod)}
                   alt="coffee"

@@ -16,5 +16,7 @@ public interface CoffeeListingService {
 
     CoffeeListingDTO addCoffeeListing(AddOrUpdateCoffeeListingDTO dto);
 
+    void deleteCoffeeListingById(UUID id);
+
     CoffeeListingDTO updateCoffeeListing(UUID id, AddOrUpdateCoffeeListingDTO dto);
 }

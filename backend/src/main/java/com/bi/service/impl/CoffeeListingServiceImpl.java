@@ -80,6 +80,17 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY, RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY,
             RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
     @Transactional
+    public void deleteCoffeeListingById(UUID id) {
+        CoffeeListing existingListing = this.coffeeListingRepo.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("CoffeeListing", id));
+
+        this.coffeeListingRepo.delete(existingListing);
+    }
+
+    @Override
+    @CacheEvict(value = { RedisCacheKey.GET_COFFEE_LISTINGS_KEY, RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY,
+            RedisCacheKey.GET_FILTERED_COFFEE_LISTINGS_KEY }, allEntries = true)
+    @Transactional
     public CoffeeListingDTO updateCoffeeListing(UUID id, AddOrUpdateCoffeeListingDTO updatedCoffeeListing) {
         // TODO: Refactor error code
         CoffeeListing existingListing = this.coffeeListingRepo.findById(id)
