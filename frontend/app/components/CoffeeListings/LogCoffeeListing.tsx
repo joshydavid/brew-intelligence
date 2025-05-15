@@ -69,7 +69,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
       roastDate: new Date(),
       weightInKg: 0,
       roastType: RoastType.LIGHT,
-      brewMethod: BrewMethod.V60,
+      brewMethod: BrewMethod.CHEMEX,
     },
   });
 
@@ -79,7 +79,8 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
     const sanitisedData = {
       ...data,
       userId: authData?.userId,
-      roastType: data.roastType.toUpperCase() as RoastType,
+      roastType: data.roastType.toUpperCase(),
+      brewMethod: data.brewMethod.toUpperCase(),
     };
     mutate(sanitisedData, {
       onSuccess: () => onSuccess(),
