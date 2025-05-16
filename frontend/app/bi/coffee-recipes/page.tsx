@@ -20,6 +20,8 @@ import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
+import Empty from "@/public/empty.svg";
+import Restricted from "@/public/restricted.png";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { X } from "lucide-react";
@@ -45,6 +47,14 @@ export default function DisplayCoffeeRecipes() {
       case HTTP_STATUS_CODE.FORBIDDEN:
         return (
           <ErrorMessage
+            image={
+              <Image
+                src={Restricted}
+                alt="not-found"
+                width={500}
+                height={500}
+              />
+            }
             statusCode={403}
             header="Forbidden"
             message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
@@ -53,6 +63,14 @@ export default function DisplayCoffeeRecipes() {
       case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
         return (
           <ErrorMessage
+            image={
+              <Image
+                src={Restricted}
+                alt="not-found"
+                width={500}
+                height={500}
+              />
+            }
             statusCode={409}
             header="Rate Limit Exceeded"
             message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
@@ -101,12 +119,20 @@ export default function DisplayCoffeeRecipes() {
   return (
     <ParentWrapper>
       {sortedCoffeeRecipes.length < 1 ? (
-        <div className="flex min-h-[calc(100vh-100px)] flex-col items-center justify-center px-4 text-center">
-          <h1 className="text-4xl font-semibold text-blue-500">Empty</h1>
-          <p className="mt-2 text-lg text-gray-600">
-            No recipes found. Add some?
-          </p>
-        </div>
+        <ErrorMessage
+          image={
+            <Image
+              src={Empty}
+              alt="not-found"
+              width={300}
+              height={300}
+              className="pb-4"
+            />
+          }
+          statusCode={404}
+          header="Empty"
+          message="No recipes found. Add some?"
+        />
       ) : (
         <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
           {sortedCoffeeRecipes?.map(

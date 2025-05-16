@@ -23,7 +23,9 @@ import {
   sortByLatestDate,
 } from "@/lib/constants/utils";
 import { CoffeeListingDTO } from "@/models/api-dto";
+import Empty from "@/public/empty.svg";
 import Espresso from "@/public/Espresso.jpeg";
+import Restricted from "@/public/restricted.png";
 import V60 from "@/public/V60.jpg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -51,6 +53,14 @@ export default function DisplayCoffeeListings() {
       case HTTP_STATUS_CODE.FORBIDDEN:
         return (
           <ErrorMessage
+            image={
+              <Image
+                src={Restricted}
+                alt="not-found"
+                width={500}
+                height={500}
+              />
+            }
             statusCode={403}
             header="Forbidden"
             message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
@@ -59,6 +69,14 @@ export default function DisplayCoffeeListings() {
       case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
         return (
           <ErrorMessage
+            image={
+              <Image
+                src={Restricted}
+                alt="not-found"
+                width={500}
+                height={500}
+              />
+            }
             statusCode={409}
             header="Rate Limit Exceeded"
             message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
@@ -118,12 +136,20 @@ export default function DisplayCoffeeListings() {
   return (
     <ParentWrapper>
       {sortedCoffeeListings.length < 1 ? (
-        <div className="flex min-h-[calc(100vh-100px)] flex-col items-center justify-center px-4 text-center">
-          <h1 className="text-4xl font-semibold text-blue-500">Empty</h1>
-          <p className="mt-2 text-lg text-gray-600">
-            No coffee listings found. Add some?
-          </p>
-        </div>
+        <ErrorMessage
+          image={
+            <Image
+              src={Empty}
+              alt="not-found"
+              width={300}
+              height={300}
+              className="pb-4"
+            />
+          }
+          statusCode={404}
+          header="Empty"
+          message="No coffee listings found. Add some?"
+        />
       ) : (
         <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
           {sortedCoffeeListings.map(

@@ -80,7 +80,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
       ...data,
       userId: authData?.userId,
       roastType: data.roastType.toUpperCase(),
-      brewMethod: data.brewMethod.toUpperCase(),
+      brewMethod: data.brewMethod.replaceAll(" ", "_").toUpperCase(),
     };
     mutate(sanitisedData, {
       onSuccess: () => onSuccess(),
