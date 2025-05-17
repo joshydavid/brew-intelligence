@@ -1,6 +1,6 @@
 services:
   brewintelligence-app:
-    build: .
+    image: joshdavidang/backend-brewintelligence-app:latest
     ports:
       - "8080:8080"
     env_file:
@@ -21,7 +21,7 @@ services:
     image: postgres:16
     container_name: postgres
     env_file:
-      - .env
+      - .env.dev
     environment:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
