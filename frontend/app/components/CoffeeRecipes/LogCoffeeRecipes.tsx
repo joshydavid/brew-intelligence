@@ -28,10 +28,17 @@ import { CoffeeRecipesBrewSteps } from "./CoffeeRecipesBrewSteps";
 
 export default function LogCoffeeRecipes() {
   const [open, setOpen] = useState<boolean>(false);
+  const { authData } = useAuthStatus();
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button size="lg" variant="outline" className="rounded-3xl">
+        <Button
+          size="lg"
+          variant="outline"
+          className="rounded-3xl"
+          disabled={!authData?.userId}
+        >
           <BookOpen className="h-4 w-4" />
           <p className="text-xs md:text-sm">Log Recipes</p>
         </Button>
