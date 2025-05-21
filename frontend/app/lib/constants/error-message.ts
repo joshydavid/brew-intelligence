@@ -38,3 +38,8 @@ export enum CoffeeListingErrMsg {
   ROAST_TYPE_REQUIRED = "Roast type is required",
   BREW_METHOD_REQUIRED = "Brew method is required",
 }
+
+export enum AIChatMessage {
+  MESSAGE_REQUIRED = "Message is required",
+  MAX_CHARACTERS_500 = "Message must be under 500 characters",
+}

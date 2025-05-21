@@ -1,6 +1,6 @@
 import { APP_AI } from "@/lib/constants/marketing";
 
-export default function ChatHelper() {
+export default function ChatHelperText() {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-8 px-2">
       <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
