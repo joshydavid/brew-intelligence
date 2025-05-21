@@ -1,7 +1,7 @@
 "use client";
 
 import { Form } from "@/components/ui/form";
-import { aiChatScehma, AIChatSchema } from "@/schema/ai-chat";
+import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -10,7 +10,7 @@ import { ChatHelperText, ChatInput, ChatLLM } from "./index";
 export default function Chat() {
   const [showHelper, setShowHelper] = useState<boolean>(true);
   const chatForm = useForm<AIChatSchema>({
-    resolver: zodResolver(aiChatScehma),
+    resolver: zodResolver(aiChatSchema),
     defaultValues: {
       message: "",
     },
@@ -19,6 +19,7 @@ export default function Chat() {
   const { control, handleSubmit, reset } = chatForm;
 
   const onSubmit = (data: AIChatSchema) => {
+    // TDOO: llm api
     console.log("Sent:", data.message);
     reset();
   };
