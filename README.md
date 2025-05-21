@@ -10,8 +10,8 @@
 
 Brew Intelligence — your personal coffee companion. Whether you’re pulling a perfect espresso, dialing in a V60, or experimenting with your coffee setup, Brew Intelligence is here to help you brew better.
 
-- [View Project](https://api-brew.joshydavid.com)
-- [View API Documentation](https://brew.joshydavid.com/docs.html)
+- [View Project](https://brew.joshydavid.com)
+- [View API Documentation](https://api-brew.joshydavid.com/docs.html)
 - [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
 
 ## Features
