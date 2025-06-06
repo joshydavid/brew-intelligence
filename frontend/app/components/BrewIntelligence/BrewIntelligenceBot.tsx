@@ -1,7 +1,7 @@
 "use client";
 
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
-import { APP } from "@/lib/constants/marketing";
+import { APP } from "@/lib/constants/metadata";
 import { cn } from "@/lib/constants/utils";
 import { useRouter } from "next/navigation";
 

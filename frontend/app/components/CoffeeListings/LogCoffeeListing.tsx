@@ -75,8 +75,8 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
       coffeeName: "",
       roastDate: new Date(),
       weightInKg: 0,
-      roastType: RoastType.LIGHT,
-      brewMethod: BrewMethod.CHEMEX,
+      roastType: RoastType.MEDIUM,
+      brewMethod: BrewMethod.ESPRESSO,
     },
   });
 
