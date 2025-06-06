@@ -3,12 +3,12 @@ import LogCoffeeListing from "@/components/CoffeeListings/LogCoffeeListing";
 import ViewBeansButton from "@/components/CoffeeListings/ViewBeansButton";
 import LogCoffeeRecipes from "@/components/CoffeeRecipes/LogCoffeeRecipes";
 import ViewRecipesButton from "@/components/CoffeeRecipes/ViewRecipesButton";
-import { APP } from "@/lib/constants/marketing";
+import { APP } from "@/lib/constants/metadata";
 
 export default function LandingIntro() {
   return (
     <div className="mx-auto max-w-2xl px-2 py-12">
-      <h1 className="text-4xl font-semibold text-gray-900 dark:text-white">
+      <h1 className="text-4xl text-gray-900 dark:text-white">
         Welcome to{" "}
         <span className="text-blue-600 dark:text-blue-500">{APP.NAME}.</span>
       </h1>
