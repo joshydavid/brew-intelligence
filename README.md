@@ -20,10 +20,10 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 
 ## Features
 
-- Full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1, developed during the Summer 2025 break.
-- Implemented token-bucket algorithm for rate limiting (50 requests/min) to prevent API overload.
-- Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
-- Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
+- Browse a curated coffee bean library featuring origins, roast profiles, tasting notes, and processing methods.
+- Add your own recipes and fine-tune them over time.
+- Track your personal coffee beans, log roast dates, origin details, and freshness reminders to keep every cup fresh.
+- Chat with Brew Intelligence to get real-time support guidance, from dialing in espresso to troubleshooting your pour-over.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -78,7 +78,7 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 
 ## Achievements
 
-- Full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1, developed during the Summer 2025 break.
+- Developed a full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1 during the Summer 2025 break.
 - Implemented token-bucket algorithm for rate limiting (50 requests/min) to prevent API overload.
 - Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
 - Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
