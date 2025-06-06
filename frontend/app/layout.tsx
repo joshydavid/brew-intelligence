@@ -5,7 +5,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
-import { APP } from "./lib/constants/marketing";
+import { APP } from "./lib/constants/metadata";
 import { TanStackProvider } from "./TanStackProvider";
 
 const raleway = Raleway({

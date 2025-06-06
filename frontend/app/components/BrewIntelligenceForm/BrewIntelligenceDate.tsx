@@ -15,7 +15,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/constants/utils";
-import { format } from "date-fns";
+import { format, startOfToday, subYears } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Control, FieldValues, Path } from "react-hook-form";
 
@@ -61,9 +61,10 @@ export function BrewIntelligenceDate<T extends FieldValues>({
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}
-                disabled={(date) =>
-                  date > new Date() || date < new Date("1900-01-01")
-                }
+                disabled={(date) => {
+                  const now = startOfToday();
+                  return date > now || date < subYears(now, 1);
+                }}
                 initialFocus
               />
             </PopoverContent>
