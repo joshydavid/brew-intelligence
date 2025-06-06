@@ -1,3 +1,5 @@
+<a id="readme-top"></a>
+
 # ☕ Brew Intelligence
 
 ![Issue](https://img.shields.io/github/issues/joshydavid/joshua-david)
@@ -14,13 +16,16 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 - [View API Documentation](https://api-brew.joshydavid.com/docs.html)
 - [Report Bug](https://github.com/joshydavid/brew-intelligence/issues/new/choose)
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
 ## Features
 
-- Browse a curated coffee bean library featuring origins, roast profiles, tasting notes, and processing methods.
-- Unlock expert recipes, including Jeff Hoffman’s precision brews—from his world championship V60 to clever AeroPress ratios and beyond.
-- Add your own recipes and fine-tune them over time—track your tweaks, dial-ins.
-- Track your personal coffee beans—log roast dates, origin details, and freshness reminders to keep every cup at its peak.
-- Chat with Brew Intelligence to get real-time support guidance, from dialing in espresso to troubleshooting your pour-over.
+- Full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1, developed during the Summer 2025 break.
+- Implemented token-bucket algorithm for rate limiting (50 requests/min) to prevent API overload.
+- Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
+- Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Tech Stack
 
@@ -32,6 +37,8 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
 - Amazon Web Services
 - Docker
 - Swagger UI (API Documentation)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Getting Started
 
@@ -66,6 +73,17 @@ Brew Intelligence — your personal coffee companion. Whether you’re pulling a
    # backend
    docker compose up --build
    ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Achievements
+
+- Full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1, developed during the Summer 2025 break.
+- Implemented token-bucket algorithm for rate limiting (50 requests/min) to prevent API overload.
+- Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
+- Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Acknowledgement
 
