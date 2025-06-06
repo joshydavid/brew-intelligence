@@ -25,7 +25,7 @@ export default function ChatInput({ control }: { control: any }) {
           <Button
             type="submit"
             variant="ghost"
-            className="absolute top-1/2 right-8 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground hover:text-foreground md:right-6"
           >
             <Send size={18} />
           </Button>
