@@ -1,10 +1,10 @@
 <a id="readme-top"></a>
 
-# ☕ Brew Intelligence
-
 ![Issue](https://img.shields.io/github/issues/joshydavid/joshua-david)
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
+
+# ☕ Brew Intelligence
 
 <img src="https://github.com/user-attachments/assets/21b14349-4657-4aea-a82a-dcef198fcfbc" width="800" alt="brew intelligence"  />
 <br />
