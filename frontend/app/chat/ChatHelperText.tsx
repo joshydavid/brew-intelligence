@@ -7,7 +7,9 @@ export default function ChatHelperText() {
         👋 Hey, I'm your{" "}
         <span className="text-blue-600 dark:text-blue-500">AI Barista.</span>
       </h1>
-      <p className="text-sm md:text-lg">{APP_AI.LONG_DESCRIPTION}</p>
+      <p className="text-sm text-gray-600 md:text-lg dark:text-gray-200">
+        {APP_AI.LONG_DESCRIPTION}
+      </p>
     </div>
   );
 }
