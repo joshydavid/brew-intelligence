@@ -39,7 +39,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ec2-user
         key: ${{ secrets.EC2_SSH_KEY }}
-        source: backend/scripts/restart-app.sh
+        source: scripts/restart-app.sh
         target: /home/ec2-user/
     - name: Restart app on EC2
       uses: appleboy/ssh-action@v0.1.7
@@ -48,4 +48,4 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            /home/ec2-user/restart-app.sh
+            /home/ec2-user/scripts/restart-app.sh
