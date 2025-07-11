@@ -25,3 +25,28 @@ jobs:
       run: mvn clean install -U
     - name: Build with Maven
       run: mvn -B package
+    - name: Copy JAR to EC2
+      uses: appleboy/scp-action@v0.1.7
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: backend/target/brewintelligence-backend-0.0.1-SNAPSHOT.jar
+          target: /home/ec2-user/myapp/myapp.jar
+    - name: Copy restart app script to EC2
+      uses: appleboy/scp-action@v0.1.7
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ec2-user
+        key: ${{ secrets.EC2_SSH_KEY }}
+        source: backend/scripts/restart-app.sh
+        target: /home/ec2-user/
+    - name: Restart app on EC2
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ec2-user
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            chmod +x /home/ec2-user/backend/scripts/restart-app.sh
+            /home/ec2-user/backend/scripts/restart-app.sh
