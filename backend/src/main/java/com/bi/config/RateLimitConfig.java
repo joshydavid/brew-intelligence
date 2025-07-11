@@ -1,12 +1,14 @@
 package com.bi.config;
 
 import java.time.Duration;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.Caffeine;
 
 import io.github.bucket4j.Bandwidth;
 import io.github.bucket4j.Bucket;
@@ -16,10 +18,13 @@ public class RateLimitConfig {
     @Value("${num.reqs.per.min}")
     private Long NUM_REQUESTS_PER_MIN;
 
-    private final Map<String, Bucket> buckets = new ConcurrentHashMap<>();
+    private final Cache<String, Bucket> buckets = Caffeine.newBuilder()
+            .maximumSize(10_000)
+            .expireAfterAccess(1, TimeUnit.HOURS)
+            .build();
 
     @Bean
-    Map<String, Bucket> buckets() {
+    Cache<String, Bucket> buckets() {
         return buckets;
     }
 
