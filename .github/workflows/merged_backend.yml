@@ -48,4 +48,5 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            chmod +x /home/ec2-user/backend/scripts/restart-app.sh
             /home/ec2-user/backend/scripts/restart-app.sh
