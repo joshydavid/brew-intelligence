@@ -13,7 +13,7 @@ import { Form } from "@/components/ui/form";
 import { useLogRecipeMutation } from "@/hooks/apis/use-log-recipe-mutation";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { MethodType } from "@/lib/constants/coffee-listing";
-import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
+import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { handleSuccess } from "@/lib/constants/utils";
 import {
   logCoffeeRecipeSchema,
@@ -53,7 +53,7 @@ export default function LogCoffeeRecipes() {
         <CoffeeRecipeForm
           onSuccess={() =>
             handleSuccess(
-              COFFEE_RECIPE_SUCCESS_MESSAGE.RECIPE_SUCCESSFULLY_ADDED,
+              COFFEE_RECIPE_MESSAGE.RECIPE_SUCCESSFULLY_ADDED,
               setOpen,
             )
           }
