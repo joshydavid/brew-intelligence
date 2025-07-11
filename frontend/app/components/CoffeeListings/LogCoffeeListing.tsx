@@ -18,7 +18,7 @@ import { Form } from "@/components/ui/form";
 import { useLogCoffeeMutation } from "@/hooks/apis/use-log-coffee-mutation";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
-import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
+import { COFFEE_LISTING_MESSAGE } from "@/lib/constants/message";
 import { handleSuccess } from "@/lib/constants/utils";
 import {
   logCoffeeListingSchema,
@@ -56,7 +56,7 @@ export default function LogCoffeeListing() {
         <CoffeeListingEntryForm
           onSuccess={() =>
             handleSuccess(
-              COFFEE_LISTING_SUCCESS_MESSAGE.LISTING_SUCCESSFULLY_ADDED,
+              COFFEE_LISTING_MESSAGE.LISTING_SUCCESSFULLY_ADDED,
               setOpen,
             )
           }

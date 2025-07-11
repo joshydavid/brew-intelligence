@@ -13,7 +13,7 @@ export default function Header() {
   return (
     <header className="flex flex-row items-center justify-between p-8">
       <div>{pathname !== "/" && <BackButton />}</div>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center">
         <LoginX name={authData?.name ?? ""} />
         <AppearanceToggle />
       </div>

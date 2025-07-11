@@ -15,8 +15,8 @@ import {
   API_ERROR_MESSAGE,
   HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
+import { COFFEE_LISTING_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
-import { COFFEE_LISTING_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import {
   formatDate,
   getTimeFrame,
@@ -119,16 +119,13 @@ export default function DisplayCoffeeListings() {
   const handleDelete = (listingId: string) => {
     deleteCoffeeListing(listingId, {
       onSuccess: () => {
-        toast.success(
-          COFFEE_LISTING_SUCCESS_MESSAGE.LISTING_SUCCESSFULLY_DELETED,
-        );
+        toast.success(COFFEE_LISTING_MESSAGE.LISTING_SUCCESSFULLY_DELETED);
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.COFFEE_LISTINGS],
         });
       },
-      onError: (error) => {
-        // TODO: refactor
-        console.error("Delete failed", error);
+      onError: () => {
+        toast.error(COFFEE_LISTING_MESSAGE.LISTING_DELETION_FAILED);
       },
     });
   };

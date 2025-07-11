@@ -15,8 +15,8 @@ import {
   API_ERROR_MESSAGE,
   HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
+import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
-import { COFFEE_RECIPE_SUCCESS_MESSAGE } from "@/lib/constants/success-message";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
@@ -102,16 +102,13 @@ export default function DisplayCoffeeRecipes() {
   const handleDelete = (recipeId: string) => {
     deleteCoffeeRecipe(recipeId, {
       onSuccess: () => {
-        toast.success(
-          COFFEE_RECIPE_SUCCESS_MESSAGE.RECIPE_SUCCESSFULLY_DELETED,
-        );
+        toast.success(COFFEE_RECIPE_MESSAGE.RECIPE_SUCCESSFULLY_DELETED);
         queryClient.invalidateQueries({
           queryKey: [QUERY_KEYS.COFFEE_RECIPES],
         });
       },
-      onError: (error) => {
-        // TODO: refactor
-        console.error("Delete failed", error);
+      onError: () => {
+        toast.error(COFFEE_RECIPE_MESSAGE.RECIPE_DELETION_FAILED);
       },
     });
   };
