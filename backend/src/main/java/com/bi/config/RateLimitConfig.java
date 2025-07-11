@@ -17,7 +17,6 @@ import io.github.bucket4j.Bucket;
 public class RateLimitConfig {
     @Value("${num.reqs.per.min}")
     private Long NUM_REQUESTS_PER_MIN;
-
     private final Cache<String, Bucket> buckets = Caffeine.newBuilder()
             .maximumSize(10_000)
             .expireAfterAccess(1, TimeUnit.HOURS)

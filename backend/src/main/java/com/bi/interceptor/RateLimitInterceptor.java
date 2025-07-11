@@ -1,14 +1,11 @@
 package com.bi.interceptor;
 
-import java.util.concurrent.TimeUnit;
-
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.bi.config.RateLimitConfig;
 import com.bi.constant.ErrorMessage;
 import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
 
 import io.github.bucket4j.Bucket;
 import jakarta.servlet.http.HttpServletRequest;
@@ -19,10 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RateLimitInterceptor implements HandlerInterceptor {
     private final RateLimitConfig rateLimitConfig;
-    private final Cache<String, Bucket> buckets = Caffeine.newBuilder()
-            .maximumSize(10_000)
-            .expireAfterAccess(1, TimeUnit.HOURS)
-            .build();
+    private final Cache<String, Bucket> buckets;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
