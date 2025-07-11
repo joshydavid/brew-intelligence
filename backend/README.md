@@ -2,9 +2,9 @@
 
 # 🤖 Brew Intelligence
 
-![Issue](https://img.shields.io/github/issues/joshydavid/joshua-david)
-![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/joshua-david)
-![Release Badge](https://img.shields.io/github/v/release/joshydavid/joshua-david)
+![Issue](https://img.shields.io/github/issues/joshydavid/brew-intelligence)
+![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/brew-intelligence)
+![Release Badge](https://img.shields.io/github/v/release/joshydavid/brew-intelligence)
 
 <img src="https://github.com/user-attachments/assets/21b14349-4657-4aea-a82a-dcef198fcfbc" width="800" alt="brew intelligence"  />
 <br />
@@ -65,15 +65,6 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 
    docker compose up --build
    ```
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-## Achievements
-
-- Developed a full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1.
-- Implemented token-bucket algorithm for rate limiting to prevent API overload under simulated traffic.
-- Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
-- Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
