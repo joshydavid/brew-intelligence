@@ -70,8 +70,8 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 
 ## Achievements
 
-- Developed a full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1 during the Summer 2025 break.
-- Implemented token-bucket algorithm for rate limiting (50 requests/min) to prevent API overload.
+- Developed a full-stack Java Spring Boot web application leveraging object-oriented design, builder pattern and MVC architecture from 0 to 1.
+- Implemented token-bucket algorithm for rate limiting to prevent API overload under simulated traffic.
 - Integrated Redis caching to reduce database reads and cut API response time from 790ms to 50ms.
 - Leveraged Large Language Models to analyse grind results and deliver tailored brewing advice.
 
