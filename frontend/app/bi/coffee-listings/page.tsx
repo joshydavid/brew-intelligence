@@ -124,8 +124,8 @@ export default function DisplayCoffeeListings() {
           queryKey: [QUERY_KEYS.COFFEE_LISTINGS],
         });
       },
-      onError: (error) => {
-        toast.success(COFFEE_LISTING_MESSAGE.LISTING_DELETION_FAILED);
+      onError: () => {
+        toast.error(COFFEE_LISTING_MESSAGE.LISTING_DELETION_FAILED);
       },
     });
   };

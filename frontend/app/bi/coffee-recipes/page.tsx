@@ -107,8 +107,8 @@ export default function DisplayCoffeeRecipes() {
           queryKey: [QUERY_KEYS.COFFEE_RECIPES],
         });
       },
-      onError: (error) => {
-        toast.success(COFFEE_RECIPE_MESSAGE.RECIPE_DELETION_FAILED);
+      onError: () => {
+        toast.error(COFFEE_RECIPE_MESSAGE.RECIPE_DELETION_FAILED);
       },
     });
   };
