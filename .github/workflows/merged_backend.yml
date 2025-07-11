@@ -25,13 +25,3 @@ jobs:
       run: mvn clean install -U
     - name: Build with Maven
       run: mvn -B package
-    - name: SonarQube Scan
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: |
-        npm install -g sonar-scanner
-        sonar-scanner \
-            -Dsonar.projectKey=joshydavid_brew-intelligence-backend \
-            -Dsonar.sources=. \
-            -Dsonar.host.url=https://sonarcloud.io \
-            -Dsonar.login=$SONAR_TOKEN
