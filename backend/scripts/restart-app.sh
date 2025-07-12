@@ -1,5 +1,5 @@
 #!/bin/bash
-source /home/ec2-user/myapp/.env.prod
+source /home/ec2-user/myapp/backend/target/.env.prod
 
 JAR_PATH="/home/ec2-user/myapp/backend/target/brewintelligence-backend-0.0.1-SNAPSHOT.jar"
 JAR_DIR="$(dirname "$JAR_PATH")"
