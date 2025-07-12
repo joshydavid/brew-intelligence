@@ -16,8 +16,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(ApiPaths.HEALTHCHECK).permitAll()
                         .requestMatchers(ApiPaths.LOGIN_WITH_X + "/**").permitAll()
+                        .requestMatchers(ApiPaths.HEALTHCHECK).permitAll()
                         .requestMatchers(ApiPaths.SWAGGER_DOCS).permitAll()
                         .anyRequest()
                         .authenticated());
