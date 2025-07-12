@@ -17,8 +17,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(ApiPaths.HEALTHCHECK).permitAll()
-                        .requestMatchers(ApiPaths.LOGIN_WITH_X).permitAll()
-                        .requestMatchers(ApiPaths.LOGIN_WITH_X + ApiPaths.X_CALLBACK).permitAll()
+                        .requestMatchers(ApiPaths.LOGIN_WITH_X + "/**").permitAll()
+                        .requestMatchers(ApiPaths.SWAGGER_DOCS).permitAll()
                         .anyRequest()
                         .authenticated());
 
