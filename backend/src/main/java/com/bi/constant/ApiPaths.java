@@ -10,7 +10,11 @@ public class ApiPaths {
     public static final String X_AUTH_STATUS = "/status";
     public static final String X_USER = BASE_API + "/user";
     public static final String X_VERIFY_CREDENTIALS = "https://api.twitter.com/1.1/account/verify_credentials.json";
-    public static final String[] SWAGGER_WHITELIST = {
+    private static final String[] SWAGGER_WHITELIST = {
             "/docs.html", "/swagger-ui/**", "/api-docs/**"
     };
+
+    public static String[] getSwaggerWhitelist() {
+        return SWAGGER_WHITELIST.clone();
+    }
 }

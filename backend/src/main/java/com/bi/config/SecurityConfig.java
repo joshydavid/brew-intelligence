@@ -18,7 +18,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(ApiPaths.HEALTHCHECK).permitAll()
                         .requestMatchers(ApiPaths.LOGIN_WITH_X + "/**").permitAll()
-                        .requestMatchers(ApiPaths.SWAGGER_WHITELIST).permitAll()
+                        .requestMatchers(ApiPaths.getSwaggerWhitelist()).permitAll()
                         .anyRequest()
                         .authenticated());
 
