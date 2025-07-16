@@ -15,6 +15,9 @@ public class ApiPaths {
             "/docs.html", "/swagger-ui/**", "/api-docs/**"
     };
 
+    private ApiPaths() {
+    }
+
     public static String[] getSwaggerWhitelist() {
         return SWAGGER_WHITELIST.clone();
     }

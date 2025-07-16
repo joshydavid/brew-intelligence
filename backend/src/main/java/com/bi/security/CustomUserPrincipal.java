@@ -33,7 +33,7 @@ public class CustomUserPrincipal implements UserDetails {
 
     @Override
     public String getUsername() {
-        return userId;
+        return name;
     }
 
     @Override

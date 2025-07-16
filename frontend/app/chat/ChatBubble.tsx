@@ -37,7 +37,7 @@ export default function ChatBubble({
       <div
         className={cn(
           "my-4 flex flex-col items-start gap-4 md:flex-row",
-          isUser && "flex-row-reverse",
+          isUser && "flex-row-reverse items-center",
         )}
       >
         <Avatar className="flex-shrink-0">
