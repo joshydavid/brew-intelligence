@@ -1,13 +1,17 @@
 "use client";
 
-import BeatLoaderSpiner from "@/components/Spinner/BeatLoaderSpinner";
+import { ErrorMessage } from "@/components/ErrorMessage";
+import BeatLoaderSpinner from "@/components/Spinner/BeatLoaderSpinner";
 import { Form } from "@/components/ui/form";
 import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
+import { API_ERROR_MESSAGE } from "@/lib/constants/error-message";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
+import Restricted from "@/public/restricted.png";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ChatHelperText, ChatInput, ChatLLM } from "./index";
@@ -15,7 +19,6 @@ import { ChatHelperText, ChatInput, ChatLLM } from "./index";
 export default function Chat() {
   const { authData } = useAuthStatus();
   const [queries, setQueries] = useState<ChatUser[]>([]);
-  // TODO: remove this, use react-query loading state
   const [loading, setLoading] = useState<boolean>(false);
   const messagesEndRef = useAutoScroll<HTMLDivElement>([queries, loading]);
 
@@ -50,6 +53,19 @@ export default function Chat() {
     });
   };
 
+  if (authData === undefined) {
+    return (
+      <ErrorMessage
+        image={
+          <Image src={Restricted} alt="not-found" width={500} height={500} />
+        }
+        statusCode={403}
+        header="Forbidden"
+        message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
+      />
+    );
+  }
+
   return (
     <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-5xl flex-col p-8">
       {queries.length > 0 ? (
@@ -57,7 +73,7 @@ export default function Chat() {
           <ChatLLM queries={queries} />
           {loading && (
             <div className="mt-4 ml-2 flex items-center gap-1 italic md:ml-5 md:text-sm">
-              Processing <BeatLoaderSpiner size={7} />{" "}
+              Processing <BeatLoaderSpinner size={7} />{" "}
             </div>
           )}
         </>

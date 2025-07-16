@@ -6,7 +6,9 @@ interface BeatLoaderSpinnerProps {
   size?: number;
 }
 
-export default function BeatLoaderSpiner({ size = 8 }: BeatLoaderSpinnerProps) {
+export default function BeatLoaderSpinner({
+  size = 8,
+}: BeatLoaderSpinnerProps) {
   const { theme } = useTheme();
   const isDark = theme === Theme.DARK;
 

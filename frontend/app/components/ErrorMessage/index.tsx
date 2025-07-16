@@ -18,10 +18,10 @@ export function ErrorMessage({
     <ParentWrapper>
       <div className="flex min-h-[calc(100vh-200px)] flex-col items-center justify-center px-4 text-center">
         {image}
-        <h1 className="text-3xl text-red-500">
+        <h1 className="text-xl text-red-500 md:text-2xl">
           {statusCode} {header}
         </h1>
-        <p className="mt-2 text-lg text-gray-600">{message}</p>
+        <p className="md:text-md mt-2 text-sm text-gray-600">{message}</p>
       </div>
     </ParentWrapper>
   );
