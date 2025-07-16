@@ -2,6 +2,8 @@
 
 import BeatLoaderSpiner from "@/components/Spinner/BeatLoaderSpinner";
 import { Form } from "@/components/ui/form";
+import { useLLM } from "@/hooks/apis/use-llm";
+import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
@@ -11,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { ChatHelperText, ChatInput, ChatLLM } from "./index";
 
 export default function Chat() {
+  const { authData } = useAuthStatus();
   const [queries, setQueries] = useState<ChatUser[]>([]);
   // TODO: remove this, use react-query loading state
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,6 +27,7 @@ export default function Chat() {
   });
 
   const { control, handleSubmit, reset } = chatForm;
+  const { mutate } = useLLM();
 
   const onSubmit = (data: AIChatSchema) => {
     setQueries((prev) => [
@@ -33,18 +37,24 @@ export default function Chat() {
     reset();
     setLoading(true);
 
-    // TDOO: llm api
-    setTimeout(() => {
-      setQueries((prev) => [
-        ...prev,
-        { sender: UserType.GROK_BOT, query: "Grazie" },
-      ]);
-      setLoading(false);
-    }, 500);
+    const requestBody = [{ parts: [{ text: data.message }] }];
+    mutate(requestBody, {
+      onSuccess: (data) => {
+        console.log(data.response);
+
+        setQueries((prev) => [
+          ...prev,
+          { sender: UserType.GROK_BOT, query: data.response },
+        ]);
+
+        setLoading(false);
+      },
+      onError: (error) => console.error("Mutation failed:", error.message),
+    });
   };
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-2xl flex-col p-8">
+    <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-5xl flex-col p-8">
       {queries.length > 0 ? (
         <>
           <ChatLLM queries={queries} />
