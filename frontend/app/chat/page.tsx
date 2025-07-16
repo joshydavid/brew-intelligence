@@ -1,7 +1,7 @@
 "use client";
 
 import { ErrorMessage } from "@/components/ErrorMessage";
-import BeatLoaderSpiner from "@/components/Spinner/BeatLoaderSpinner";
+import BeatLoaderSpinner from "@/components/Spinner/BeatLoaderSpinner";
 import { Form } from "@/components/ui/form";
 import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
@@ -73,7 +73,7 @@ export default function Chat() {
           <ChatLLM queries={queries} />
           {loading && (
             <div className="mt-4 ml-2 flex items-center gap-1 italic md:ml-5 md:text-sm">
-              Processing <BeatLoaderSpiner size={7} />{" "}
+              Processing <BeatLoaderSpinner size={7} />{" "}
             </div>
           )}
         </>

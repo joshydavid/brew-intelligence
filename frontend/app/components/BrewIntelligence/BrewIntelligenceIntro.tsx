@@ -1,10 +1,10 @@
 "use client";
 
+import BeatLoaderSpinner from "@/components/Spinner/BeatLoaderSpinner";
 import { Button } from "@/components/ui/button";
 import { useLoading } from "@/hooks/use-loading";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { Bot } from "lucide-react";
-import BeatLoaderSpiner from "../Spinner/BeatLoaderSpinner";
 
 export default function BrewIntelligenceIntro() {
   const { isLoading, navigate } = useLoading();
@@ -19,7 +19,7 @@ export default function BrewIntelligenceIntro() {
         disabled={isLoading}
       >
         {isLoading ? (
-          <BeatLoaderSpiner />
+          <BeatLoaderSpinner />
         ) : (
           <>
             <Bot className="h-4 w-4" />
