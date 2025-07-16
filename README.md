@@ -36,6 +36,7 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 - Tailwind CSS
 - Amazon Web Services
 - Docker
+- Gemini API
 - Swagger UI (API Documentation)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -62,16 +63,24 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 
 3. Set up environment variables
 
-   `cp .env.sample .env`
+   ```
+   # frontend
+   cp .env.sample .env
 
-4. Run the project in development environment
+   # backend
+   cp .env.sample .env.local
+   ```
+
+4. Ensure you have PostgreSQL running locally (or accessible via network) with a database configured that matches the `.env.local` settings.
+
+5. Run the project in development environment
 
    ```
    # frontend
    bun run dev
 
    # backend
-   docker compose up --build
+   mvn spring-boot:run
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

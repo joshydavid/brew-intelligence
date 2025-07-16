@@ -1,10 +1,10 @@
 <a id="readme-top"></a>
 
-# 🤖 Brew Intelligence
-
 ![Issue](https://img.shields.io/github/issues/joshydavid/brew-intelligence)
 ![Pull Request](https://img.shields.io/github/issues-pr/joshydavid/brew-intelligence)
 ![Release Badge](https://img.shields.io/github/v/release/joshydavid/brew-intelligence)
+
+# ☕ Brew Intelligence
 
 <img src="https://github.com/user-attachments/assets/21b14349-4657-4aea-a82a-dcef198fcfbc" width="800" alt="brew intelligence"  />
 <br />
@@ -27,12 +27,16 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Backend Tech Stack
+## Tech Stack
 
 - Java Spring Boot
 - PostgreSQL
 - Redis
+- React
+- Tailwind CSS
 - Amazon Web Services
+- Docker
+- Gemini API
 - Swagger UI (API Documentation)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -48,22 +52,35 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 2. Install dependencies
 
    ```
+   # frontend
+   cd frontend
+   bun install
+
+   # backend
+   cd backend
    mvn clean install -U
    ```
 
-3. Set up environment variables. Refer to `.env.sample`
-
-   `cp .env.sample .env`
-
-4. Run the project in development environment
+3. Set up environment variables
 
    ```
-   source .env
+   # frontend
+   cp .env.sample .env
+
+   # backend
+   cp .env.sample .env.local
+   ```
+
+4. Ensure you have PostgreSQL running locally (or accessible via network) with a database configured that matches the `.env.local` settings.
+
+5. Run the project in development environment
+
+   ```
+   # frontend
+   bun run dev
+
+   # backend
    mvn spring-boot:run
-
-   or
-
-   docker compose up --build
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
