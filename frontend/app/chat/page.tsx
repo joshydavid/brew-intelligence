@@ -40,13 +40,10 @@ export default function Chat() {
     const requestBody = [{ parts: [{ text: data.message }] }];
     mutate(requestBody, {
       onSuccess: (data) => {
-        console.log(data.response);
-
         setQueries((prev) => [
           ...prev,
           { sender: UserType.GROK_BOT, query: data.response },
         ]);
-
         setLoading(false);
       },
       onError: (error) => console.error("Mutation failed:", error.message),
