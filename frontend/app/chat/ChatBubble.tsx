@@ -1,5 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { cn } from "@/lib/constants/utils";
+import Gemini from "@/public/gemini.svg";
 import DOMPurify from "dompurify";
 import { motion } from "framer-motion";
 import ReactMarkdown from "react-markdown";
@@ -8,7 +9,6 @@ interface ChatBubbleProps {
   query: string;
   index: number;
   isUser: boolean;
-  avatarSrc?: string;
   fallback: string;
 }
 
@@ -22,7 +22,6 @@ export default function ChatBubble({
   query,
   index,
   isUser,
-  avatarSrc,
   fallback,
 }: ChatBubbleProps) {
   return (
@@ -36,12 +35,12 @@ export default function ChatBubble({
     >
       <div
         className={cn(
-          "my-4 flex flex-col items-start gap-4 md:flex-row",
-          isUser && "flex-row-reverse items-center",
+          "my-4 flex flex-col items-start gap-6 md:flex-row",
+          isUser && "flex-row-reverse items-center gap-4",
         )}
       >
         <Avatar className="flex-shrink-0">
-          <AvatarImage src={avatarSrc} />
+          <AvatarImage src={!isUser && Gemini.src} />
           <AvatarFallback className="text-sm">{fallback}</AvatarFallback>
         </Avatar>
         <div
@@ -59,24 +58,26 @@ export default function ChatBubble({
               <ReactMarkdown
                 components={{
                   h1: ({ node, ...props }) => (
-                    <h1 className="mt-2 mb-1 text-lg font-bold" {...props} />
+                    <h1 className="my-2 text-lg font-bold" {...props} />
                   ),
                   h2: ({ node, ...props }) => (
-                    <h2
-                      className="mt-2 mb-1 text-base font-semibold"
-                      {...props}
-                    />
+                    <h2 className="my-4 text-base font-semibold" {...props} />
                   ),
                   ul: ({ node, ...props }) => (
-                    <ul className="mb-4 list-disc pl-5" {...props} />
+                    <ul className="my-4 list-disc pl-5" {...props} />
                   ),
                   li: ({ node, ...props }) => (
-                    <li className="mb-3" {...props} />
+                    <li className="my-2" {...props} />
                   ),
                   strong: ({ node, ...props }) => (
                     <strong className="font-semibold" {...props} />
                   ),
-                  p: ({ node, ...props }) => <p className="mb-2" {...props} />,
+                  p: ({ node, ...props }) => (
+                    <p
+                      className={cn(node?.position?.start.line !== 1 && "my-4")}
+                      {...props}
+                    />
+                  ),
                 }}
               >
                 {DOMPurify.sanitize(query)}
