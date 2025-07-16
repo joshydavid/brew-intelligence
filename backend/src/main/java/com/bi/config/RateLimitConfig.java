@@ -16,7 +16,7 @@ import io.github.bucket4j.Bucket;
 @Configuration
 public class RateLimitConfig {
     @Value("${num.reqs.per.min}")
-    private Long NUM_REQUESTS_PER_MIN;
+    private Long numRequestsPerMin;
     private final Cache<String, Bucket> buckets = Caffeine.newBuilder()
             .maximumSize(10_000)
             .expireAfterAccess(1, TimeUnit.HOURS)
@@ -29,8 +29,8 @@ public class RateLimitConfig {
 
     public Bucket createBucket() {
         Bandwidth limit = Bandwidth.builder()
-                .capacity(NUM_REQUESTS_PER_MIN)
-                .refillIntervally(NUM_REQUESTS_PER_MIN, Duration.ofMinutes(1))
+                .capacity(numRequestsPerMin)
+                .refillIntervally(numRequestsPerMin, Duration.ofMinutes(1))
                 .build();
 
         return Bucket.builder()

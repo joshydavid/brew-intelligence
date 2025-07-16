@@ -1,6 +1,10 @@
 package com.bi.constant;
 
 public class ErrorMessage {
+
+    private ErrorMessage() {
+    }
+
     // Authentication
     public static final String UNAUTHENTICATED_USER = "User is unauthenticated. Please login.";
     public static final String UNAUTHORISED_USER = "User has insufficient permission to view this resource.";

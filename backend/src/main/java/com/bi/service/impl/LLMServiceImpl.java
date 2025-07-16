@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.bi.exception.LLMServiceException;
 import com.bi.service.LLMService;
 import com.google.genai.Client;
 import com.google.genai.types.Content;
@@ -29,7 +30,7 @@ public class LLMServiceImpl implements LLMService {
                     null);
             return response.text();
         } catch (Exception e) {
-            throw new RuntimeException("Failed to generate text from input", e);
+            throw new LLMServiceException("Failed to generate text from query", e);
         }
     }
 }

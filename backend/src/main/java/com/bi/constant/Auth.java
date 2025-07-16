@@ -5,4 +5,7 @@ public class Auth {
     public static final String X_ACCESS_TOKEN = "x_access_token";
     public static final String SPRING_SECURITY_CONTEXT = "SPRING_SECURITY_CONTEXT";
     public static final String USER = "user";
+
+    private Auth() {
+    }
 }

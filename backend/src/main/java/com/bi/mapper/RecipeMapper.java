@@ -5,6 +5,10 @@ import com.bi.model.Recipe;
 import com.bi.model.UserProfile;
 
 public class RecipeMapper {
+    private RecipeMapper() {
+
+    }
+
     public static RecipeDTO toDTO(Recipe entity) {
         if (entity == null)
             return null;
