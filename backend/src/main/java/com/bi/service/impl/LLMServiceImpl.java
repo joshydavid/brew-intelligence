@@ -18,13 +18,13 @@ public class LLMServiceImpl implements LLMService {
     private final Client client;
 
     @Value("${gemini.model}")
-    private String GEMINI_MODEL;
+    private String geminiModel;
 
     @Override
     public String generateLLMResponse(List<Content> prompt) {
         try {
             GenerateContentResponse response = client.models.generateContent(
-                    GEMINI_MODEL,
+                    geminiModel,
                     prompt,
                     null);
             return response.text();
