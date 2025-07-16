@@ -7,4 +7,5 @@ export const API_ROUTES: ApiEndpoints = {
   RECIPES: `${API_BASE_URL}/api/v1/recipes`,
   LOGIN_WITH_X: `${API_BASE_URL}/api/v1/login`,
   AUTH_STATUS: `${API_BASE_URL}/api/v1/user/status`,
+  AI_CHAT: `${API_BASE_URL}/api/v1/generate-content`,
 };
