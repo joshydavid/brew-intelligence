@@ -38,7 +38,7 @@ public class CoffeeListingServiceImpl implements CoffeeListingService {
     }
 
     @Override
-    @Cacheable(value = RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY)
+    @Cacheable(value = RedisCacheKey.GET_USER_COFFEE_LISTINGS_KEY, key = "#userId")
     public List<CoffeeListingDTO> getCoffeeListingsByUserId(String userId) {
         List<CoffeeListing> userCoffeeListings = this.coffeeListingRepo.findByUserProfileUserId(userId);
         return userCoffeeListings.stream()
