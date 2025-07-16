@@ -5,6 +5,10 @@ import com.bi.model.CoffeeListing;
 import com.bi.model.UserProfile;
 
 public class CoffeeListingMapper {
+    private CoffeeListingMapper() {
+
+    }
+
     public static CoffeeListingDTO toDTO(CoffeeListing entity) {
         if (entity == null)
             return null;

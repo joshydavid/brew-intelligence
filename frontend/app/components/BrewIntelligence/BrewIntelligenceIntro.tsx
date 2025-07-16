@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useLoading } from "@/hooks/use-loading";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { Bot } from "lucide-react";
+import BeatLoaderSpiner from "../Spinner/BeatLoaderSpinner";
 
 export default function BrewIntelligenceIntro() {
   const { isLoading, navigate } = useLoading();
@@ -12,13 +13,19 @@ export default function BrewIntelligenceIntro() {
     <div className="col-span-2 flex justify-center lg:col-span-1">
       <Button
         size="lg"
-        className="rounded-3xl"
+        className="w-[200px] rounded-3xl"
         variant="outline"
         onClick={() => navigate(CLIENT_ROUTES.BREW_INTELLIGENCE)}
         disabled={isLoading}
       >
-        <Bot className="h-4 w-4" />
-        <p className="text-xs md:text-sm">Ask Brew Intelligence</p>
+        {isLoading ? (
+          <BeatLoaderSpiner />
+        ) : (
+          <>
+            <Bot className="h-4 w-4" />
+            <p className="text-xs md:text-sm">Ask Brew Intelligence</p>
+          </>
+        )}
       </Button>
     </div>
   );
