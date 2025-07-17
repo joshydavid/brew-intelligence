@@ -1,7 +1,6 @@
 "use client";
 
 import { ErrorMessage } from "@/components/ErrorMessage";
-import BeatLoaderSpinner from "@/components/Spinner/BeatLoaderSpinner";
 import { Form } from "@/components/ui/form";
 import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
@@ -31,6 +30,17 @@ export default function Chat() {
 
   const { control, handleSubmit, reset } = chatForm;
   const { mutate } = useLLM();
+
+  const CustomLoader = () => {
+    return (
+      <>
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-muted border-t-primary" />
+        <span className="text-md ml-4 text-muted-foreground">
+          Processing...
+        </span>
+      </>
+    );
+  };
 
   const onSubmit = (data: AIChatSchema) => {
     setQueries((prev) => [
@@ -72,8 +82,8 @@ export default function Chat() {
         <>
           <ChatLLM queries={queries} />
           {loading && (
-            <div className="mt-4 ml-2 flex items-center gap-1 italic md:ml-5 md:text-sm">
-              Processing <BeatLoaderSpinner size={7} />{" "}
+            <div className="mt-4 ml-2 flex items-center gap-1 md:ml-5">
+              <CustomLoader />
             </div>
           )}
         </>
