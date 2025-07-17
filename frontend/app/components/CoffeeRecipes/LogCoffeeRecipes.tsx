@@ -70,9 +70,9 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     resolver: zodResolver(logCoffeeRecipeSchema),
     defaultValues: {
       methodType: MethodType.ICED,
-      coffeeDose: 0,
-      waterAmount: 0,
-      brewTemp: 0,
+      coffeeDose: 15,
+      waterAmount: 100,
+      brewTemp: 91,
       brewTime: "",
       brewInstructions: [""],
       createdBy: "",

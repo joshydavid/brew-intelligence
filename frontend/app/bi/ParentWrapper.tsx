@@ -6,7 +6,7 @@ interface ChildrenProps {
 
 export default function ParentWrapper({ children }: Readonly<ChildrenProps>) {
   return (
-    <div className="flex w-screen items-start justify-center px-8 md:p-0">
+    <div className="flex w-screen items-start justify-center px-6 md:p-0">
       {children}
     </div>
   );
