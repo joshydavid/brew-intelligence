@@ -7,6 +7,7 @@ import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
 import { API_ERROR_MESSAGE } from "@/lib/constants/error-message";
+import { FADE_DURATION, UP_NEXT } from "@/lib/constants/timings";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
 import Restricted from "@/public/restricted.png";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
@@ -47,9 +48,9 @@ export default function Chat() {
       setTimeout(() => {
         setLoadingMessage(loadingSteps[i % loadingSteps.length]);
         setFade(false);
-      }, 200);
+      }, FADE_DURATION);
       i++;
-    }, 3000);
+    }, UP_NEXT);
     return intervalId;
   };
 
