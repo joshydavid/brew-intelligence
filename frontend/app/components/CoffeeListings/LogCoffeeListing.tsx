@@ -5,6 +5,7 @@ import {
   BrewIntelligenceInput,
   BrewIntelligenceSelect,
 } from "@/components/BrewIntelligenceForm/";
+import HashLoaderSpinner from "@/components/Spinner/HashLoaderSpinner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -81,7 +82,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
   });
 
   const { control, handleSubmit } = addCoffeeListingForm;
-  const { mutate } = useLogCoffeeMutation();
+  const { mutate, isPending } = useLogCoffeeMutation();
   const onSubmit = (data: LogCoffeeListingSchema) => {
     const sanitisedData = {
       ...data,
@@ -90,7 +91,9 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
       brewMethod: data.brewMethod.replaceAll(" ", "_").toUpperCase(),
     };
     mutate(sanitisedData, {
-      onSuccess: () => onSuccess(),
+      onSuccess: () => {
+        onSuccess();
+      },
       //   onError: (error) => console.error("Mutation failed:", error),
     });
   };
@@ -133,9 +136,20 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
             enumValues={BrewMethod}
           />
           <div className="flex justify-end">
-            <Button type="submit" size="md" variant="outline">
-              <Check className="h-4 w-4" />
-              Save
+            <Button
+              type="submit"
+              size="lg"
+              variant="outline"
+              disabled={isPending}
+            >
+              {isPending ? (
+                <HashLoaderSpinner />
+              ) : (
+                <>
+                  <Check className="h-4 w-4" />
+                  Save
+                </>
+              )}
             </Button>
           </div>
         </div>

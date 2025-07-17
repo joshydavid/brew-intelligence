@@ -1,5 +1,6 @@
 "use client";
 
+import HashLoaderSpinner from "@/components/Spinner/HashLoaderSpinner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -79,7 +80,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
   });
 
   const { control, handleSubmit } = addCoffeeRecipeForm;
-  const { mutate } = useLogRecipeMutation();
+  const { mutate, isPending } = useLogRecipeMutation();
   const { fields, append, remove } = useFieldArray<any>({
     control,
     name: "brewInstructions",
@@ -109,9 +110,20 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
             append={append}
           />
           <div className="flex justify-end">
-            <Button type="submit" size="md" variant="outline">
-              <Check className="h-4 w-4" />
-              Save
+            <Button
+              type="button"
+              size="lg"
+              variant="outline"
+              disabled={isPending}
+            >
+              {isPending ? (
+                <HashLoaderSpinner />
+              ) : (
+                <>
+                  <Check className="h-4 w-4" />
+                  Save
+                </>
+              )}
             </Button>
           </div>
         </div>
