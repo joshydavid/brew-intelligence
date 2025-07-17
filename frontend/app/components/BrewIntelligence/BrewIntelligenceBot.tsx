@@ -1,21 +1,28 @@
 "use client";
 
+import HashLoaderSpinner from "@/components/Spinner/HashLoaderSpinner";
+import { useLoading } from "@/hooks/use-loading";
 import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { APP } from "@/lib/constants/metadata";
 import { cn } from "@/lib/constants/utils";
-import { useRouter } from "next/navigation";
 
 export default function BrewIntelligenceBot() {
-  const router = useRouter();
+  const { isLoading, navigate } = useLoading();
+
   return (
     <div
       className={gradientBorderClass}
       role="button"
       tabIndex={0}
-      onClick={() => router.push(CLIENT_ROUTES.BREW_INTELLIGENCE)}
+      onClick={() => navigate(CLIENT_ROUTES.BREW_INTELLIGENCE)}
     >
-      <p className="md:text-md ml-4 p-4 text-sm text-gray-400 dark:text-gray-400">
-        {APP.CTA}
+      <p
+        className={cn(
+          isLoading && "justify-center",
+          "ml-4 flex p-4 text-gray-400 md:text-sm dark:text-gray-400",
+        )}
+      >
+        {isLoading ? <HashLoaderSpinner /> : <>{APP.CTA}</>}
       </p>
     </div>
   );
