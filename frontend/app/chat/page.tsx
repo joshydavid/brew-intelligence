@@ -93,7 +93,7 @@ export default function Chat() {
   }
 
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-5xl flex-col p-6">
+    <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-5xl flex-col p-5">
       {queries.length > 0 ? (
         <>
           <ChatLLM queries={queries} />

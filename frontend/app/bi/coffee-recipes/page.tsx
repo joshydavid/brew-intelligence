@@ -95,7 +95,7 @@ export default function DisplayCoffeeRecipes() {
           message="No recipes found. Add some?"
         />
       ) : (
-        <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-8 pb-12 sm:grid-cols-2 md:w-4/5 md:py-12 lg:grid-cols-3">
           {sortedCoffeeRecipes?.map(
             ({
               recipeId,

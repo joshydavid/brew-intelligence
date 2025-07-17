@@ -114,7 +114,7 @@ export default function DisplayCoffeeListings() {
           message="No coffee listings found. Add some?"
         />
       ) : (
-        <div className="grid w-full grid-cols-1 gap-8 py-12 sm:grid-cols-2 md:w-4/5 lg:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-8 pb-12 sm:grid-cols-2 md:w-4/5 md:py-12 lg:grid-cols-3">
           {sortedCoffeeListings.map(
             ({
               listingId,
@@ -165,10 +165,12 @@ export default function DisplayCoffeeListings() {
                       {BrewMethod[brewMethod as keyof typeof BrewMethod]}
                     </Badge>
                   </div>
-                  <p className="text-xs font-medium text-muted-foreground">
-                    Roast Date
-                  </p>
-                  <p className="text-sm">{formatDate(new Date(roastDate))}</p>
+                  <div>
+                    <p className="text-xs font-medium text-muted-foreground">
+                      Roast Date
+                    </p>
+                    <p className="text-sm">{formatDate(new Date(roastDate))}</p>
+                  </div>
                 </CardContent>
               </Card>
             ),
