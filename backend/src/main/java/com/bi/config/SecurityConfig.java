@@ -7,6 +7,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.bi.constant.ApiPaths;
+import com.bi.constant.ErrorMessage;
+
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
 public class SecurityConfig {
@@ -20,7 +23,10 @@ public class SecurityConfig {
                         .requestMatchers(ApiPaths.LOGIN_WITH_X + "/**").permitAll()
                         .requestMatchers(ApiPaths.getSwaggerWhitelist()).permitAll()
                         .anyRequest()
-                        .authenticated());
+                        .authenticated())
+                .exceptionHandling(ex -> ex
+                        .authenticationEntryPoint((request, response, authException) -> response
+                                .sendError(HttpServletResponse.SC_UNAUTHORIZED, ErrorMessage.UNAUTHENTICATED_USER)));
 
         return http.build();
     }
