@@ -17,6 +17,7 @@ import {
 import { cn } from "@/lib/constants/utils";
 import { format, startOfToday, subYears } from "date-fns";
 import { CalendarIcon } from "lucide-react";
+import { useState } from "react";
 import { Control, FieldValues, Path } from "react-hook-form";
 
 interface BrewIntelligenceDateProps<T extends FieldValues> {
@@ -30,6 +31,8 @@ export function BrewIntelligenceDate<T extends FieldValues>({
   name,
   label,
 }: BrewIntelligenceDateProps<T>) {
+  const [open, setOpen] = useState(false);
+
   return (
     <FormField
       control={control}
@@ -37,7 +40,7 @@ export function BrewIntelligenceDate<T extends FieldValues>({
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel>{label}</FormLabel>
-          <Popover>
+          <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <FormControl>
                 <Button
@@ -60,12 +63,14 @@ export function BrewIntelligenceDate<T extends FieldValues>({
               <Calendar
                 mode="single"
                 selected={field.value}
-                onSelect={field.onChange}
+                onSelect={(date) => {
+                  field.onChange(date);
+                  setOpen(false);
+                }}
                 disabled={(date) => {
                   const now = startOfToday();
                   return date > now || date < subYears(now, 1);
                 }}
-                initialFocus
               />
             </PopoverContent>
           </Popover>

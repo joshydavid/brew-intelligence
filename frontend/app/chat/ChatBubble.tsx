@@ -35,11 +35,11 @@ export default function ChatBubble({
     >
       <div
         className={cn(
-          "my-4 flex flex-col items-start gap-6 md:flex-row",
+          "my-4 flex flex-col items-start gap-5 md:flex-row",
           isUser && "flex-row-reverse items-center gap-4",
         )}
       >
-        <Avatar className="flex-shrink-0">
+        <Avatar>
           <AvatarImage src={!isUser && Gemini.src} />
           <AvatarFallback className="text-sm">{fallback}</AvatarFallback>
         </Avatar>

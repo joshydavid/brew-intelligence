@@ -1,11 +1,13 @@
 "use client";
 
 import { ErrorMessage } from "@/components/ErrorMessage";
+import HashLoaderSpinner from "@/components/Spinner/HashLoaderSpinner";
 import { Form } from "@/components/ui/form";
 import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
 import { API_ERROR_MESSAGE } from "@/lib/constants/error-message";
+import { FADE_DURATION, UP_NEXT } from "@/lib/constants/timings";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
 import Restricted from "@/public/restricted.png";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
@@ -19,6 +21,14 @@ export default function Chat() {
   const { authData } = useAuthStatus();
   const [queries, setQueries] = useState<ChatUser[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const loadingSteps = [
+    "Processing...",
+    "Thinking...",
+    "Be patient...",
+    "Almost done...",
+  ];
+  const [loadingMessage, setLoadingMessage] = useState(loadingSteps[0]);
+  const [fade, setFade] = useState(false);
   const messagesEndRef = useAutoScroll<HTMLDivElement>([queries, loading]);
 
   const chatForm = useForm<AIChatSchema>({
@@ -31,15 +41,17 @@ export default function Chat() {
   const { control, handleSubmit, reset } = chatForm;
   const { mutate } = useLLM();
 
-  const CustomLoader = () => {
-    return (
-      <>
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-muted border-t-primary" />
-        <span className="text-md ml-4 text-muted-foreground">
-          Processing...
-        </span>
-      </>
-    );
+  const queryAnimate = () => {
+    let i = 0;
+    const intervalId = setInterval(() => {
+      setFade(true);
+      setTimeout(() => {
+        setLoadingMessage(loadingSteps[i % loadingSteps.length]);
+        setFade(false);
+      }, FADE_DURATION);
+      i++;
+    }, UP_NEXT);
+    return intervalId;
   };
 
   const onSubmit = (data: AIChatSchema) => {
@@ -50,6 +62,7 @@ export default function Chat() {
     reset();
     setLoading(true);
 
+    const intervalId = queryAnimate();
     const requestBody = [{ parts: [{ text: data.message }] }];
     mutate(requestBody, {
       onSuccess: (data) => {
@@ -58,6 +71,7 @@ export default function Chat() {
           { sender: UserType.GROK_BOT, query: data.response },
         ]);
         setLoading(false);
+        clearInterval(intervalId);
       },
       onError: (error) => console.error("Mutation failed:", error.message),
     });
@@ -82,8 +96,15 @@ export default function Chat() {
         <>
           <ChatLLM queries={queries} />
           {loading && (
-            <div className="mt-4 ml-2 flex items-center gap-1 md:ml-5">
-              <CustomLoader />
+            <div className="flex items-center gap-4 text-muted-foreground">
+              <HashLoaderSpinner />
+              <span
+                className={`transition-opacity duration-300 ${
+                  fade ? "opacity-0" : "opacity-100"
+                }`}
+              >
+                {loadingMessage}
+              </span>
             </div>
           )}
         </>
