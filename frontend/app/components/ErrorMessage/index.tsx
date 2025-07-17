@@ -44,7 +44,9 @@ export const renderErrorMessageByStatus = (statusCode: number) => {
       message = API_ERROR_MESSAGE.ERROR_429_RATE_LIMIT_EXCEEDED;
       break;
     default:
-      return null;
+      (header = API_ERROR_MESSAGE_HEADER.UNEXPECTED_ERROR),
+        (message = API_ERROR_MESSAGE.UNEXPECTED_ERROR);
+      break;
   }
 
   return (

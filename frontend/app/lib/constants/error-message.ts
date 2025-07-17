@@ -14,12 +14,14 @@ export enum API_ERROR_MESSAGE_HEADER {
   UNAUTHENTICATED = "🔐 Access Denied",
   FORBIDDEN = "🚫 Forbidden",
   RATE_LIMIT = "⏱️ Too Many Requests",
+  UNEXPECTED_ERROR = "⚠️ Unexpected Error",
 }
 
 export enum API_ERROR_MESSAGE {
   ERROR_401_UNAUTHENTICATED = "You’re not logged in. Please log in to access this page.",
   ERROR_403_FORBIDDEN = "You don’t have the necessary permissions to view this page. If you believe this is an error, please contact support.",
   ERROR_429_RATE_LIMIT_EXCEEDED = "Rate limit exceeded. Please reduce the frequency of your requests and try again later.",
+  UNEXPECTED_ERROR = "An unexpected error occured. Please try again later.",
 }
 
 export enum CoffeeRecipeErrMsg {
