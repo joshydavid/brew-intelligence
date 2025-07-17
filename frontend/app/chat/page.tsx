@@ -6,7 +6,10 @@ import { Form } from "@/components/ui/form";
 import { useLLM } from "@/hooks/apis/use-llm";
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
-import { API_ERROR_MESSAGE } from "@/lib/constants/error-message";
+import {
+  API_ERROR_MESSAGE,
+  API_ERROR_MESSAGE_HEADER,
+} from "@/lib/constants/error-message";
 import { FADE_DURATION, UP_NEXT } from "@/lib/constants/timings";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
 import Restricted from "@/public/restricted.png";
@@ -83,9 +86,8 @@ export default function Chat() {
         image={
           <Image src={Restricted} alt="not-found" width={500} height={500} />
         }
-        statusCode={403}
-        header="Forbidden"
-        message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
+        header={API_ERROR_MESSAGE_HEADER.UNAUTHENTICATED}
+        message={API_ERROR_MESSAGE.ERROR_401_UNAUTHENTICATED}
       />
     );
   }

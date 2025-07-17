@@ -3,7 +3,10 @@
 import { getRequest } from "@/api/getRequest";
 import ParentWrapper from "@/bi/ParentWrapper";
 import { CTADialog } from "@/components/CTADialog";
-import { ErrorMessage } from "@/components/ErrorMessage";
+import {
+  ErrorMessage,
+  renderErrorMessageByStatus,
+} from "@/components/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
@@ -11,10 +14,6 @@ import { useDeleteCoffeeListingMutation } from "@/hooks/apis/use-delete-coffee-m
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
-import {
-  API_ERROR_MESSAGE,
-  HTTP_STATUS_CODE,
-} from "@/lib/constants/error-message";
 import { COFFEE_LISTING_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import {
@@ -25,7 +24,6 @@ import {
 import { CoffeeListingDTO } from "@/models/api-dto";
 import Empty from "@/public/empty.svg";
 import Espresso from "@/public/Espresso.jpeg";
-import Restricted from "@/public/restricted.png";
 import V60 from "@/public/V60.jpg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -49,48 +47,17 @@ export default function DisplayCoffeeListings() {
   });
 
   if (coffeeListingsErr) {
-    switch (coffeeListingsErr.status) {
-      case HTTP_STATUS_CODE.FORBIDDEN:
-        return (
-          <ErrorMessage
-            image={
-              <Image
-                src={Restricted}
-                alt="not-found"
-                width={500}
-                height={500}
-              />
-            }
-            statusCode={403}
-            header="Forbidden"
-            message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
-          />
-        );
-      case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
-        return (
-          <ErrorMessage
-            image={
-              <Image
-                src={Restricted}
-                alt="not-found"
-                width={500}
-                height={500}
-              />
-            }
-            statusCode={409}
-            header="Rate Limit Exceeded"
-            message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
-          />
-        );
-      default:
-        return (
-          <ParentWrapper>
-            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
-              {coffeeListingsErr?.response?.data}
-            </div>
-          </ParentWrapper>
-        );
-    }
+    const errorComponent = renderErrorMessageByStatus(
+      coffeeListingsErr.status!,
+    );
+    if (errorComponent) return errorComponent;
+    return (
+      <ParentWrapper>
+        <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
+          {coffeeListingsErr?.response?.data}
+        </div>
+      </ParentWrapper>
+    );
   }
 
   if (coffeeListingsLoading)
@@ -143,7 +110,6 @@ export default function DisplayCoffeeListings() {
               className="pb-4"
             />
           }
-          statusCode={404}
           header="Empty"
           message="No coffee listings found. Add some?"
         />

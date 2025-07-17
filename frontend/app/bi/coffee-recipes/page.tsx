@@ -3,7 +3,10 @@
 import { getRequest } from "@/api/getRequest";
 import ParentWrapper from "@/bi/ParentWrapper";
 import { CTADialog } from "@/components/CTADialog";
-import { ErrorMessage } from "@/components/ErrorMessage";
+import {
+  ErrorMessage,
+  renderErrorMessageByStatus,
+} from "@/components/ErrorMessage";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
@@ -11,17 +14,12 @@ import { useDeleteCoffeeRecipeMutation } from "@/hooks/apis/use-delete-coffee-re
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { MethodType } from "@/lib/constants/coffee-listing";
-import {
-  API_ERROR_MESSAGE,
-  HTTP_STATUS_CODE,
-} from "@/lib/constants/error-message";
 import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
 import Brew from "@/public/brew.jpg";
 import Empty from "@/public/empty.svg";
-import Restricted from "@/public/restricted.png";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { X } from "lucide-react";
@@ -43,48 +41,15 @@ export default function DisplayCoffeeRecipes() {
   });
 
   if (coffeeRecipesErr) {
-    switch (coffeeRecipesErr.status) {
-      case HTTP_STATUS_CODE.FORBIDDEN:
-        return (
-          <ErrorMessage
-            image={
-              <Image
-                src={Restricted}
-                alt="not-found"
-                width={500}
-                height={500}
-              />
-            }
-            statusCode={403}
-            header="Forbidden"
-            message={API_ERROR_MESSAGE.ERROR_403_FORBIDDEN}
-          />
-        );
-      case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
-        return (
-          <ErrorMessage
-            image={
-              <Image
-                src={Restricted}
-                alt="not-found"
-                width={500}
-                height={500}
-              />
-            }
-            statusCode={409}
-            header="Rate Limit Exceeded"
-            message={API_ERROR_MESSAGE.ERROR_409_RATE_LIMIT_EXCEEDED}
-          />
-        );
-      default:
-        return (
-          <ParentWrapper>
-            <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
-              {coffeeRecipesErr?.response?.data}{" "}
-            </div>
-          </ParentWrapper>
-        );
-    }
+    const errorComponent = renderErrorMessageByStatus(coffeeRecipesErr.status!);
+    if (errorComponent) return errorComponent;
+    return (
+      <ParentWrapper>
+        <div className="flex min-h-[calc(100vh-100px)] items-center text-lg">
+          {coffeeRecipesErr?.response?.data}{" "}
+        </div>
+      </ParentWrapper>
+    );
   }
 
   if (coffeeRecipesLoading)
@@ -126,7 +91,6 @@ export default function DisplayCoffeeRecipes() {
               className="pb-4"
             />
           }
-          statusCode={404}
           header="Empty"
           message="No recipes found. Add some?"
         />
