@@ -45,7 +45,7 @@ export default function ChatBubble({
         </Avatar>
         <div
           className={cn(
-            "max-w-2xl rounded-lg px-5 py-3.5 text-sm",
+            "rounded-lg px-5 py-3.5 text-sm md:max-w-3xl",
             isUser
               ? "bg-gray-100 dark:bg-gray-900 dark:text-white"
               : "bg-transparent px-0 py-0 dark:text-white",
@@ -72,11 +72,15 @@ export default function ChatBubble({
                   strong: ({ node, ...props }) => (
                     <strong className="font-semibold" {...props} />
                   ),
-                  p: ({ node, ...props }) => (
-                    <p
-                      className={cn(node?.position?.start.line !== 1 && "my-4")}
+                  p: ({ node, ...props }) => <p className="my-4" {...props} />,
+                  pre: ({ node, ...props }) => (
+                    <pre
+                      className="my-4 overflow-x-auto rounded-md bg-gray-800 p-4 text-sm break-words whitespace-pre-wrap text-white"
                       {...props}
                     />
+                  ),
+                  hr: ({ node, ...props }) => (
+                    <hr className="my-4 border-t" {...props} />
                   ),
                 }}
               >

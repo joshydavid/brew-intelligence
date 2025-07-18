@@ -71,7 +71,7 @@ export default function Chat() {
       onSuccess: (data) => {
         setQueries((prev) => [
           ...prev,
-          { sender: UserType.GROK_BOT, query: data.response },
+          { sender: UserType.LLM_BOT, query: data.response },
         ]);
         setLoading(false);
         clearInterval(intervalId);

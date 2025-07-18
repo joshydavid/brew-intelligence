@@ -1,6 +1,6 @@
 export enum UserType {
   User = "User",
-  GROK_BOT = "grokBot",
+  LLM_BOT = "llmBot",
 }
 
 export interface ChatUser {
