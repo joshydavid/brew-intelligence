@@ -11,7 +11,7 @@ export default function Header() {
   const { authData } = useAuthStatus();
 
   return (
-    <header className="flex flex-row items-center justify-between px-4 py-6">
+    <header className="flex flex-row items-center justify-between px-4 py-6 md:px-6">
       <div>{pathname !== "/" && <BackButton />}</div>
       <div className="flex items-center gap-2">
         <LoginX name={authData?.name ?? ""} />
