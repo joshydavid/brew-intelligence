@@ -1,9 +1,10 @@
 import BrewIntelligenceIntro from "@/components/BrewIntelligence/BrewIntelligenceIntro";
 import LogCoffeeListing from "@/components/CoffeeListings/LogCoffeeListing";
-import ViewBeansButton from "@/components/CoffeeListings/ViewBeansButton";
 import LogCoffeeRecipes from "@/components/CoffeeRecipes/LogCoffeeRecipes";
-import ViewRecipesButton from "@/components/CoffeeRecipes/ViewRecipesButton";
+import ViewButton from "@/components/ViewButton";
+import { CLIENT_ROUTES } from "@/lib/constants/client-routes";
 import { APP } from "@/lib/constants/metadata";
+import { BookOpen, Coffee } from "lucide-react";
 
 export default function LandingIntro() {
   return (
@@ -16,9 +17,17 @@ export default function LandingIntro() {
         {APP.LONG_DESCRIPTION}
       </p>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
-        <ViewBeansButton />
+        <ViewButton
+          clientRoute={CLIENT_ROUTES.COFFEE_RECIPES}
+          btnIcon={<Coffee className="h-4 w-4" />}
+          btnName="View Beans"
+        />
         <LogCoffeeListing />
-        <ViewRecipesButton />
+        <ViewButton
+          clientRoute={CLIENT_ROUTES.COFFEE_LISTINGS}
+          btnIcon={<BookOpen className="h-4 w-4" />}
+          btnName="View Recipes"
+        />
         <LogCoffeeRecipes />
         <BrewIntelligenceIntro />
       </div>
