@@ -18,13 +18,13 @@ export default function LandingIntro() {
       </p>
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-3">
         <ViewButton
-          clientRoute={CLIENT_ROUTES.COFFEE_RECIPES}
+          clientRoute={CLIENT_ROUTES.COFFEE_LISTINGS}
           btnIcon={<Coffee className="h-4 w-4" />}
           btnName="View Beans"
         />
         <LogCoffeeListing />
         <ViewButton
-          clientRoute={CLIENT_ROUTES.COFFEE_LISTINGS}
+          clientRoute={CLIENT_ROUTES.COFFEE_RECIPES}
           btnIcon={<BookOpen className="h-4 w-4" />}
           btnName="View Recipes"
         />
