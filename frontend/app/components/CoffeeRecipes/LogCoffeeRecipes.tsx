@@ -44,7 +44,7 @@ export default function LogCoffeeRecipes() {
           <p className="text-xs md:text-sm">Log Recipes</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-[70vh] overflow-y-auto sm:max-w-[650px]">
+      <DialogContent className="max-h-[70vh] overflow-y-auto sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>New Brew Recipe</DialogTitle>
           <DialogDescription className="text-xs">
@@ -101,7 +101,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
   return (
     <Form {...addCoffeeRecipeForm}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-8 py-4">
+        <div className="grid gap-5 py-2">
           <CoffeeRecipeFields control={control} />
           <CoffeeRecipesBrewSteps
             control={control}

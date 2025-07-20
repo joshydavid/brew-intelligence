@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import com.bi.constant.ApiPaths;
 import com.bi.interceptor.RateLimitInterceptor;
 
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(rateLimitInterceptor)
-                .addPathPatterns("/api/v1/**");
+                .addPathPatterns(ApiPaths.BASE_API + "/**")
+                .excludePathPatterns(ApiPaths.X_USER + ApiPaths.X_AUTH_STATUS);
     }
 }

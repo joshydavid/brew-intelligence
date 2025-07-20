@@ -31,7 +31,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 export default function LogCoffeeListing() {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
   const { authData } = useAuthStatus();
 
   return (
@@ -101,7 +101,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
   return (
     <Form {...addCoffeeListingForm}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="grid gap-5 py-4">
+        <div className="grid gap-5 py-2">
           <BrewIntelligenceInput
             type="string"
             control={control}
