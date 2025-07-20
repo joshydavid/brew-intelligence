@@ -19,7 +19,7 @@ export function CoffeeRecipesBrewSteps({
   return (
     <div>
       <FormLabel>Brew Steps</FormLabel>
-      <div className="space-y-4 pb-3">
+      <div className="space-y-3 py-2">
         {fields.map((fieldItem: any, index: number) => (
           <FormField
             key={fieldItem.id}

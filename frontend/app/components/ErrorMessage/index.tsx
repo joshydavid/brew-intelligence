@@ -53,7 +53,7 @@ export const renderErrorMessageByStatus = (statusCode: number) => {
     <ErrorMessage
       image={
         <Image
-          src={S3_IMAGES.RESTRICTED}
+          src={S3_IMAGES.BUS}
           alt="access restricted"
           width={400}
           height={400}
