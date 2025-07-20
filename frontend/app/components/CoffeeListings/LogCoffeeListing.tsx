@@ -29,6 +29,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Check, Coffee } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function LogCoffeeListing() {
   const [open, setOpen] = useState<boolean>(false);
@@ -94,7 +95,7 @@ const CoffeeListingEntryForm = ({ onSuccess }: { onSuccess: () => void }) => {
       onSuccess: () => {
         onSuccess();
       },
-      //   onError: (error) => console.error("Mutation failed:", error),
+      onError: (error) => toast.error(error.message),
     });
   };
 
