@@ -14,6 +14,10 @@ import { useDeleteCoffeeListingMutation } from "@/hooks/apis/use-delete-coffee-m
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
+import {
+  API_ERROR_MESSAGE,
+  API_ERROR_MESSAGE_HEADER,
+} from "@/lib/constants/error-message";
 import { COFFEE_LISTING_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
 import { S3_IMAGES } from "@/lib/constants/s3-images";
@@ -23,7 +27,6 @@ import {
   sortByLatestDate,
 } from "@/lib/constants/utils";
 import { CoffeeListingDTO } from "@/models/api-dto";
-import Empty from "@/public/empty.svg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { X } from "lucide-react";
@@ -43,6 +46,7 @@ export default function DisplayCoffeeListings() {
     queryFn: () =>
       getRequest(`${API_ROUTES.COFFEE_LISTINGS}/${authData?.userId}`),
     retry: 1,
+    enabled: !!authData?.userId,
   });
 
   if (coffeeListingsErr) {
@@ -59,7 +63,9 @@ export default function DisplayCoffeeListings() {
     );
   }
 
-  if (coffeeListingsLoading)
+  const isAuthLoading = !authData?.userId;
+  const isLoading = isAuthLoading || coffeeListingsLoading;
+  if (isLoading)
     return (
       <ParentWrapper>
         <Loader />
@@ -102,15 +108,14 @@ export default function DisplayCoffeeListings() {
         <ErrorMessage
           image={
             <Image
-              src={Empty}
+              src={S3_IMAGES.MILO}
               alt="not-found"
-              width={300}
-              height={300}
-              className="pb-4"
+              width={400}
+              height={400}
             />
           }
-          header="Empty"
-          message="No coffee listings found. Add some?"
+          header={API_ERROR_MESSAGE_HEADER.EMPTY_LISTINGS}
+          message={API_ERROR_MESSAGE.EMPTY_COFFEE_LISTINGS}
         />
       ) : (
         <div className="grid w-full grid-cols-1 gap-8 pb-12 sm:grid-cols-2 md:w-4/5 md:py-12 lg:grid-cols-3">
