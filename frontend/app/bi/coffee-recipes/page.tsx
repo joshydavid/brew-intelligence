@@ -16,9 +16,9 @@ import { API_ROUTES } from "@/lib/constants/api-routes";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { S3_IMAGES } from "@/lib/constants/s3-images";
 import { getTimeFrame, sortByLatestDate } from "@/lib/constants/utils";
 import { CoffeeRecipeDTO } from "@/models/api-dto";
-import Brew from "@/public/brew.jpg";
 import Empty from "@/public/empty.svg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
@@ -119,7 +119,7 @@ export default function DisplayCoffeeRecipes() {
                     />
                   </div>
                   <Image
-                    src={Brew}
+                    src={S3_IMAGES.BREW}
                     alt="coffee"
                     height="1000"
                     width="1000"

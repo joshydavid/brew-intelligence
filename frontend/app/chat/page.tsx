@@ -10,9 +10,9 @@ import {
   API_ERROR_MESSAGE,
   API_ERROR_MESSAGE_HEADER,
 } from "@/lib/constants/error-message";
+import { S3_IMAGES } from "@/lib/constants/s3-images";
 import { FADE_DURATION, UP_NEXT } from "@/lib/constants/timings";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
-import Restricted from "@/public/restricted.png";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
@@ -84,7 +84,12 @@ export default function Chat() {
     return (
       <ErrorMessage
         image={
-          <Image src={Restricted} alt="not-found" width={500} height={500} />
+          <Image
+            src={S3_IMAGES.RESTRICTED}
+            alt="not-found"
+            width={400}
+            height={400}
+          />
         }
         header={API_ERROR_MESSAGE_HEADER.UNAUTHENTICATED}
         message={API_ERROR_MESSAGE.ERROR_401_UNAUTHENTICATED}
