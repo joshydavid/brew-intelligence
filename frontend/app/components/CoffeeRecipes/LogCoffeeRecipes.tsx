@@ -24,6 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { BookOpen, Check } from "lucide-react";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import CoffeeRecipeFields from "./CoffeeRecipeFields";
 import { CoffeeRecipesBrewSteps } from "./CoffeeRecipesBrewSteps";
 
@@ -94,7 +95,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
     };
     mutate(sanitisedData, {
       onSuccess: () => onSuccess(),
-      //   onError: (error) => console.error("Mutation failed:", error),
+      onError: (error) => toast.error(error.message),
     });
   };
 

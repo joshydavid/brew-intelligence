@@ -13,6 +13,7 @@ import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { ChatHelperText, ChatInput, ChatLLM } from "./index";
 
 export default function Chat() {
@@ -78,7 +79,11 @@ export default function Chat() {
         setLoading(false);
         clearInterval(intervalId);
       },
-      onError: (error) => console.error("Mutation failed:", error.message),
+      onError: (error) => {
+        setLoading(false);
+        clearInterval(intervalId);
+        toast.error(error.message);
+      },
     });
   };
 

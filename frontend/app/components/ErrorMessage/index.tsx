@@ -27,6 +27,7 @@ export function ErrorMessage({ image, header, message }: ErrorMessageProps) {
 }
 
 export const renderErrorMessageByStatus = (statusCode: number) => {
+  let image = S3_IMAGES.RESTRICTED;
   let header = "";
   let message = "";
 
@@ -40,6 +41,7 @@ export const renderErrorMessageByStatus = (statusCode: number) => {
       message = API_ERROR_MESSAGE.ERROR_403_FORBIDDEN;
       break;
     case HTTP_STATUS_CODE.TOO_MANY_REQUESTS:
+      image = S3_IMAGES.BUS;
       header = API_ERROR_MESSAGE_HEADER.RATE_LIMIT;
       message = API_ERROR_MESSAGE.ERROR_429_RATE_LIMIT_EXCEEDED;
       break;
@@ -51,14 +53,7 @@ export const renderErrorMessageByStatus = (statusCode: number) => {
 
   return (
     <ErrorMessage
-      image={
-        <Image
-          src={S3_IMAGES.RESTRICTED}
-          alt="access restricted"
-          width={400}
-          height={400}
-        />
-      }
+      image={<Image src={image} alt={header} width={400} height={400} />}
       header={header}
       message={message}
     />
