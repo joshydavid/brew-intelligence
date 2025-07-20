@@ -11,13 +11,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { useDeleteCoffeeRecipeMutation } from "@/hooks/apis/use-delete-coffee-recipe";
-import { useAuthStatus } from "@/hooks/use-auth-status";
+import { useProtectedRoute } from "@/hooks/use-protected-route";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import {
   API_ERROR_MESSAGE,
   API_ERROR_MESSAGE_HEADER,
-  HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
 import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
@@ -31,7 +30,8 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 export default function DisplayCoffeeRecipes() {
-  const { authData, authLoading } = useAuthStatus();
+  const { showError, errorComponent, authLoading, authData } =
+    useProtectedRoute();
   const queryClient = useQueryClient();
   const { mutate: deleteCoffeeRecipe } = useDeleteCoffeeRecipeMutation();
   const {
@@ -45,13 +45,7 @@ export default function DisplayCoffeeRecipes() {
     enabled: !!authData?.userId,
   });
 
-  if (!authData && !authLoading) {
-    const errorComponent = renderErrorMessageByStatus(
-      HTTP_STATUS_CODE.UNAUTHENTICATED,
-    );
-    return errorComponent;
-  }
-
+  if (showError) return errorComponent;
   if (authLoading || coffeeRecipesLoading)
     return (
       <ParentWrapper>
