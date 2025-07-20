@@ -13,3 +13,7 @@ export const APP_AI = {
     "Tell me how you’re brewing — your method, dose, water, and timing and I’ll guide you with tips, adjustments, and insights to help you make the best cup possible.",
   INPUT_PLACEHOLDER: "Why does my brew taste so bitter?",
 };
+
+export const WHITELIST = {
+  AWS_S3: "https://joshydavid.s3.us-east-1.amazonaws.com/**",
+};

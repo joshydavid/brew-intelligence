@@ -16,6 +16,7 @@ import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
 import { COFFEE_LISTING_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
+import { S3_IMAGES } from "@/lib/constants/s3-images";
 import {
   formatDate,
   getTimeFrame,
@@ -23,8 +24,6 @@ import {
 } from "@/lib/constants/utils";
 import { CoffeeListingDTO } from "@/models/api-dto";
 import Empty from "@/public/empty.svg";
-import Espresso from "@/public/Espresso.jpeg";
-import V60 from "@/public/V60.jpg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AxiosError } from "axios";
 import { X } from "lucide-react";
@@ -75,11 +74,11 @@ export default function DisplayCoffeeListings() {
   const getCoffeeImage = (brewMethod: BrewMethod) => {
     switch (brewMethod) {
       case BrewMethod.ESPRESSO:
-        return Espresso;
+        return S3_IMAGES.ESPRESSO;
       case BrewMethod.V60:
-        return V60;
+        return S3_IMAGES.V60;
       default:
-        return Espresso;
+        return S3_IMAGES.ESPRESSO;
     }
   };
 

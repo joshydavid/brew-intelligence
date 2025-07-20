@@ -4,7 +4,7 @@ import {
   API_ERROR_MESSAGE_HEADER,
   HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
-import Restricted from "@/public/restricted.png";
+import { S3_IMAGES } from "@/lib/constants/s3-images";
 import Image from "next/image";
 import { ReactNode } from "react";
 
@@ -53,10 +53,10 @@ export const renderErrorMessageByStatus = (statusCode: number) => {
     <ErrorMessage
       image={
         <Image
-          src={Restricted}
+          src={S3_IMAGES.RESTRICTED}
           alt="access restricted"
-          width={500}
-          height={500}
+          width={400}
+          height={400}
         />
       }
       header={header}
