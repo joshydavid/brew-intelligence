@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { useDeleteCoffeeListingMutation } from "@/hooks/apis/use-delete-coffee-mutation";
-import { useAuthStatus } from "@/hooks/use-auth-status";
+import { useProtectedRoute } from "@/hooks/use-protected-route";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { BrewMethod, RoastType } from "@/lib/constants/coffee-listing";
 import {
@@ -34,7 +34,8 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 export default function DisplayCoffeeListings() {
-  const { authData } = useAuthStatus();
+  const { showError, errorComponent, authLoading, authData } =
+    useProtectedRoute();
   const queryClient = useQueryClient();
   const { mutate: deleteCoffeeListing } = useDeleteCoffeeListingMutation();
   const {
@@ -49,6 +50,14 @@ export default function DisplayCoffeeListings() {
     enabled: !!authData?.userId,
   });
 
+  if (showError) return errorComponent;
+  if (authLoading || coffeeListingsLoading)
+    return (
+      <ParentWrapper>
+        <Loader />
+      </ParentWrapper>
+    );
+
   if (coffeeListingsErr) {
     const errorComponent = renderErrorMessageByStatus(
       coffeeListingsErr.status!,
@@ -62,15 +71,6 @@ export default function DisplayCoffeeListings() {
       </ParentWrapper>
     );
   }
-
-  const isAuthLoading = !authData?.userId;
-  const isLoading = isAuthLoading || coffeeListingsLoading;
-  if (isLoading)
-    return (
-      <ParentWrapper>
-        <Loader />
-      </ParentWrapper>
-    );
 
   const sortedCoffeeListings = sortByLatestDate(
     coffeeListings ?? [],

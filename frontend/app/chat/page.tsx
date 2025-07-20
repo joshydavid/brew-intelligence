@@ -1,27 +1,22 @@
 "use client";
 
-import { ErrorMessage } from "@/components/ErrorMessage";
+import ParentWrapper from "@/bi/ParentWrapper";
 import HashLoaderSpinner from "@/components/Spinner/HashLoaderSpinner";
 import { Form } from "@/components/ui/form";
+import Loader from "@/components/ui/loader";
 import { useLLM } from "@/hooks/apis/use-llm";
-import { useAuthStatus } from "@/hooks/use-auth-status";
 import { useAutoScroll } from "@/hooks/use-autoscroll";
-import {
-  API_ERROR_MESSAGE,
-  API_ERROR_MESSAGE_HEADER,
-} from "@/lib/constants/error-message";
-import { S3_IMAGES } from "@/lib/constants/s3-images";
+import { useProtectedRoute } from "@/hooks/use-protected-route";
 import { FADE_DURATION, UP_NEXT } from "@/lib/constants/timings";
 import { ChatUser, UserType } from "@/lib/constants/user-type";
 import { aiChatSchema, AIChatSchema } from "@/schema/ai-chat";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { ChatHelperText, ChatInput, ChatLLM } from "./index";
 
 export default function Chat() {
-  const { authData } = useAuthStatus();
+  const { showError, errorComponent, authLoading } = useProtectedRoute();
   const [queries, setQueries] = useState<ChatUser[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const loadingSteps = [
@@ -43,6 +38,13 @@ export default function Chat() {
 
   const { control, handleSubmit, reset } = chatForm;
   const { mutate } = useLLM();
+  if (showError) return errorComponent;
+  if (authLoading)
+    return (
+      <ParentWrapper>
+        <Loader />
+      </ParentWrapper>
+    );
 
   const queryAnimate = () => {
     let i = 0;
@@ -79,23 +81,6 @@ export default function Chat() {
       onError: (error) => console.error("Mutation failed:", error.message),
     });
   };
-
-  if (authData === undefined) {
-    return (
-      <ErrorMessage
-        image={
-          <Image
-            src={S3_IMAGES.RESTRICTED}
-            alt="not-found"
-            width={400}
-            height={400}
-          />
-        }
-        header={API_ERROR_MESSAGE_HEADER.UNAUTHENTICATED}
-        message={API_ERROR_MESSAGE.ERROR_401_UNAUTHENTICATED}
-      />
-    );
-  }
 
   return (
     <div className="mx-auto flex min-h-[calc(100vh-100px)] w-full max-w-5xl flex-col p-5">

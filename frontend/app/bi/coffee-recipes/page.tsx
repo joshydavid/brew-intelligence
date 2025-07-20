@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Loader from "@/components/ui/loader";
 import { useDeleteCoffeeRecipeMutation } from "@/hooks/apis/use-delete-coffee-recipe";
-import { useAuthStatus } from "@/hooks/use-auth-status";
+import { useProtectedRoute } from "@/hooks/use-protected-route";
 import { API_ROUTES } from "@/lib/constants/api-routes";
 import { MethodType } from "@/lib/constants/coffee-listing";
 import {
@@ -30,7 +30,8 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 export default function DisplayCoffeeRecipes() {
-  const { authData } = useAuthStatus();
+  const { showError, errorComponent, authLoading, authData } =
+    useProtectedRoute();
   const queryClient = useQueryClient();
   const { mutate: deleteCoffeeRecipe } = useDeleteCoffeeRecipeMutation();
   const {
@@ -44,6 +45,14 @@ export default function DisplayCoffeeRecipes() {
     enabled: !!authData?.userId,
   });
 
+  if (showError) return errorComponent;
+  if (authLoading || coffeeRecipesLoading)
+    return (
+      <ParentWrapper>
+        <Loader />
+      </ParentWrapper>
+    );
+
   if (coffeeRecipesErr) {
     const errorComponent = renderErrorMessageByStatus(coffeeRecipesErr.status!);
     if (errorComponent) return errorComponent;
@@ -55,15 +64,6 @@ export default function DisplayCoffeeRecipes() {
       </ParentWrapper>
     );
   }
-
-  const isAuthLoading = !authData?.userId;
-  const isLoading = isAuthLoading || coffeeRecipesLoading;
-  if (isLoading)
-    return (
-      <ParentWrapper>
-        <Loader />
-      </ParentWrapper>
-    );
 
   const sortedCoffeeRecipes = sortByLatestDate(
     coffeeRecipes ?? [],
