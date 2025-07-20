@@ -17,6 +17,7 @@ import { MethodType } from "@/lib/constants/coffee-listing";
 import {
   API_ERROR_MESSAGE,
   API_ERROR_MESSAGE_HEADER,
+  HTTP_STATUS_CODE,
 } from "@/lib/constants/error-message";
 import { COFFEE_RECIPE_MESSAGE } from "@/lib/constants/message";
 import { QUERY_KEYS } from "@/lib/constants/query-keys";
@@ -30,7 +31,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 
 export default function DisplayCoffeeRecipes() {
-  const { authData } = useAuthStatus();
+  const { authData, authLoading } = useAuthStatus();
   const queryClient = useQueryClient();
   const { mutate: deleteCoffeeRecipe } = useDeleteCoffeeRecipeMutation();
   const {
@@ -44,6 +45,20 @@ export default function DisplayCoffeeRecipes() {
     enabled: !!authData?.userId,
   });
 
+  if (!authData && !authLoading) {
+    const errorComponent = renderErrorMessageByStatus(
+      HTTP_STATUS_CODE.UNAUTHENTICATED,
+    );
+    return errorComponent;
+  }
+
+  if (authLoading || coffeeRecipesLoading)
+    return (
+      <ParentWrapper>
+        <Loader />
+      </ParentWrapper>
+    );
+
   if (coffeeRecipesErr) {
     const errorComponent = renderErrorMessageByStatus(coffeeRecipesErr.status!);
     if (errorComponent) return errorComponent;
@@ -55,15 +70,6 @@ export default function DisplayCoffeeRecipes() {
       </ParentWrapper>
     );
   }
-
-  const isAuthLoading = !authData?.userId;
-  const isLoading = isAuthLoading || coffeeRecipesLoading;
-  if (isLoading)
-    return (
-      <ParentWrapper>
-        <Loader />
-      </ParentWrapper>
-    );
 
   const sortedCoffeeRecipes = sortByLatestDate(
     coffeeRecipes ?? [],
