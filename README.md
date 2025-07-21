@@ -6,7 +6,7 @@
 
 # ☕ Brew Intelligence
 
-<img src="https://github.com/user-attachments/assets/21b14349-4657-4aea-a82a-dcef198fcfbc" width="800" alt="brew intelligence"  />
+<img src="https://github.com/user-attachments/assets/58f0d99a-74f1-407e-a5b9-a93af60f19ef" width="800" alt="brew intelligence"  />
 <br />
 <br />
 
@@ -29,15 +29,16 @@ Brew Intelligence, your personal coffee brewing companion. Whether you’re pull
 
 ## Tech Stack
 
-- Java Spring Boot
-- PostgreSQL
-- Redis
-- React
-- Tailwind CSS
-- Amazon Web Services
-- Docker
-- Gemini API
-- Swagger UI (API Documentation)
+- [Java Spring Boot](https://spring.io/projects/spring-boot)
+- [PostgreSQL](https://www.postgresql.org)
+- [Redis](https://redis.io)
+- [React](https://react.dev)
+- [Tailwind CSS](https://tailwindcss.com)
+- [AWS EC2](https://aws.amazon.com/ec2)
+- [AWS RDS](https://aws.amazon.com/rds)
+- [AWS Amplify](https://aws.amazon.com/amplify)
+- [Gemini API](https://ai.google.dev/gemini-api/docs)
+- [Swagger UI (API Documentation)](https://api-brew.joshydavid.com/docs.html)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

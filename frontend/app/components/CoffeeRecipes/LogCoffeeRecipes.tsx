@@ -113,7 +113,7 @@ const CoffeeRecipeForm = ({ onSuccess }: { onSuccess: () => void }) => {
           <div className="flex justify-end">
             <Button
               type="submit"
-              size="lg"
+              size="md"
               variant="outline"
               disabled={isPending}
             >
