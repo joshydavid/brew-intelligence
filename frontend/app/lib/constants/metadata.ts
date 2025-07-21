@@ -11,7 +11,7 @@ export const APP = {
 export const APP_AI = {
   LONG_DESCRIPTION:
     "Tell me how you’re brewing — your method, dose, water, and timing and I’ll guide you with tips, adjustments, and insights to help you make the best cup possible.",
-  INPUT_PLACEHOLDER: "Why does my brew taste so bitter?",
+  INPUT_PLACEHOLDER: "What do you want to know?",
 };
 
 export const WHITELIST = {

@@ -6,6 +6,7 @@ import { Toaster } from "./components/ui/sonner";
 import { AuthProvider } from "./context/AuthContext";
 import "./globals.css";
 import { APP } from "./lib/constants/metadata";
+import { Theme } from "./lib/constants/theme";
 import { TanStackProvider } from "./TanStackProvider";
 
 const raleway = Raleway({
@@ -35,7 +36,7 @@ export default function RootLayout({
           <TanStackProvider>
             <ThemeProvider
               attribute="class"
-              defaultTheme="dark"
+              defaultTheme={Theme.DARK}
               disableTransitionOnChange
             >
               <Header />
