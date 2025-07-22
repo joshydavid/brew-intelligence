@@ -16,4 +16,5 @@ export const APP_AI = {
 
 export const WHITELIST = {
   AWS_S3: "https://joshydavid.s3.us-east-1.amazonaws.com/**",
+  AWS_CLOUDFRONT: "https://dhqsl2r2qz28p.cloudfront.net/**",
 };
