@@ -37,7 +37,7 @@ public class RecipeServiceImpl implements RecipeService {
     }
 
     @Override
-    @Cacheable(value = RedisCacheKey.GET_USER_RECIPES_KEY, key = "#userId")
+    @Cacheable(value = RedisCacheKey.GET_USER_RECIPES_KEY, key = RedisCacheKey.CACHE_PARAM)
     public List<RecipeDTO> getCoffeeRecipesByUserId(String userId) {
         List<Recipe> userRecipes = this.recipeRepo.findByUserProfileUserId(userId);
         return userRecipes.stream()
