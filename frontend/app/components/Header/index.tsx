@@ -4,8 +4,10 @@ import LoginX from "@/components/Authentication/LoginX";
 import BackButton from "@/components/BackButton";
 import BannerComponent from "@/components/Banner";
 import { AppearanceToggle } from "@/components/ui/appearance-toggle";
+
 import { useAuthStatus } from "@/hooks/use-auth-status";
 import { usePathname } from "next/navigation";
+import BannerComponent from "../Banner";
 
 export default function Header() {
   const pathname = usePathname();
