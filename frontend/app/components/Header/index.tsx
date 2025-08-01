@@ -10,13 +10,16 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
   const { authData } = useAuthStatus();
+  const showBanner = process.env.NEXT_PUBLIC_NOTIFICATION_BANNER === "true";
 
   return (
     <>
-      <BannerComponent
-        title="⚠️&nbsp; Notice: AWS resources have been spun down. The backend is
+      {showBanner && (
+        <BannerComponent
+          title="⚠️&nbsp; Notice: AWS resources have been spun down. The backend is
       currently not running."
-      />
+        />
+      )}
       <header className="flex flex-row items-center justify-between px-4 py-6 md:px-6">
         <div>{pathname !== "/" && <BackButton />}</div>
         <div className="flex items-center gap-2">
