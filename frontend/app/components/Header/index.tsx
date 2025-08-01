@@ -16,8 +16,10 @@ export default function Header() {
     <>
       {showBanner && (
         <BannerComponent
-          title="⚠️&nbsp; Notice: AWS resources have been spun down. The backend is
-      currently not running."
+          title={
+            process.env.NEXT_PUBLIC_BANNER_MESSAGE ||
+            "Notice: AWS resources have been spun down. The backend is currently not running."
+          }
         />
       )}
       <header className="flex flex-row items-center justify-between px-4 py-6 md:px-6">
