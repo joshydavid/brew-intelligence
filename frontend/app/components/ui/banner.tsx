@@ -52,7 +52,7 @@ export const Banner = ({
     <BannerContext.Provider value={{ show, setShow }}>
       <div
         className={cn(
-          "flex w-full items-center justify-between gap-2 bg-orange-400 px-4 py-1 text-white",
+          "flex w-full items-center justify-between gap-2 bg-orange-400 px-4 py-4 text-white md:py-1",
           inset && "rounded-lg",
           className,
         )}
